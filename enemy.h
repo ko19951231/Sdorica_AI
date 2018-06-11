@@ -1,31 +1,50 @@
 class Enemy
 {
 public:
-    void init()   // randomly generate 5 monsters
+    void init(int s)   // randomly generate 5 monsters
     {
-        srand(time(NULL));
+        amount = 5;
+        //Stage0: mushroom * 5
+        //Stage1: mushroom, round, mushroom, mushroom, mushroom.
+        //Stage2: mushroom, round, cube, mushroom, mushroom.
+        for(int i = 0 ; i < 5; i++)
+            kind[i] = 0;
+        if(s >= 2) kind[1] = 1;
+        if(s >= 3) kind[2] = 2;
+        //Assign the initial state  
         for(int i=0;i<5;i++){
-            kind[i]=rand()%3;
             if(kind[i]==0){      //mushroom
                 HP[i]=120;
-                CD[i]=0;
             }
             else if(kind[i]==1){ //round monster
                 HP[i]=239;
-                CD[i]=0;
             }
             else if(kind[i]==2){ //cube monster
                 HP[i]=239;
-                CD[i]=0;
             }
+            CD[i] = i + 3;
+            if(s >= 3)  CD[i]++;
         }
     }
-    int get_hurt(int hurt)
+    int get_hurt(int index, int hurt)
     {
-        HP[0]-=hurt;
-        if(HP[0]<=0&&kind[0]==0) return 72;  // if the first mushroom dead, hurt player with 72 HP
-        else return 0;
+        if(HP[index] > 0){
+            HP[index]-=hurt;
+            if(HP[index]<=0 && kind[index]==0) {
+                amount--;
+                return 72;  // if the first mushroom dead, hurt enemies with 72 HP
+            }
+        }  
+        return 0;
     }
+
+    void get_hurt_all(int hurt){
+        for(int i = 0 ; i < 5; i++){
+            int boom = get_hurt(i, hurt);
+            if(boom) get_hurt_all(boom);
+        }
+    }
+
     void print()
     {
         for(int i=0;i<5;i++){
@@ -36,6 +55,8 @@ public:
         puts("==============");
     }
     int kind[5];  // 0 for mushroom, 1 for round, 2 for cube
-    int HP[5];
-    int CD[5];
+    int HP[5];  
+    int CD[5];  
+    int stage;  // after all the enemy is dead, a new stage is begin
+    int amount; // the amount of the "living" enemy
 };

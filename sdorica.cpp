@@ -17,6 +17,7 @@ int main()
     Trainer trainer; 
     game.init();
     trainer.open_episode();
+    srand(time(NULL));
     while(1){
         game.print();
         int n;
@@ -32,8 +33,7 @@ int main()
         game.player_move(r, c);
         game.print();
         trainer.add_state(game);
-        srand(time(NULL));
-        game.enemy_move(rand()%5);
+        game.enemy_move();
     }
     trainer.close_episode();
 }
