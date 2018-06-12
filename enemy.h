@@ -1,40 +1,27 @@
 class Enemy
 {
 public:
-    void init(int s)   // randomly generate 5 monsters
+    void init(int s)
     {
         amount = 5;
         //Stage0: mushroom * 5
         //Stage1: mushroom, round, mushroom, mushroom, mushroom.
         //Stage2: mushroom, round, cube, mushroom, mushroom.
+        int CD_start = 3;
+        if(s >= 3) CD_start+=;
         for(int i = 0 ; i < 5; i++)
-            kind[i] = 0;
-        if(s >= 2) kind[1] = 1;
-        if(s >= 3) kind[2] = 2;
-        //Assign the initial state  
-        for(int i=0;i<5;i++){
-            if(kind[i]==0){      //mushroom
-                HP[i]=120;
-            }
-            else if(kind[i]==1){ //round monster
-                HP[i]=239;
-            }
-            else if(kind[i]==2){ //cube monster
-                HP[i]=239;
-            }
-            CD[i] = i + 3;
-            if(s >= 3)  CD[i]++;
-        }
+            enemies[i].setValue(0, i + CD_start);
+        if(s >= 2) enemies[1].setValue(1, CD_start + 1);
+        if(s >= 3) enemies[2].setValue(2, CD_start + 2);
     }
     int get_hurt(int index, int hurt)
     {
-        if(HP[index] > 0){
-            HP[index]-=hurt;
-            if(HP[index]<=0 && kind[index]==0) {
-                amount--;
-                return 72;  // if the first mushroom dead, hurt enemies with 72 HP
-            }
-        }  
+        bool dead = enemies[index].getDamage(hurt);
+        if(dead){
+            amount--;
+            if(enemies[index].getKind() == 0)
+                return 72; // if the mushroom dead, hurt enemies with 72 HP
+        }
         return 0;
     }
 
@@ -45,18 +32,21 @@ public:
         }
     }
 
+    void addEasyHarm(int index, int round){
+        enemies[index].addEasyHarm(round);
+    }
+
     void print()
     {
         for(int i=0;i<5;i++){
-            if(kind[i]==0) printf("Mushroom: HP %d, CD %d\n", HP[i], CD[i]);
-            else if(kind[i]==1) printf("Round: HP %d, CD %d\n", HP[i], CD[i]);
-            else if(kind[i]==2) printf("Cube: HP %d, CD %d\n", HP[i], CD[i]);
+            if(enemies[i].getKind() == 0) printf("Mushroom: HP %d, CD %d\n", enemies[i].getHP(),  enemies[i].getCD());
+            else if(enemies[i].getKind() == 1) printf("Round: HP %d, CD %d\n", enemies[i].getHP(),  enemies[i].getCD());
+            else if(enemies[i].getKind() == 2) printf("Cube: HP %d, CD %d\n", enemies[i].getHP(),  enemies[i].getCD());
         }
         puts("==============");
     }
-    int kind[5];  // 0 for mushroom, 1 for round, 2 for cube
-    int HP[5];  
-    int CD[5];  
+private:
+    EnemyState enemies[5];
     int stage;  // after all the enemy is dead, a new stage is begin
     int amount; // the amount of the "living" enemy
 };

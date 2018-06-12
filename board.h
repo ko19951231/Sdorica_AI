@@ -3,9 +3,9 @@ class Board
 public:
     void init() // generate a new board
     {
-        srand(time(NULL));
         for(int r=0;r<2;r++){
             for(int c=0;c<7;c++){
+                //The color of the diamond is randomized initially
                 daimond[r][c]=rand()%3;
             }
         }

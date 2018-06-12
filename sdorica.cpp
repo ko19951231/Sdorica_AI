@@ -30,9 +30,12 @@ int main()
             r.push_back(rr);
             c.push_back(cc);
         }
-        game.player_move(r, c);
+        //Return value
+        //True: the game is over, False: the game isn't over
+        bool gameOver = game.player_move(r, c);
         game.print();
         trainer.add_state(game);
+        if(gameOver) break;
         game.enemy_move();
     }
     trainer.close_episode();
