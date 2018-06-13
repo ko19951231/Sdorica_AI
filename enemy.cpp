@@ -1,7 +1,3 @@
-#include<cstdio>
-#include<cstdlib>
-using namespace std;
-
 #include "enemy.h"
 #include "state.h"
 

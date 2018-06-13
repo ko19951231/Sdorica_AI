@@ -1,7 +1,3 @@
-#include<cstdio>
-#include<cstdlib>
-#include<vector>
-using namespace std;
 #include "trainer.h"
 #include "state.h"
 

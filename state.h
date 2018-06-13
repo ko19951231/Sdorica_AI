@@ -1,8 +1,14 @@
+
 #ifndef STATE_H
 #define STATE_H
+#include<cstdio>
+#include<cstdlib>
+#include<vector>
+
 #include "board.h"
 #include "player.h"
 #include "enemy.h"
+using namespace std;
 class state
 {
 public:

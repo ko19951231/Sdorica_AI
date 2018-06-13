@@ -1,7 +1,10 @@
 #ifndef ENEMY_H
 #define ENEMY_H
+#include<cstdio>
+#include<cstdlib>
 #include "enemyState.h"
 
+using namespace std;
 class state;
 
 class Enemy

@@ -1,7 +1,3 @@
-#include<cstdio>
-#include<cstdlib>
-using namespace std;
-
 #include "player.h"
 #include "state.h"
 

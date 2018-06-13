@@ -1,9 +1,5 @@
-#include<cstdio>
-#include<cstdlib>
-#include<vector>
-using namespace std;
-
 #include"state.h"
+
 void state::init()
 {
     board.init();

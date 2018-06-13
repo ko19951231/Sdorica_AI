@@ -1,7 +1,3 @@
-#include<cstdio>
-#include<cstdlib>
-#include<vector>
-using namespace std;
 #include "board.h"
 
 void Board::init() // generate a new board

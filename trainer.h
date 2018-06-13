@@ -1,5 +1,11 @@
 #ifndef TRAINER_H
 #define TRAINER_H
+
+#include<cstdio>
+#include<cstdlib>
+#include<vector>
+
+using namespace std;
 class state;
 class Trainer
 {
