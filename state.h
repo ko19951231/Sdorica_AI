@@ -3,6 +3,8 @@
 #include "board.h"
 #include "player.h"
 #include "enemy.h"
+class Enemy;
+class Player;
 class state
 {
 public:
