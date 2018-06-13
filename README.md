@@ -1,7 +1,7 @@
 # Sdorica AI
 
 ## 編譯
- `g++ sdorica.cpp -o s.exe`
+ `g++ *.cpp -o s.exe`
 
 ## 玩法
 
