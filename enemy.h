@@ -1,6 +1,6 @@
 #ifndef ENEMY_H
 #define ENEMY_H
-
+#include "state.h"
 class Enemy
 {
 public:
