@@ -1,3 +1,7 @@
+#include<cstdio>
+#include<cstdlib>
+using namespace std;
+
 #include "player.h"
 #include "state.h"
 
@@ -24,7 +28,7 @@ float Player::yana_attack(int daimond)
 {
     float atk_value = naya.attack(daimond);
     if(daimond == 1)
-        game->addEasyHarmFirst(3);
+        game->enemyAddEasyHarmFirst(3);
     return atk_value;
 }
 float Player::dica_attack(int daimond)
