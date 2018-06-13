@@ -91,9 +91,9 @@ void Player::update(){
 }
 void Player::print()
 {
-    printf("PON: HP %d, ATK %d\n", pon.getHP(), pon.getATK());
-    printf("NAYA: HP %d, ATK %d\n", naya.getHP(), naya.getATK());
-    printf("DICA: HP %d, ATK %d\n", dica.getHP(), dica.getATK());
+    printf("PON: HP %f, ATK %f\n", pon.getHP(), pon.getATK());
+    printf("NAYA: HP %f, ATK %f\n", naya.getHP(), naya.getATK());
+    printf("DICA: HP %f, ATK %f\n", dica.getHP(), dica.getATK());
     puts("--------");
 }
 

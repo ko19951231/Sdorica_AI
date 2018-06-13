@@ -10,7 +10,7 @@ public:
     {
         board.init();
         player.init(this);
-        enemy.init(this);
+        enemy.init(1, this);
     }
     bool player_move(vector<int> r, vector<int> c)
     {

@@ -28,6 +28,7 @@ private:
 
 void Enemy::init(int s, state *st)
 {
+    stage = s;
     amount = 5;
     game = st;
     //Stage0: mushroom * 5
@@ -84,10 +85,10 @@ void Enemy::attack(){
         //Add back the CD time and attack
         if(enemies[i].getCD() == 0){
             if(enemies[i].getKind() <= 1){
-                game.PlayerHurtFist(enemies.attack());
+                game->PlayerHurtFist(enemies.attack());
             }
             else{
-                game.PlayerHurtAll(enemies.attack());
+                game->PlayerHurtAll(enemies.attack());
             }
             enemies[i].recoverCD();
         }
@@ -101,10 +102,11 @@ int Enemy::getAmount(){
 bool Enemy::nextStage(){
     //no more enemies -> go to the next stage
     if(amount == 0) {
-        stage = (stage + 1) % 3;
+        stage = (stage + 1) % 3 + 1;
         //if the stage comes back to 0, then game over
-        if(stage == 0)
+        if(stage == 1)
             return true;
+        init(stage, game);
     }
     return false;
 }
@@ -120,9 +122,9 @@ int Enemy::getFirstIndex(){
 void Enemy::print()
 {
     for(int i=0;i<5;i++){
-        if(enemies[i].getKind() == 0) printf("Mushroom: HP %d, CD %d\n", enemies[i].getHP(),  enemies[i].getCD());
-        else if(enemies[i].getKind() == 1) printf("Round: HP %d, CD %d\n", enemies[i].getHP(),  enemies[i].getCD());
-        else if(enemies[i].getKind() == 2) printf("Cube: HP %d, CD %d\n", enemies[i].getHP(),  enemies[i].getCD());
+        if(enemies[i].getKind() == 0) printf("Mushroom: HP %f, CD %d\n", enemies[i].getHP(),  enemies[i].getCD());
+        else if(enemies[i].getKind() == 1) printf("Round: HP %f, CD %d\n", enemies[i].getHP(),  enemies[i].getCD());
+        else if(enemies[i].getKind() == 2) printf("Cube: HP %f, CD %d\n", enemies[i].getHP(),  enemies[i].getCD());
     }
     puts("==============");
 }
