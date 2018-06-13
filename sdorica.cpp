@@ -6,7 +6,9 @@
 using namespace std;
 
 #include "board.h"
+#include "playerState.h"
 #include "player.h"
+#include "enemyState.h"
 #include "enemy.h"
 #include "state.h"
 #include "trainer.h"
