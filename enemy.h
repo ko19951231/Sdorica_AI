@@ -1,15 +1,14 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-class state;
 class Enemy
 {
 public:
     void init(int s);
     //hurt the first enemy
-    int get_hurt_first(int hurt);
-    int get_hurt(int index, int hurt);
-    void get_hurt_all(int hurt);
+    float get_hurt_first(float hurt);
+    float get_hurt(int index, float hurt);
+    void get_hurt_all(float hurt);
     //Add the "easy harm" state to the first enemy
     void addEasyHarmFirst(int index, int round);
     void update();
@@ -39,11 +38,11 @@ void Enemy::init(int s)
     if(s >= 3) enemies[2].setValue(2, CD_start + 2);
 }
 
-int Enemy::get_hurt_first(int hurt){
+int Enemy::get_hurt_first(float hurt){
     return get_hurt(getFirstIndex(), hurt);
 }
 
-int Enemy::get_hurt(int index, int hurt)
+float Enemy::get_hurt(int index, float hurt)
 {
     //if the enemy is dead, then return
     if(enemies[index].isDead()) return 0;
@@ -57,7 +56,7 @@ int Enemy::get_hurt(int index, int hurt)
     return 0;
 }
 
-void Enemy::get_hurt_all(int hurt){
+void Enemy::get_hurt_all(float hurt){
     int hurts = 0;
     for(int i = 0 ; i < 5; i++){
         hurts += get_hurt(hurt, i);
@@ -81,18 +80,13 @@ void Enemy::attack(){
         //if the enemy's CD is downcounting to 0
         //Add back the CD time and attack
         if(enemies[i].getCD() == 0){
-            if(enemies[i].getKind() ==0){
-                enemy.CD[index]+=3;
-                player.get_hurt_pon(36);
+            if(enemies[i].getKind() <= 1){
+                player.get_hurt_first(enemies.attack());
             }
-            else if(enemy.kind[index]==1){
-                enemy.CD[index]+=4;
-                player.get_hurt_pon(72);
+            else{
+                player.get_hurt_all(enemies.attack());
             }
-            else if(enemy.kind[index]==2){
-                enemy.CD[index]+=3;
-                player.get_hurt_all(36);
-            }
+            enemies[i].recoverCD();
         }
     }
 }

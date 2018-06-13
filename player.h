@@ -1,7 +1,5 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-class state;
-
 class Player
 {
 public:
@@ -9,8 +7,8 @@ public:
     float pon_attack(int daimond);
     float yana_attack(int daimond);
     float dica_attack(int daimond);
-    void get_hurt_all(int hurt);
-    void get_hurt_first(int hurt);
+    void get_hurt_all(float hurt);
+    void get_hurt_first(float hurt);
     void update();
     void print();
 private:
@@ -36,7 +34,7 @@ float Player::pon_attack(int daimond)
     float atk_value = pon.attack(daimond);
     //one diamond . minus harm
     if(daimond == 1)
-        pon.addminusHarm(3);
+        pon.addMinusHarm(3);
     return atk_value;
 }
 float Player::yana_attack(int daimond)
@@ -48,10 +46,10 @@ float Player::yana_attack(int daimond)
 }
 float Player::dica_attack(int daimond)
 {
-    float atk_value = dica . attack(daimond);
+    float atk_value = dica.attack(daimond);
         
     if(daimond==1){
-        HP_pon+=atk_value;
+        pon.heal(atk_value)
         pon.addStrengthen(3);
         return 0;
     }
@@ -59,26 +57,29 @@ float Player::dica_attack(int daimond)
         return atk_value;
     }
     else if(daimond==4){     //choose the one who has the least HP to heal
-        if(HP_pon<HP_yana&&HP_pon<HP_dica) pon.heal(atk_value);
-        else if(HP_yana<HP_pon&&HP_yana<HP_dica) naya.heal(atk_value);
-        else if(HP_dica<HP_pon&&HP_dica<HP_yana) dica.heal(atk_value);
+        float HP_pon = pon.getHP();
+        float HP_naya = naya.getHP();
+        float HP_dica = dica.getHP();
+        if(HP_pon<HP_naya&&HP_pon<HP_dica) pon.heal(atk_value);
+        else if(HP_naya<HP_pon&&HP_naya<HP_dica) naya.heal(atk_value);
+        else if(HP_dica<HP_pon&&HP_dica<HP_naya) dica.heal(atk_value);
         return 0;
     }
 }
-void Player::get_hurt_all(int hurt)
+void Player::get_hurt_all(float hurt)
 {
     pon.get_hurt(hurt);
     naya.get_hurt(hurt);
     dica.get_hurt(hurt);
 }
-void Player::get_hurt_first(int hurt)
+void Player::get_hurt_first(float hurt)
 {
     if(!pon.isDead())
-        pon.get_hurt(hurt);
+        pon.getDamage(hurt);
     else if(!naya.isDead())
-        naya.get_hurt(hurt);
+        naya.getDamage(hurt);
     else
-        dica.get_hurt(hurt);
+        dica.getDamage(hurt);
 }
 void Player::update(){
     pon.update();
