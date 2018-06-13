@@ -2,7 +2,7 @@
 #define ENEMY_H
 #include "state.h"
 #include "enemyState.h"
-class state;
+//class state;
 class Enemy
 {
 public:

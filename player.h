@@ -2,7 +2,7 @@
 #define PLAYER_H
 #include "state.h"
 #include "playerState.h"
-class state;
+//class state;
 class Player
 {
 public:
