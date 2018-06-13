@@ -1,10 +1,8 @@
 #ifndef STATE_H
 #define STATE_H
 #include "board.h"
-//#include "player.h"
-//#include "enemy.h"
-class Enemy;
-class Player;
+#include "player.h"
+#include "enemy.h"
 class state
 {
 public:
