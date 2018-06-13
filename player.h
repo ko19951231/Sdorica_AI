@@ -1,3 +1,5 @@
+#ifndef PLAYER_H
+#define PLAYER_H
 class state;
 
 class Player
@@ -86,3 +88,5 @@ void Player::print()
     printf("DICA: HP %d, ATK %d\n", dica.getHP(), dica.getATK());
     puts("--------");
 }
+
+#endif

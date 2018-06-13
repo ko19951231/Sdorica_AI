@@ -1,3 +1,6 @@
+#ifndef ENEMY_H
+#define ENEMY_H
+
 class state;
 class Enemy
 {
@@ -126,3 +129,5 @@ void Enemy::print()
     }
     puts("==============");
 }
+
+#endif

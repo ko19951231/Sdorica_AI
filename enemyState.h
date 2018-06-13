@@ -1,3 +1,6 @@
+#ifndef ENEMYSTATE_H
+#define ENEMYSTATE_H
+
 class EnemyState{
 public:
     EnemyState();
@@ -175,3 +178,5 @@ float EnemyState::calculateStrengthen(){
         if(strengthen[i] > 0) v *= 1.3;
     return v;
 }
+
+#endif

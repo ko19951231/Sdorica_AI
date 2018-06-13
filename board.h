@@ -1,3 +1,5 @@
+#ifndef BOARD_H
+#define BOARD_H
 class Board
 {
 public:
@@ -55,3 +57,5 @@ public:
     }
     int daimond[2][7];  // 0 for yellow, 1 for purple, 2 for white
 };
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef TRAINER_H
+#define TRAINER_H
 class Trainer
 {
 public:
@@ -22,3 +24,5 @@ private:
     vector<state> episode;
     // some data structure to save the weights
 };
+
+#endif

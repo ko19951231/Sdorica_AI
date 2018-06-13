@@ -1,3 +1,5 @@
+#ifndef STATE_H
+#define STATE_H
 class state
 {
 public:
@@ -55,3 +57,4 @@ private:
     Player player;
     Enemy enemy;
 };
+#endif

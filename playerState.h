@@ -1,3 +1,6 @@
+#ifndef PLAYERSTATE_H
+#define PLAYERSTATE_H
+
 class PlayerState{
 public:
     PlayerState(float atk, float hp);
@@ -133,3 +136,5 @@ float PlayerState::calculateStrengthen(){
         if(strengthen[i] > 0) v *= 1.3;
     return v;
 }
+
+#endif
