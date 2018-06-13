@@ -12,7 +12,7 @@ public:
     float get_hurt(int index, float hurt);
     void get_hurt_all(float hurt);
     //Add the "easy harm" state to the first enemy
-    void addEasyHarmFirst(int index, int round);
+    void addEasyHarmFirst(int round);
     void update();
     void attack();
     int getAmount();
@@ -69,7 +69,7 @@ void Enemy::get_hurt_all(float hurt){
 }
 
 //Add the "easy harm" state to the first enemy
-void Enemy::addEasyHarmFirst(int index, int round){
+void Enemy::addEasyHarmFirst(int round){
     enemies[getFirstIndex()].addEasyHarm(round);
 }
 
@@ -85,10 +85,10 @@ void Enemy::attack(){
         //Add back the CD time and attack
         if(enemies[i].getCD() == 0){
             if(enemies[i].getKind() <= 1){
-                game->PlayerHurtFist(enemies.attack());
+                game->PlayerHurtFist(enemies[i].attack());
             }
             else{
-                game->PlayerHurtAll(enemies.attack());
+                game->PlayerHurtAll(enemies[i].attack());
             }
             enemies[i].recoverCD();
         }
