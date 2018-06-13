@@ -11,6 +11,7 @@ public:
     void update();
     float getHP(){return HP;}
     float getATK(){return ATK;}
+    bool isDead(){return HP <= 0? true:false;}
 private:
     float ATK;
     float HP;
@@ -47,7 +48,7 @@ void PlayerState::setDiamondBuff(float n1, float n2, float n3){
 
 float PlayerState::attack(int diamond){
     //If the player is dead, return nothing
-    if(HP <= 0) return 0;
+    if(isDead()) return 0;
 
     float currentATK = ATK * calculateStrengthen();
     return currentATK * diamondBuff[diamond];

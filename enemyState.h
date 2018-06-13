@@ -9,11 +9,13 @@ public:
     void addEasyHarm(int round);
     void addStrengthen(int round);
     void update();
+    void recoverCD();
     float getHP(){return HP;}
     float getATK(){return ATK;}
     int getCD(){return CD;}
     int getKind(){return kind;}
     void setValue(int k, int cd);
+    bool isDead(){return HP <= 0? true:false;}
 private:
     int kind;   // 0 for mushroom, 1 for round, 2 for cube
     float ATK;
@@ -83,7 +85,7 @@ void EnemyState::setValue(int k, int cd){
 
 float EnemyState::attack(){
     //If the enemy is dead, return nothing
-    if(HP <= 0) return 0;
+    if(isDead()) return 0;
     float currentATK = ATK * calculateStrengthen();
     return currentATK;
 }
@@ -139,13 +141,18 @@ void EnemyState::addStrengthen(int round){
 }
 
 void EnemyState::update(){
-    //update the Player's buff state
+    //update the Enemies's buff state
+    //update the CD time
     for(int i = 0; i < 3; i++){
         if(easyHarm[i] > 0) easyHarm[i]--;
         if(minusHarm[i] > 0) minusHarm[i]--;
         if(strengthen[i] > 0) strengthen[i]--;
     }
-    CD--;
+    if(!isDead()) CD--;
+}
+
+void EnemyState::recoverCD(){
+    CD = CD_interval;
 }
 
 float EnemyState::calculateMinusHarm(){

@@ -35,6 +35,9 @@ int main()
         bool gameOver = game.player_move(r, c);
         game.print();
         trainer.add_state(game);
+        //update the game state
+        //including the player's buff cd and enemies' cd
+        game.update();
         if(gameOver) break;
         game.enemy_move();
     }
