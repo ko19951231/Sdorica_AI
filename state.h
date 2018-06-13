@@ -6,8 +6,8 @@ public:
     void init()
     {
         board.init();
-        player.init();
-        enemy.init();
+        player.init(this);
+        enemy.init(this);
     }
     bool player_move(vector<int> r, vector<int> c)
     {

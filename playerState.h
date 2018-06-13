@@ -3,7 +3,9 @@
 
 class PlayerState{
 public:
+    PlayerState();
     PlayerState(float atk, float hp);
+    void setValue(float atk, float hp);
     void setDiamondBuff(float n1, float n2, float n3);
     float attack(int diamond);
     bool getDamage(float damage);
@@ -33,6 +35,14 @@ private:
     float calculateStrengthen();
 };
 
+PlayerState::PlayerState(){
+    for(int i = 0 ; i < 3; i++){
+        minusHarm[i] = 0;
+        easyHarm[i] = 0;
+        strengthen[i] = 0;
+    }
+}
+
 PlayerState::PlayerState(float atk, float hp){
     ATK = atk; HP = hp;
     for(int i = 0 ; i < 3; i++){
@@ -40,6 +50,10 @@ PlayerState::PlayerState(float atk, float hp){
         easyHarm[i] = 0;
         strengthen[i] = 0;
     }
+}
+
+void PlayerState::setValue(float atk, float hp){
+    ATK = atk; HP = hp;
 }
 
 void PlayerState::setDiamondBuff(float n1, float n2, float n3){

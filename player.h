@@ -14,13 +14,17 @@ public:
     void update();
     void print();
 private:
-    PlayerState pon(47, 310);
-    PlayerState naya(61, 225);
-    PlayerState dica(56, 253);
+    PlayerState pon;
+    PlayerState naya;
+    PlayerState dica;
     state *game;
 };
 
 void Player::init(state *s){
+    //set the basic value
+    pon.setValue(47, 310);
+    naya.setValue(61, 225);
+    dica.setValue(56, 253);
     //Set up the characters' diamond buff
     pon.setDiamondBuff(1.41, 2.83, 5.67);
     naya.setDiamondBuff(1.58, 3.16, 6.6);
