@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "state.h"
+#include "playerState.h"
+class state;
 class Player
 {
 public:
