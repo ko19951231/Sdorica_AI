@@ -6,7 +6,7 @@ class state;
 class Enemy
 {
 public:
-    void init(int s);
+    void init(int s, state *st);
     //hurt the first enemy
     float get_hurt_first(float hurt);
     float get_hurt(int index, float hurt);
@@ -26,21 +26,22 @@ private:
     state *game;
 };
 
-void Enemy::init(int s)
+void Enemy::init(int s, state *st)
 {
     amount = 5;
+    game = st;
     //Stage0: mushroom * 5
     //Stage1: mushroom, round, mushroom, mushroom, mushroom.
     //Stage2: mushroom, round, cube, mushroom, mushroom.
     int CD_start = 3;
-    if(s >= 3) CD_start+=;
+    if(s >= 3) CD_start++;
     for(int i = 0 ; i < 5; i++)
         enemies[i].setValue(0, i + CD_start);
     if(s >= 2) enemies[1].setValue(1, CD_start + 1);
     if(s >= 3) enemies[2].setValue(2, CD_start + 2);
 }
 
-int Enemy::get_hurt_first(float hurt){
+float Enemy::get_hurt_first(float hurt){
     return get_hurt(getFirstIndex(), hurt);
 }
 
@@ -83,10 +84,10 @@ void Enemy::attack(){
         //Add back the CD time and attack
         if(enemies[i].getCD() == 0){
             if(enemies[i].getKind() <= 1){
-                player.get_hurt_first(enemies.attack());
+                game.PlayerHurtFist(enemies.attack());
             }
             else{
-                player.get_hurt_all(enemies.attack());
+                game.PlayerHurtAll(enemies.attack());
             }
             enemies[i].recoverCD();
         }

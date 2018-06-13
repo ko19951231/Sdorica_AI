@@ -52,7 +52,7 @@ float Player::dica_attack(int daimond)
     float atk_value = dica.attack(daimond);
         
     if(daimond==1){
-        pon.heal(atk_value)
+        pon.heal(atk_value);
         pon.addStrengthen(3);
         return 0;
     }
@@ -71,9 +71,9 @@ float Player::dica_attack(int daimond)
 }
 void Player::get_hurt_all(float hurt)
 {
-    pon.get_hurt(hurt);
-    naya.get_hurt(hurt);
-    dica.get_hurt(hurt);
+    pon.getDamage(hurt);
+    naya.getDamage(hurt);
+    dica.getDamage(hurt);
 }
 void Player::get_hurt_first(float hurt)
 {
