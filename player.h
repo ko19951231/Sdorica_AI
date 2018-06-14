@@ -10,7 +10,7 @@ class Player
 public:
     void init(state *s);
     float pon_attack(int daimond);
-    float yana_attack(int daimond);
+    float naya_attack(int daimond);
     float dica_attack(int daimond);
     void get_hurt_all(float hurt);
     void get_hurt_first(float hurt);

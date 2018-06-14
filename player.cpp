@@ -20,7 +20,7 @@ float Player::pon_attack(int daimond)
         pon.addMinusHarm(3);
     return atk_value;
 }
-float Player::yana_attack(int daimond)
+float Player::naya_attack(int daimond)
 {
     float atk_value = naya.attack(daimond);
     if(daimond == 1)

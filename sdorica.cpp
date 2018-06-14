@@ -12,9 +12,9 @@ int main()
 {
     state game;
     Trainer trainer; 
+    srand(time(NULL));
     game.init();
     trainer.open_episode();
-    srand(time(NULL));
     while(1){
         game.print();
         int n;
