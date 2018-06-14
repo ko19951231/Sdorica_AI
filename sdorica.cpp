@@ -10,11 +10,12 @@ using namespace std;
 
 int main()
 {
+    srand(time(NULL));
     state game;
     Trainer trainer; 
-    srand(time(NULL));
     game.init();
     trainer.open_episode();
+    printf("game start");
     while(1){
         game.print();
         int n;
