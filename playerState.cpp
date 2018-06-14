@@ -11,6 +11,7 @@ PlayerState::PlayerState(){
 
 PlayerState::PlayerState(float atk, float hp){
     ATK = atk; HP = hp;
+    MAX_HP = hp;
     for(int i = 0 ; i < 3; i++){
         minusHarm[i] = 0;
         easyHarm[i] = 0;
@@ -19,7 +20,7 @@ PlayerState::PlayerState(float atk, float hp){
 }
 
 void PlayerState::setValue(float atk, float hp){
-    ATK = atk; HP = hp;
+    ATK = atk; HP = MAX_HP = hp;
 }
 
 void PlayerState::setDiamondBuff(float n1, float n2, float n3){
@@ -45,6 +46,7 @@ bool PlayerState::getDamage(float damage){
 
 void PlayerState::heal(float hp){
     HP += hp;
+    if(HP > MAX_HP) HP = MAX_HP;
 }
 
 void PlayerState::addEasyHarm(int round){

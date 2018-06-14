@@ -23,6 +23,7 @@ private:
     int kind;   // 0 for mushroom, 1 for round, 2 for cube
     float ATK;
     float HP;
+    float MAX_HP;
     int CD;
     int CD_interval;
     //Player's state

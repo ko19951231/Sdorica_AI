@@ -13,15 +13,15 @@ EnemyState::EnemyState(int k, int cd){
     kind = k;
     CD = cd;
     if(kind == 0){      //mushroom
-        HP = 120;
+        HP = MAX_HP = 120;
         CD_interval = 3;
     }
     else if(kind == 1){ //round monster
-        HP = 239;
+        HP = MAX_HP =239;
         CD_interval = 4;
     }
     else if(kind == 2){ //cube monster
-        HP = 239;
+        HP = MAX_HP =239;
         CD_interval = 3;
     }
     //initial states
@@ -36,15 +36,15 @@ void EnemyState::setValue(int k, int cd){
     kind = k;
     CD = cd;
     if(kind == 0){      //mushroom
-        HP = 120;
+        HP = MAX_HP =120;
         CD_interval = 3;
     }
     else if(kind == 1){ //round monster
-        HP = 239;
+        HP = MAX_HP =239;
         CD_interval = 4;
     }
     else if(kind == 2){ //cube monster
-        HP = 239;
+        HP = MAX_HP =239;
         CD_interval = 3;
     }
 }
@@ -65,6 +65,7 @@ bool EnemyState::getDamage(float damage){
 
 void EnemyState::heal(float hp){
     HP += hp;
+    if(HP > MAX_HP) HP = MAX_HP;
 }
 
 void EnemyState::addEasyHarm(int round){

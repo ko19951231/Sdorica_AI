@@ -20,6 +20,7 @@ public:
 private:
     float ATK;
     float HP;
+    float MAX_HP;
     //The percentage depend by the diamond
     //There are actually only 3 kinds of value of the diamond
     float diamondBuff[4];
