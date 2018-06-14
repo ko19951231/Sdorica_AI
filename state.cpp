@@ -4,7 +4,7 @@ void state::init()
 {
     board.init();
     player.init(this);
-    enemy.init(1, this);
+    enemy.init(0, this);
 }
 bool state::player_move(vector<int> r, vector<int> c)
 {
@@ -14,7 +14,7 @@ bool state::player_move(vector<int> r, vector<int> c)
     int count=daimond%4;
     printf("%d %d\n",color, count);
     // get the value of hurt to the enemy
-    float hurt;
+    float hurt = 0;
     if(color==0) hurt=player.pon_attack(count);
     else if(color==1) hurt=player.naya_attack(count);
     else if(color==2) hurt=player.dica_attack(count);

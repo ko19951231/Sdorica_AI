@@ -10,11 +10,11 @@ void Enemy::init(int s, state *st)
     //Stage1: mushroom, round, mushroom, mushroom, mushroom.
     //Stage2: mushroom, round, cube, mushroom, mushroom.
     int CD_start = 3;
-    if(s >= 3) CD_start++;
+    if(s >= 2) CD_start++;
     for(int i = 0 ; i < 5; i++)
         enemies[i].setValue(0, i + CD_start);
-    if(s >= 2) enemies[1].setValue(1, CD_start + 1);
-    if(s >= 3) enemies[2].setValue(2, CD_start + 2);
+    if(s >= 1) enemies[1].setValue(1, CD_start + 1);
+    if(s >= 2) enemies[2].setValue(2, CD_start + 2);
 }
 
 float Enemy::get_hurt_first(float hurt){
@@ -77,9 +77,9 @@ int Enemy::getAmount(){
 bool Enemy::nextStage(){
     //no more enemies -> go to the next stage
     if(amount == 0) {
-        stage = (stage + 1) % 3 + 1;
+        stage = (stage + 1) % 3;
         //if the stage comes back to 0, then game over
-        if(stage == 1)
+        if(stage == 0)
             return true;
         init(stage, game);
     }
