@@ -38,7 +38,7 @@ float Enemy::get_hurt(int index, float hurt)
 void Enemy::get_hurt_all(float hurt){
     int hurts = 0;
     for(int i = 0 ; i < 5; i++){
-        hurts += get_hurt(hurt, i);
+        hurts += get_hurt(i, hurt);
     }
     if(hurts > 0) get_hurt_all(hurts);
 }

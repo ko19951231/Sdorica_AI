@@ -18,9 +18,9 @@ bool state::player_move(vector<int> r, vector<int> c)
     if(color==0) hurt=player.pon_attack(count);
     else if(color==1) hurt=player.naya_attack(count);
     else if(color==2) hurt=player.dica_attack(count);
-    printf("att: %f", hurt);
     // hurt the first enemy and see if there are 72 point return with mushroom's dead
     float enemyHurt = enemy.get_hurt_first(hurt);
+    printf("e: %f\n", enemyHurt);
     if(enemyHurt != 0) enemy.get_hurt_all(enemyHurt);
     //no more enemies -> go to the next stage
     if(enemy.getAmount() == 0)

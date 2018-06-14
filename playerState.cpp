@@ -33,7 +33,6 @@ float PlayerState::attack(int diamond){
     //If the player is dead, return nothing
     if(isDead()) return 0;
     float currentATK = ATK * calculateStrengthen();
-    printf("atk: %f \n", currentATK);
     return currentATK * diamondBuff[diamond - 1];
 }
 
