@@ -16,7 +16,7 @@ bool state::player_move(vector<int> r, vector<int> c)
     // get the value of hurt to the enemy
     float hurt;
     if(color==0) hurt=player.pon_attack(count);
-    else if(color==1) hurt=player.yana_attack(count);
+    else if(color==1) hurt=player.naya_attack(count);
     else if(color==2) hurt=player.dica_attack(count);
     printf("att: %f", hurt);
     // hurt the first enemy and see if there are 72 point return with mushroom's dead
