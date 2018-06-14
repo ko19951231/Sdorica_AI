@@ -12,9 +12,9 @@ void Enemy::init(int s, state *st)
     int CD_start = 3;
     if(s >= 2) CD_start++;
     for(int i = 0 ; i < 5; i++)
-        enemies[i].setValue(0, i + CD_start);
-    if(s >= 1) enemies[1].setValue(1, CD_start + 1);
-    if(s >= 2) enemies[2].setValue(2, CD_start + 2);
+        enemies[i].setValue(0, i + CD_start, 36);
+    if(s >= 1) enemies[1].setValue(1, CD_start + 1, 72);
+    if(s >= 2) enemies[2].setValue(2, CD_start + 2, 36);
 }
 
 float Enemy::get_hurt_first(float hurt){
@@ -58,7 +58,7 @@ void Enemy::attack(){
     for(int i = 0 ; i < 5; i++){
         //if the enemy's CD is downcounting to 0
         //Add back the CD time and attack
-        if(enemies[i].getCD() == 0){
+        if((enemies[i].getCD() == 0)&& !enemies[i].isDead()){
             if(enemies[i].getKind() <= 1){
                 game->PlayerHurtFist(enemies[i].attack());
             }

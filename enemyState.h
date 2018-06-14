@@ -4,7 +4,7 @@
 class EnemyState{
 public:
     EnemyState();
-    EnemyState(int k, int cd);
+    EnemyState(int k, int cd, float atk);
     float attack();
     bool getDamage(float damage);
     void heal(float hp);
@@ -17,7 +17,7 @@ public:
     float getATK(){return ATK;}
     int getCD(){return CD;}
     int getKind(){return kind;}
-    void setValue(int k, int cd);
+    void setValue(int k, int cd, float atk);
     bool isDead(){return HP <= 0? true:false;}
 private:
     int kind;   // 0 for mushroom, 1 for round, 2 for cube

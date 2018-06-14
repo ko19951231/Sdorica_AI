@@ -9,9 +9,8 @@ EnemyState::EnemyState(){
     }
 }
 
-EnemyState::EnemyState(int k, int cd){
-    kind = k;
-    CD = cd;
+EnemyState::EnemyState(int k, int cd, float atk){
+    kind = k; CD = cd; ATK = atk;
     if(kind == 0){      //mushroom
         HP = MAX_HP = 120;
         CD_interval = 3;
@@ -32,9 +31,8 @@ EnemyState::EnemyState(int k, int cd){
     }
 }
 
-void EnemyState::setValue(int k, int cd){
-    kind = k;
-    CD = cd;
+void EnemyState::setValue(int k, int cd, float atk){
+    kind = k; CD = cd; ATK = atk;
     if(kind == 0){      //mushroom
         HP = MAX_HP =120;
         CD_interval = 3;
