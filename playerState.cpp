@@ -1,4 +1,5 @@
 #include "playerState.h"
+#include<cstdio>
 
 PlayerState::PlayerState(){
     for(int i = 0 ; i < 3; i++){
@@ -31,7 +32,7 @@ void PlayerState::setDiamondBuff(float n1, float n2, float n3){
 float PlayerState::attack(int diamond){
     //If the player is dead, return nothing
     if(isDead()) return 0;
-
+    printf("is not dead");
     float currentATK = ATK * calculateStrengthen();
     return currentATK * diamondBuff[diamond];
 }

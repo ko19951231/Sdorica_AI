@@ -15,7 +15,6 @@ int main()
     Trainer trainer; 
     game.init();
     trainer.open_episode();
-    printf("game start");
     while(1){
         game.print();
         int n;
