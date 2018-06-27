@@ -3,83 +3,184 @@
 
 void Player::init(state *s){
     //set the basic value
-    pon.setValue(47, 310);
-    naya.setValue(61, 225);
-    dica.setValue(56, 253);
+    this.pon.setValue(47, 310);
+    this.naya.setValue(61, 225);
+    this.dica.setValue(56, 253);
     //Set up the characters' diamond buff
-    pon.setDiamondBuff(1.41, 2.83, 5.67);
-    naya.setDiamondBuff(1.58, 3.16, 6.6);
-    dica.setDiamondBuff(2.07, 2.91, 10.37);
-    game = s;
+    this.pon.setDiamondBuff(1.41, 2.83, 5.67);
+    this.naya.setDiamondBuff(1.58, 3.16, 6.6);
+    this.dica.setDiamondBuff(2.07, 2.91, 10.37);
+    this.game = s;
+}
+void Player::setSelectedIndex(int index){
+    this.selectedCharacterIndex = index;
 }
 float Player::pon_attack(int daimond)
 {
-    float atk_value = pon.attack(daimond);
+    //Select an enemy to attack
+    if(daimond != 1){
+        int n = -1;
+        printf("Select an enemy for pon to attack(0~4): ");
+        scanf("%d" , &n);
+        this.game->setEnemySelectedIndex(n);
+    }
+    float atk_value = this.pon.attack(daimond);
     //one diamond . minus harm
-    if(daimond == 1)
-        pon.addMinusHarm(3);
-    return atk_value;
+    if(daimond == 1){
+        this.game->enemyHurtFirst(atk_value);
+        this.pon.addMinusHarm(3);
+    }
+    else{
+        this.game->enemyHurtSelected(atk_value);
+    }    
 }
-float Player::naya_attack(int daimond)
+void Player::naya_attack(int daimond)
 {
-    float atk_value = naya.attack(daimond);
+    //Select an enemy to attack
+    int n = -1;
+    printf("Select an enemy for naya to attack (0~4): ");
+    scanf("%d" , &n);
+    this.game->setEnemySelectedIndex(n);
+    //Attack the enemy
+    float atk_value = this.naya.attack(daimond);
+    this.game->enemyHurtSelected(atk_value);
     if(daimond == 1)
-        game->enemyAddEasyHarmFirst(3);
-    return atk_value;
+        this.game->enemyAddEasyHarmFirst(3);
 }
-float Player::dica_attack(int daimond)
+void Player::dica_attack(int daimond)
 {
-    float atk_value = dica.attack(daimond);
-        
+    float atk_value = this.dica.attack(daimond);
+
     if(daimond==1){
-        pon.heal(atk_value);
-        pon.addStrengthen(3);
-        return 0;
+        //Select a character to heal
+        int n = -1;
+        printf("Select an character: (0 for pon, 1 for naya, 2 for dica)");
+        scanf("%d" , &n);
+        this.game->setSelectedIndex(n);
+        
+        PlayerState *p = getSelectedCharater();
+        p->heal(atk_value);
+        p->strengthen(3);
+        
     }
     else if(daimond==2){
-        return atk_value;
+        int n = -1;
+        printf("Select an enemy: 0~4");
+        scanf("%d" , &n);
+        this.game->selectedEnemyIndex(n);
+        this.game->enemyHurtSelected(atk_value);
     }
     else if(daimond==4){     //choose the one who has the least HP to heal
-        float HP_pon = pon.getHP();
-        float HP_naya = naya.getHP();
-        float HP_dica = dica.getHP();
-        if(HP_pon<HP_naya&&HP_pon<HP_dica) pon.heal(atk_value);
-        else if(HP_naya<HP_pon&&HP_naya<HP_dica) naya.heal(atk_value);
-        else if(HP_dica<HP_pon&&HP_dica<HP_naya) dica.heal(atk_value);
-        return 0;
+        float HP_pon = this.pon.getHP();
+        float HP_naya = this.naya.getHP();
+        float HP_dica = this.dica.getHP();
+        if(HP_pon<HP_naya&&HP_pon<HP_dica) this.pon.heal(atk_value);
+        else if(HP_naya<HP_pon&&HP_naya<HP_dica) this.naya.heal(atk_value);
+        else if(HP_dica<HP_pon&&HP_dica<HP_naya) this.dica.heal(atk_value);
     }
 }
+
+void Player::get_hurt(int index, float hurt)
+{
+    if(index == 0)
+        this.pon.getDamage(hurt);
+    else if(index == 1)
+        this.naya.getDamage(hurt);
+    else
+        this.dica.getDamage(hurt);
+    checkSelectedCharacterState();
+}
+
+void Player::get_hurt_first(float hurt){
+    get_hurt(getFirstCharacterIndex(), hurt);
+}
+
+void Player::get_hurt_selected(float hurt){
+    get_hurt(selectedCharacterIndex, hurt);
+}
+
 void Player::get_hurt_all(float hurt)
 {
-    pon.getDamage(hurt);
-    naya.getDamage(hurt);
-    dica.getDamage(hurt);
-}
-void Player::get_hurt_first(float hurt)
-{
-    if(!pon.isDead())
-        pon.getDamage(hurt);
-    else if(!naya.isDead())
-        naya.getDamage(hurt);
-    else
-        dica.getDamage(hurt);
+    if(!this.pon.isDead())
+        this.pon.getDamage(hurt);
+    if(!this.naya.isDead())
+        this.naya.getDamage(hurt);
+    if(!this.dica.isDead())
+        this.dica.getDamage(hurt);
+    checkSelectedCharacterState();
 }
 
 bool Player::player_dead(){
-    if(pon.isDead() && naya.isDead() && dica.isDead())
+    if(this.pon.isDead() && this.naya.isDead() && this.dica.isDead())
         return true;
     return false;
 }
 
 void Player::update(){
-    pon.update();
-    naya.update();
-    dica.update();
+    this.pon.update();
+    this.naya.update();
+    this.dica.update();
 }
 void Player::print()
 {
-    printf("PON: HP %f, ATK %f\n", pon.getHP(), pon.getATK());
-    printf("NAYA: HP %f, ATK %f\n", naya.getHP(), naya.getATK());
-    printf("DICA: HP %f, ATK %f\n", dica.getHP(), dica.getATK());
+    printf("PON: HP %f, ATK %f, Recover Diamond: %d\n", this.pon.getHP(), this.pon.getATK(), this.pon.getDiamondAount());
+    printf("NAYA: HP %f, ATK %f, Recover Diamond: %d\n", this.naya.getHP(), this.naya.getATK(), this.naya.getDiamondAount());
+    printf("DICA: HP %f, ATK %f, Recover Diamond: %d\n", this.dica.getHP(), this.dica.getATK(), this.dica.getDiamondAount());
     puts("--------");
+}
+
+int Player::getFirstCharacterIndex(){
+
+    if(!this.pon.isDead())
+        return 0;
+    if(!this.naya.isDead())
+        return 1;
+    if(!this.dica.isDead())
+        return 2;
+    return -1;
+}
+
+PlayerState* Player::getFirstCharacter(){
+    if(!this.pon.isDead())
+        return &pon;
+    if(!this.naya.isDead())
+        return &naya;
+    if(!this.dica.isDead())
+        return &dica;
+    return NULL;
+}
+
+PlayerState* Player::getSelectedCharater(){
+    if(this.selectedCharacterIndex == 0){
+        if(this.pon.isDead())
+            return &pon;
+    }
+    else if (selectedCharacterIndex == 1){
+        if(this.naya.isDead())
+            return &naya;
+    }
+    else{
+        if(this.dica.isDead())
+            return &dica;
+    }
+    return NULL;
+}
+
+void Player::updateSelectedIndex(){
+    this.selectedCharacterIndex = getFirstCharacterIndex();
+}
+
+void Player::checkSelectedCharacterState(){
+    if(this.selectedCharacterIndex == 0){
+        if(this.pon.isDead())
+            updateSelectedIndex();
+    }
+    else if (selectedCharacterIndex == 1){
+        if(this.naya.isDead())
+            updateSelectedIndex();
+    }
+    else{
+        if(this.dica.isDead())
+            updateSelectedIndex();
+    }
 }

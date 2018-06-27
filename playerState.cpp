@@ -40,7 +40,10 @@ float PlayerState::attack(int diamond){
 bool PlayerState::getDamage(float damage){
     HP -= damage * calculateMinusHarm() * calculateEasyHarm();
     //if the character is dead, return true, otherwise, false
-    if(HP <= 0) return true;
+    if(HP <= 0) {
+        recover_diamond = RECOVER_DIAMOND_AMOUNT;
+        return true;
+    }
     return false;
 }
 
@@ -86,6 +89,13 @@ void PlayerState::addStrengthen(int round){
     //The array is full, add it to the first one
     if(i == 3)
         strengthen[0] = round;
+}
+
+void PlayerState::recover_diamond(int daimond){
+    recover_diamond -= daimond;
+    if(recover_diamond <= 0){
+        HP = MAX_HP / 2.0f;
+    }
 }
 
 void PlayerState::update(){

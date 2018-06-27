@@ -13,9 +13,11 @@ public:
     void addMinusHarm(int round);
     void addEasyHarm(int round);
     void addStrengthen(int round);
+    void recoverDiamond(int daimond);
     void update();
     float getHP(){return HP;}
     float getATK(){return ATK;}
+    int getDiamondAount(){return recover_diamond;}
     bool isDead(){return HP <= 0? true:false;}
 private:
     float ATK;
@@ -28,8 +30,10 @@ private:
     //minusHarm(減傷), easyHarm(易傷), strengthen(強化) with there rounds (maximum with 3 times of state)
     int minusHarm[3];
     int strengthen[3];
-    //易傷 在 character上 此次不會用到 但先留著
     int easyHarm[3];
+    //The diamond should be use to make the character alive
+    int recover_diamond;
+    int RECOVER_DIAMOND_AMOUNT = 8;
 
     float calculateMinusHarm();
     float calculateEasyHarm();

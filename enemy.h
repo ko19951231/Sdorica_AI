@@ -11,13 +11,18 @@ class Enemy
 {
 public:
     void init(int s, state *st);
-    //hurt the first enemy
-    float get_hurt_first(float hurt);
-    float get_hurt(int index, float hurt);
+    void setSelectedIndex(int index);
+    //hurt the enemy
+    void get_hurt(int index, float hurt);
+    void get_hurt_first(float hurt);
+    void get_hurt_selected(float hurt);
     void get_hurt_all(float hurt);
-    //Add the "easy harm" state to the first enemy
+    //add state buff to enemy
     void addEasyHarmFirst(int round);
+    void addEasyHarmSelected(int round);
+    //update CD value
     void update();
+    //attack the player
     void attack();
     int getAmount();
     void nextStage();
@@ -27,6 +32,9 @@ private:
     EnemyState enemies[5];
     int stage;  // after all the enemy is dead, a new stage is begin
     int amount; // the amount of the "living" enemy
+    int selectedEnemyIndex;
     state *game;
+    void updateSelectedIndex();
+    void checkSelectedEnemyState();
 };
 #endif

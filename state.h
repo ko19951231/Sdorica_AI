@@ -17,9 +17,14 @@ public:
     bool enemy_move();
     void update();
     void print();
-    void PlayerHurtFist(float hurt);
+    void setEnemySelectedIndex(int index);
+    void setPlayerSelectedIndex(int index);
+    void PlayerHurtFirst(float hurt);
+    void PlayerHurtSelected(float hurt);
     void PlayerHurtAll(float hurt);
-    void enemyAddEasyHarmFirst(int round);
+    void enemyHurtFirst(float hurt);
+    void enemyHurtSelected(float hurt);
+    void enemyAddEasyHarmFirst(int round)
 private:
     Board board;
     Player player;
