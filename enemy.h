@@ -20,7 +20,7 @@ public:
     void update();
     void attack();
     int getAmount();
-    bool nextStage();
+    void nextStage();
     int getFirstIndex();
     void print();
 private:

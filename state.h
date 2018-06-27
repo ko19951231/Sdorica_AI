@@ -13,8 +13,8 @@ class state
 {
 public:
     void init();
-    bool player_move(vector<int> r, vector<int> c);
-    void enemy_move();
+    void player_move(vector<int> r, vector<int> c);
+    bool enemy_move();
     void update();
     void print();
     void PlayerHurtFist(float hurt);

@@ -14,6 +14,7 @@ public:
     float dica_attack(int daimond);
     void get_hurt_all(float hurt);
     void get_hurt_first(float hurt);
+    bool player_dead();
     void update();
     void print();
 private:

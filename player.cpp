@@ -64,6 +64,13 @@ void Player::get_hurt_first(float hurt)
     else
         dica.getDamage(hurt);
 }
+
+bool Player::player_dead(){
+    if(pon.isDead() && naya.isDead() && dica.isDead())
+        return true;
+    return false;
+}
+
 void Player::update(){
     pon.update();
     naya.update();

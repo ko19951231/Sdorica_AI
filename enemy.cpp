@@ -74,16 +74,12 @@ int Enemy::getAmount(){
     return amount;
 }
 
-bool Enemy::nextStage(){
+void Enemy::nextStage(){
     //no more enemies -> go to the next stage
     if(amount == 0) {
         stage = (stage + 1) % 3;
-        //if the stage comes back to 0, then game over
-        if(stage == 0)
-            return true;
         init(stage, game);
     }
-    return false;
 }
 
 int Enemy::getFirstIndex(){

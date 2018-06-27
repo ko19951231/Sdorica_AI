@@ -6,7 +6,7 @@ void state::init()
     player.init(this);
     enemy.init(0, this);
 }
-bool state::player_move(vector<int> r, vector<int> c)
+void state::player_move(vector<int> r, vector<int> c)
 {
     // slide on the board to get the color and number of eliminated daimonds
     int daimond=board.slide(r, c);
@@ -24,13 +24,15 @@ bool state::player_move(vector<int> r, vector<int> c)
     if(enemyHurt != 0) enemy.get_hurt_all(enemyHurt);
     //no more enemies -> go to the next stage
     if(enemy.getAmount() == 0)
-        return enemy.nextStage();
-    return false;
+        enemy.nextStage();
 }
-void state::enemy_move()
+bool state::enemy_move()
 {
     enemy.attack();
     board.pop_up();
+    if(player.player_dead())
+        return true;
+    return false;
 }
 void state::update(){
     player.update();
