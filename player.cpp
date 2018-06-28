@@ -170,16 +170,13 @@ PlayerState* Player::getFirstCharacter(){
 
 PlayerState* Player::getSelectedCharater(){
     if(this->selectedCharacterIndex == 0){
-        if(this->pon.isDead())
-            return &pon;
+        return &pon;
     }
-    else if (selectedCharacterIndex == 1){
-        if(this->naya.isDead())
-            return &naya;
+    else if (this->selectedCharacterIndex == 1){
+        return &naya;
     }
     else{
-        if(this->dica.isDead())
-            return &dica;
+        return &dica;
     }
     return NULL;
 }
