@@ -36,7 +36,7 @@ public:
 private:
     EnemyState enemies[5];
     int stage;  // after all the enemy is dead, a new stage is begin
-    int stage_amount; //the amount of the enemy in the stage begining
+    int total_amount; //the amount of the enemy in the stage begining
     int amount; // the amount of the "living" enemy
     int selectedEnemyIndex;
     state *game;
