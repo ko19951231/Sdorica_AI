@@ -102,6 +102,8 @@ int Enemy::getFirstIndex(){
 void Enemy::print()
 {
     for(int i=0;i<5;i++){
+        if(this->selectedEnemyIndex == i)
+            printf("*");
         if(this->enemies[i].getKind() == 0) printf("Mushroom: HP %f, CD %d\n", this->enemies[i].getHP(),  this->enemies[i].getCD());
         else if(this->enemies[i].getKind() == 1) printf("Round: HP %f, CD %d\n", this->enemies[i].getHP(),  this->enemies[i].getCD());
         else if(this->enemies[i].getKind() == 2) printf("Cube: HP %f, CD %d\n", this->enemies[i].getHP(),  this->enemies[i].getCD());

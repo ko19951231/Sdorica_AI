@@ -135,8 +135,14 @@ void Player::update(){
 }
 void Player::print()
 {
+    if(this->selectedCharacterIndex == 0)
+        printf("*");
     printf("PON: HP %f, ATK %f, Recover Diamond: %d\n", this->pon.getHP(), this->pon.getATK(), this->pon.getDiamondAount());
+    if(this->selectedCharacterIndex == 1)
+        printf("*");
     printf("NAYA: HP %f, ATK %f, Recover Diamond: %d\n", this->naya.getHP(), this->naya.getATK(), this->naya.getDiamondAount());
+    if(this->selectedCharacterIndex == 2)
+        printf("*");
     printf("DICA: HP %f, ATK %f, Recover Diamond: %d\n", this->dica.getHP(), this->dica.getATK(), this->dica.getDiamondAount());
     puts("--------");
 }
