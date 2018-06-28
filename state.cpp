@@ -34,7 +34,7 @@ void state::player_move(vector<int> r, vector<int> c)
             this->player.dica_attack(count);
         }    
         else
-            this->player.dica_recover();
+            this->player.dica_recover(count);
     }
     if(this->enemy.getAmount() == 0)
         this->enemy.nextStage();
