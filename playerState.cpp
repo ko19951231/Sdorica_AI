@@ -7,6 +7,8 @@ PlayerState::PlayerState(){
         easyHarm[i] = 0;
         strengthen[i] = 0;
     }
+    RECOVER_DIAMOND_AMOUNT = 8;
+    recover_diamond = 0;
 }
 
 PlayerState::PlayerState(float atk, float hp){
@@ -17,6 +19,8 @@ PlayerState::PlayerState(float atk, float hp){
         easyHarm[i] = 0;
         strengthen[i] = 0;
     }
+    RECOVER_DIAMOND_AMOUNT = 8;
+    recover_diamond = 0;
 }
 
 void PlayerState::setValue(float atk, float hp){

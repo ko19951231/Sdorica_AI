@@ -33,7 +33,7 @@ private:
     int easyHarm[3];
     //The diamond should be use to make the character alive
     int recover_diamond;
-    int RECOVER_DIAMOND_AMOUNT = 8;
+    int RECOVER_DIAMOND_AMOUNT;
 
     float calculateMinusHarm();
     float calculateEasyHarm();
