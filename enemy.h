@@ -32,7 +32,7 @@ public:
     int getFirstIndex();
     void print();
 private:
-    EnemyState enemies[5];
+    EnemyState enemies[3];
     int stage;  // after all the enemy is dead, a new stage is begin
     int init_amount; //the amount of the enemy in the stage begining
     int amount; // the amount of the "living" enemy

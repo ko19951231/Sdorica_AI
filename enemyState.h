@@ -21,15 +21,17 @@ public:
     //update value and CD after one round
     void update();
     //get value
-    float getHP(){return HP;}
-    float getATK(){return ATK;}
-    int getCD(){return CD;}
-    int getKind(){return kind;}
+    float getHP(){return this->HP;}
+    float getATK(){return this->ATK;}
+    float getShield(){return this->shield;}
+    int getCD(){return this->CD;}
+    int getKind(){return this->kind;}
     //set value
     void setValue(int k);
-    bool isDead(){return HP <= 0? true:false;}
+    bool isDead(){return this->HP <= 0? true:false;}
     //transfer shield
     void setTransferShield(int v);
+    void addShieldTransferLevel();
 private:
     int kind;   //0: 紅球角鯨 1:草葉巨蚤 2:結草鵝 3:組合偶屍 4:狼人盾兵 5:王國符文師
     float ATK;
@@ -38,6 +40,7 @@ private:
     float shield;
     int CD;
     int CD_interval;
+    int shieldTransfer_level;
     //Enemy's state
     //minusHarm(減傷), easyHarm(易傷), strengthen(強化) with there rounds (maximum with 3 times of state)
     int minusHarm[3];

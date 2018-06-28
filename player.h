@@ -20,6 +20,8 @@ public:
     void get_hurt_selected(float hurt);
     void get_hurt_first(float hurt);
     void get_hurt_all(float hurt);
+    void get_hurt_less(float hurt);
+    void get_hurt_index(int index, float hurt);
     bool pon_isDead(){ return pon.isDead();}
     bool naya_isDead(){return naya.isDead();}
     bool dica_isDead(){return dica.isDead();}

@@ -26,36 +26,42 @@ void EnemyState::init(){
         this->ATK = 163;
         this->CD = 4;
         this->CD_interval = 3;
+        this->shieldTransfer_level = 3;
     }
     else if(this->kind == 1){ //草葉巨蚤
         this->HP = this->MAX_HP = this->shield = 1149;
         this->ATK = 173;
         this->CD = 0;
         this->CD_interval = 4;
+        this->shieldTransfer_level = 0;
     }
     else if(this->kind == 2){ //結草鵝
         this->HP = this->MAX_HP = this->shield = 1149;
-        this->ATK = 305;
-        this->CD = 3;
+        this->ATK = 0;
+        this->CD = 0;
         this->CD_interval = 3;
+        this->shieldTransfer_level = 0;
     }
     else if(this->kind == 3){ //組合偶屍
         this->HP = this->MAX_HP = this->shield = 1614;
         this->ATK = 388;
         this->CD = 1;
         this->CD_interval = 3;
+        this->shieldTransfer_level = 3;
     }
     else if(this->kind == 4){ //狼人盾兵
         this->HP = this->MAX_HP = this->shield = 2306;
         this->ATK = 346;
         this->CD = 3;
         this->CD_interval = 3;
+        this->shieldTransfer_level = 3;
     }
     else if(this->kind == 5){ //王國符文師
         this->HP = this->MAX_HP = this->shield = 4852;
         this->ATK = 934;
         this->CD = 3;
         this->CD_interval = 3;
+        this->shieldTransfer_level = 3;
     }
     //initial states
     for(int i = 0 ; i < 3; i++){
@@ -139,6 +145,16 @@ void EnemyState::addStrengthen(int round){
         this->strengthen[0] = round;
 }
 
+void EnemyState::addShieldTransferLevel(){
+    if(this->shieldTransfer_level >= 3){
+        //Not sure
+        heal(305);
+    }
+    else{
+        this->shieldTransfer_level++;
+    }
+}
+
 void EnemyState::recoverCD(){
     this->CD = this->CD_interval;
 }
@@ -155,14 +171,8 @@ void EnemyState::update(){
     if(!isDead()) this->CD--;
     
     //recover hp with shield value (盾轉)
-    //1:草葉巨蚤 2:結草鵝 只有1層盾轉 其餘3層
     float recover_hp = 0;
-    if((this->kind == 1) || (this->kind == 2)){
-        recover_hp = this->shield * 0.3;
-    }
-    else if((this->kind == 0) || (this->kind == 3) || (this->kind == 4) || (this->kind == 5)){
-        recover_hp = 3 * (this->shield * 0.3);
-    }
+    recover_hp = this->shieldTransfer_level * this->shield * 0.3;
     heal(recover_hp);
     
     //recover shield for kind == 4, 5 (狼人盾兵 & 王國符文師)

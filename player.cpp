@@ -118,6 +118,19 @@ void Player::get_hurt_selected(float hurt){
     get_hurt(selectedCharacterIndex, hurt);
 }
 
+void Player::get_hurt_less(float hurt){
+    float HP_pon = this->pon.getHP();
+    float HP_naya = this->naya.getHP();
+    float HP_dica = this->dica.getHP();
+    if(HP_pon<HP_naya&&HP_pon<HP_dica) get_hurt(0, hurt);
+    else if(HP_naya<HP_pon&&HP_naya<HP_dica) get_hurt(1, hurt);
+    else if(HP_dica<HP_pon&&HP_dica<HP_naya) get_hurt(2, hurt);
+}
+
+void Player::get_hurt_index(int index, float hurt){
+    get_hurt(index, hurt);
+}
+
 void Player::get_hurt_all(float hurt)
 {
     if(!this->pon.isDead())

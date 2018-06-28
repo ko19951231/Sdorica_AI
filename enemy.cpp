@@ -3,16 +3,34 @@
 
 void Enemy::init(int s, state *st)
 {
-    
     this->stage = s;
     this->game = st;
-    /*
-    this->amount = 3;
-    int CD_start = 3;
-    for(int i = 0 ; i < 5; i++)
-    this->enemies[i].setValue(0);
-    if(s >= 1) this->enemies[1].setValue(1);
-    if(s >= 2) this->enemies[2].setValue(2);*/
+    if(this->stage == 0){
+        this->init_amount = this->amount = 3;
+        this->enemies[0].setValue(0);
+        this->enemies[1].setValue(0);
+        this->enemies[2].setValue(0);
+    }
+    else if(this->stage == 1){
+        this->init_amount = this->amount = 3;
+        this->enemies[0].setValue(1);
+        this->enemies[1].setValue(1);
+        this->enemies[2].setValue(2);
+    }
+    else if(this->stage == 2){
+        this->init_amount = this->amount = 1;
+        this->enemies[0].setValue(3);
+    }
+    else if(this->stage == 3){
+        this->init_amount = this->amount = 1;
+        this->enemies[0].setValue(4);
+    }
+    else if(this->stage == 4){
+        this->init_amount = this->amount = 2;
+        this->enemies[0].setValue(5);
+        this->enemies[1].setValue(2);
+    }
+
     this->selectedEnemyIndex = 0;
 }
 void Enemy::setSelectedIndex(int index){
@@ -22,15 +40,13 @@ void Enemy::setSelectedIndex(int index){
 void Enemy::get_hurt(int index, float hurt)
 {
     //if the enemy is dead, then return
-    if(this->enemies[index].isDead()) return ;
+    if(this->enemies[index].isDead()) return;
 
     bool dead = this->enemies[index].getDamage(hurt);
     if(dead){
         this->amount--;
-        if(enemies[index].getKind() == 0)
-            this->get_hurt_all(72);
+        checkSelectedEnemyState();
     }
-    checkSelectedEnemyState();
 }
 void Enemy::get_hurt_first(float hurt){
     get_hurt(getFirstIndex(), hurt);
@@ -39,8 +55,8 @@ void Enemy::get_hurt_selected(float hurt){
     get_hurt(this->selectedEnemyIndex, hurt);
 }
 void Enemy::get_hurt_all(float hurt){
-    int hurts = 0;
-    for(int i = 0 ; i < 5; i++){
+
+    for(int i = 0 ; i < init_amount; i++){
         get_hurt(i, hurt);
     }
 }
@@ -56,21 +72,43 @@ void Enemy::addEasyHarmFirst(int round){
 }
 
 void Enemy::update(){
-    for(int i = 0 ; i < 3; i++)
+    for(int i = 0 ; i < init_amount; i++)
         if(!this->enemies[i].isDead())
             this->enemies[i].update();
 }
 
 void Enemy::attack(){
-    for(int i = 0 ; i < 3; i++){
+    for(int i = 0 ; i < init_amount; i++){
         //if the enemy's CD is downcounting to 0
         //Add back the CD time and attack
         if((this->enemies[i].getCD() == 0)&& !this->enemies[i].isDead()){
-            if(this->enemies[i].getKind() <= 1){
-                this->game->PlayerHurtFirst(this->enemies[i].attack());
+            if(this->enemies[i].getKind() == 0){
+                float atk = this->enemies[i].attack();
+                this->game.PlayerHurtFirst(atk);
             }
-            else{
-                this->game->PlayerHurtAll(this->enemies[i].attack());
+            else if(this->enemies[i].getKind() == 1){
+                float atk = this->enemies[i].attack();
+                this->game.PlayerHurtAll(atk);
+            }
+            else if(this->enemies[i].getKind() == 2){
+                for(int j = 0 ; j < init_amount ; j++){
+                    if(!this->enemies[j].isDead())
+                        this->enemies[j].addShieldTransferLevel();
+                }
+            }
+            else if(this->enemies[i].getKind() == 3){
+                float atk = this->enemies[i].attack();
+                this->game.PlayerHurtFirst(atk);
+                this->enemies[i].setTransferShield(1);
+            }
+            else if(this->enemies[i].getKind() == 4){
+                float atk = this->enemies[i].attack();
+                this->game.PlayerHurtFirst(atk);
+            }
+            else if(this->enemies[i].getKind() == 5){
+                float atk = this->enemies[i].attack();
+                this->game.PlayerHurtLess(atk);
+                this->enemies[i].setTransferShield(1);
             }
             this->enemies[i].recoverCD();
         }
@@ -99,20 +137,18 @@ bool Enemy::nextStage(){
 int Enemy::getFirstIndex(){
     //Check the "first" enemy
     int index;
-    for(index = 0 ; index < 3; index++)
+    for(index = 0 ; index < init_amount; index++)
         if(!this->enemies[index].isDead()) break;
     return index;
 }
 
 void Enemy::print()
 {
-    for(int i=0;i < 3;i++){
+    for(int i = 0;i < init_amount ; i++){
         if(this->selectedEnemyIndex == i)
             printf("*");
-        if(this->enemies[i].getKind() == 0) printf("Mushroom: HP %f, CD %d\n", this->enemies[i].getHP(),  this->enemies[i].getCD());
-        else if(this->enemies[i].getKind() == 1) printf("Round: HP %f, CD %d\n", this->enemies[i].getHP(),  this->enemies[i].getCD());
-        else if(this->enemies[i].getKind() == 2) printf("Cube: HP %f, CD %d\n", this->enemies[i].getHP(),  this->enemies[i].getCD());
-    }
+        printf("Monster %d: HP %f, Shield %f, CD %d\n", this->enemies[i].getKind(), this->enemies[i].getHP(), this->enemies[i].getShield(), this->enemies[i].getCD());
+     }
     puts("==============");
 }
 

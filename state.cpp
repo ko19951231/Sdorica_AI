@@ -79,6 +79,12 @@ void state::PlayerHurtAll(float hurt){
 void state::PlayerHurtSelected(float hurt){
     this->player.get_hurt_selected(hurt);
 }
+void state::PlayerHurtLess(float hurt){
+    this->player.get_hurt_less(hurt);
+}
+void state::PlayerHurtIndex(int index, float hurt){
+    this->player.get_hurt_index(index, hurt);
+}   
 void state::enemyHurtFirst(float hurt){
     this->enemy.get_hurt_first(hurt);
 }
