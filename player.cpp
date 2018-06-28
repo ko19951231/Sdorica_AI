@@ -20,7 +20,7 @@ void Player::pon_attack(int diamond)
     //Select an enemy to attack
     if(diamond != 1){
         int n = -1;
-        printf("Select an enemy for pon to attack(0~4): ");
+        printf("Select an enemy for pon to attack: ");
         scanf("%d" , &n);
         this->game->setEnemySelectedIndex(n);
     }
@@ -38,7 +38,7 @@ void Player::naya_attack(int diamond)
 {
     //Select an enemy to attack
     int n = -1;
-    printf("Select an enemy for naya to attack (0~4): ");
+    printf("Select an enemy for naya to attack: ");
     scanf("%d" , &n);
     this->game->setEnemySelectedIndex(n);
     //Attack the enemy
@@ -72,7 +72,7 @@ void Player::dica_attack(int diamond)
     }
     else if(diamond==2){
         int n = -1;
-        printf("Select an enemy for dica to attack (0~4):");
+        printf("Select an enemy for dica to attack:");
         scanf("%d" , &n);
         this->game->setEnemySelectedIndex(n);
         this->game->enemyHurtSelected(atk_value);

@@ -147,7 +147,7 @@ void Enemy::print()
     for(int i = 0;i < init_amount ; i++){
         if(this->selectedEnemyIndex == i)
             printf("*");
-        printf("Monster %d: HP %f, Shield %f, CD %d\n", this->enemies[i].getKind(), this->enemies[i].getHP(), this->enemies[i].getShield(), this->enemies[i].getCD());
+        printf("%d: Monster%d: HP %f, Shield %f, CD %d\n", i, this->enemies[i].getKind(), this->enemies[i].getHP(), this->enemies[i].getShield(), this->enemies[i].getCD());
      }
     puts("==============");
 }

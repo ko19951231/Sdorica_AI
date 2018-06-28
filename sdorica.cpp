@@ -19,12 +19,11 @@ int main()
         game.init();
         trainer.open_episode();
         while(1){
-            game.print();
-
             //The enemy attack first
             bool gameOver = game.enemy_move();
             if(gameOver) break;
 
+            game.print();
             //Input the sliding value
             int n;
             scanf("%d", &n);
@@ -47,7 +46,7 @@ int main()
             //The 5th state will give 100 for bonus
             //So if the point > 100, means that an episode is over
             if(point > 100) break;
-                     
+
             //update the CD and "state" after one round
             game.update();
         }
