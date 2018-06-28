@@ -10,12 +10,12 @@ class Player
 public:
     void init(state *s);
     void setSelectedIndex(int index);
-    void pon_attack(int daimond);
-    void naya_attack(int daimond);
-    void dica_attack(int daimond);
-    void pon_recover(int daimond);
-    void naya_recover(int daimond);
-    void dica_recover(int daimond);
+    void pon_attack(int diamond);
+    void naya_attack(int diamond);
+    void dica_attack(int diamond);
+    void pon_recover(int diamond);
+    void naya_recover(int diamond);
+    void dica_recover(int diamond);
     void get_hurt(int index, float hurt);
     void get_hurt_selected(float hurt);
     void get_hurt_first(float hurt);

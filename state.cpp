@@ -63,7 +63,7 @@ void state::setEnemySelectedIndex(int index){
 void state::setPlayerSelectedIndex(int index){
     this->player.setSelectedIndex(index);
 }
-void state::PlayerHurtFist(float hurt){
+void state::PlayerHurtFirst(float hurt){
     this->player.get_hurt_first(hurt);
 }
 void state::PlayerHurtAll(float hurt){

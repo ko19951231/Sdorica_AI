@@ -81,15 +81,15 @@ void Player::dica_attack(int daimond)
 }
 
 void Player::pon_recover(int diamond){
-    this->pon.recoverDiamond(daimond);
+    this->pon.recoverDiamond(diamond);
 }
 
 void Player::naya_recover(int diamond){
-    this->naya.recoverDiamond(daimond);
+    this->naya.recoverDiamond(diamond);
 }
 
 void Player::dica_recover(int diamond){
-    this->dica.recoverDiamond(daimond);
+    this->dica.recoverDiamond(diamond);
 }
 
 void Player::get_hurt(int index, float hurt)
