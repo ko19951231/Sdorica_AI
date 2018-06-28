@@ -84,11 +84,11 @@ void Enemy::attack(){
         if((this->enemies[i].getCD() == 0)&& !this->enemies[i].isDead()){
             if(this->enemies[i].getKind() == 0){
                 float atk = this->enemies[i].attack();
-                this->game.PlayerHurtFirst(atk);
+                this->game->PlayerHurtFirst(atk);
             }
             else if(this->enemies[i].getKind() == 1){
                 float atk = this->enemies[i].attack();
-                this->game.PlayerHurtAll(atk);
+                this->game->PlayerHurtAll(atk);
             }
             else if(this->enemies[i].getKind() == 2){
                 for(int j = 0 ; j < init_amount ; j++){
@@ -98,16 +98,16 @@ void Enemy::attack(){
             }
             else if(this->enemies[i].getKind() == 3){
                 float atk = this->enemies[i].attack();
-                this->game.PlayerHurtFirst(atk);
+                this->game->PlayerHurtFirst(atk);
                 this->enemies[i].setTransferShield(1);
             }
             else if(this->enemies[i].getKind() == 4){
                 float atk = this->enemies[i].attack();
-                this->game.PlayerHurtFirst(atk);
+                this->game->PlayerHurtFirst(atk);
             }
             else if(this->enemies[i].getKind() == 5){
                 float atk = this->enemies[i].attack();
-                this->game.PlayerHurtLess(atk);
+                this->game->PlayerHurtLess(atk);
                 this->enemies[i].setTransferShield(1);
             }
             this->enemies[i].recoverCD();
