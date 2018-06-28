@@ -23,7 +23,7 @@ int Board::slide(vector<int> r, vector<int> c) // a sequence of points to slide
     for(int i=0;i<r.size();i++){
         daimond[r[i]][c[i]]=-1;
     }
-    return color*4+r.size();            // return the color and the number of daimond eliminated
+    return color;            // return the color
 }
 void Board::pop_up()     // pop up new daimond
 {

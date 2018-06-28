@@ -9,9 +9,8 @@ void state::init()
 void state::player_move(vector<int> r, vector<int> c)
 {
     // slide on the board to get the color and number of eliminated daimonds
-    int daimond=board.slide(r, c);
-    int color=daimond/4;
-    int count=daimond%4;
+    int color=board.slide(r, c);
+    int count= r.size();
     printf("%d %d\n",color, count);
     // get the value of hurt to the enemy
     float hurt = 0;
