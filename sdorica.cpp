@@ -53,7 +53,7 @@ int main()
 
             //update the CD and "state" after one round
             //don't update when in new stage
-            if(point != 0)
+            if(point == 0)
                 game.update();
         }
         trainer.close_episode();
