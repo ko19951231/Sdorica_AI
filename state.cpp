@@ -9,6 +9,7 @@ void state::init()
 }
 int state::player_move(vector<int> r, vector<int> c)
 {
+    move_amount++;
     // slide on the board to get the color and number of eliminated daimonds
     int color=board.slide(r, c);
     int count= r.size();

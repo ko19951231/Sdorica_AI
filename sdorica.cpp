@@ -52,7 +52,9 @@ int main()
             if(point > 100) break;
 
             //update the CD and "state" after one round
-            game.update();
+            //don't update when in new stage
+            if(point != 0)
+                game.update();
         }
         trainer.close_episode();
     }
