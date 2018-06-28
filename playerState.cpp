@@ -11,20 +11,21 @@ PlayerState::PlayerState(){
     recover_diamond = 0;
 }
 
-PlayerState::PlayerState(float atk, float hp){
+PlayerState::PlayerState(float atk, float hp, int diamond){
     ATK = atk; HP = hp;
     MAX_HP = hp;
+    shield = 0;
     for(int i = 0 ; i < 3; i++){
         minusHarm[i] = 0;
         easyHarm[i] = 0;
         strengthen[i] = 0;
     }
-    RECOVER_DIAMOND_AMOUNT = 8;
+    RECOVER_DIAMOND_AMOUNT = diamond;
     recover_diamond = 0;
 }
 
-void PlayerState::setValue(float atk, float hp){
-    ATK = atk; HP = MAX_HP = hp;
+void PlayerState::setValue(float atk, float hp, int diamond){
+    ATK = atk; HP = MAX_HP = hp; RECOVER_DIAMOND_AMOUNT = diamond;
 }
 
 void PlayerState::setDiamondBuff(float n1, float n2, float n3){
@@ -102,13 +103,17 @@ void PlayerState::recoverDiamond(int daimond){
     }
 }
 
-void PlayerState::update(){
+void PlayerState::minusCD(){
     //update the Player's buff state
     for(int i = 0; i < 3; i++){
         if(easyHarm[i] > 0) easyHarm[i]--;
         if(minusHarm[i] > 0) minusHarm[i]--;
         if(strengthen[i] > 0) strengthen[i]--;
     }
+}
+
+void PlayerState::update(){
+    //nothing in this case
 }
 
 float PlayerState::calculateMinusHarm(){

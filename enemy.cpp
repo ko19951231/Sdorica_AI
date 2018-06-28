@@ -3,18 +3,16 @@
 
 void Enemy::init(int s, state *st)
 {
+    
     this->stage = s;
-    this->amount = 5;
     this->game = st;
-    //Stage0: mushroom * 5
-    //Stage1: mushroom, round, mushroom, mushroom, mushroom.
-    //Stage2: mushroom, round, cube, mushroom, mushroom.
+    /*
+    this->amount = 3;
     int CD_start = 3;
-    if(s >= 2) CD_start++;
     for(int i = 0 ; i < 5; i++)
-        this->enemies[i].setValue(0, i + CD_start, 36);
+    this->enemies[i].setValue(0, i + CD_start, 36);
     if(s >= 1) this->enemies[1].setValue(1, CD_start + 1, 72);
-    if(s >= 2) this->enemies[2].setValue(2, CD_start + 2, 36);
+    if(s >= 2) this->enemies[2].setValue(2, CD_start + 2, 36);*/
     this->selectedEnemyIndex = 0;
 }
 void Enemy::setSelectedIndex(int index){
@@ -31,7 +29,6 @@ void Enemy::get_hurt(int index, float hurt)
         this->amount--;
         if(enemies[index].getKind() == 0)
             this->get_hurt_all(72);
-            //return 72; // if the mushroom dead, hurt enemies with 72 HP
     }
     checkSelectedEnemyState();
 }
@@ -58,14 +55,20 @@ void Enemy::addEasyHarmFirst(int round){
     this->enemies[getFirstIndex()].addEasyHarm(round);
 }
 
+void Enemy::minusCD(){
+    for(int i = 0 ; i < 3; i++)
+        if(!this->enemies[i].isDead())
+            this->enemies[i].minusCD();
+}
+
 void Enemy::update(){
-    for(int i = 0 ; i < 5; i++)
+    for(int i = 0 ; i < 3; i++)
         if(!this->enemies[i].isDead())
             this->enemies[i].update();
 }
 
 void Enemy::attack(){
-    for(int i = 0 ; i < 5; i++){
+    for(int i = 0 ; i < 3; i++){
         //if the enemy's CD is downcounting to 0
         //Add back the CD time and attack
         if((this->enemies[i].getCD() == 0)&& !this->enemies[i].isDead()){
@@ -84,25 +87,32 @@ int Enemy::getAmount(){
     return this->amount;
 }
 
+int Enemy::getStage(){
+    return this->stage;
+}
+
 void Enemy::nextStage(){
     //no more enemies -> go to the next stage
     if(this->amount == 0) {
-        this->stage = (this->stage + 1) % 3;
+        if(this->state == 4)
+            return false;
+        this->stage = this->stage + 1;
         init(this->stage, this->game);
+        return true;
     }
 }
 
 int Enemy::getFirstIndex(){
     //Check the "first" enemy
     int index;
-    for(index = 0 ; index < 5; index++)
+    for(index = 0 ; index < 3; index++)
         if(!this->enemies[index].isDead()) break;
     return index;
 }
 
 void Enemy::print()
 {
-    for(int i=0;i<5;i++){
+    for(int i=0;i < 3;i++){
         if(this->selectedEnemyIndex == i)
             printf("*");
         if(this->enemies[i].getKind() == 0) printf("Mushroom: HP %f, CD %d\n", this->enemies[i].getHP(),  this->enemies[i].getCD());

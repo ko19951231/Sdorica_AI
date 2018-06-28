@@ -13,8 +13,9 @@ class state
 {
 public:
     void init();
-    void player_move(vector<int> r, vector<int> c);
+    int player_move(vector<int> r, vector<int> c);
     bool enemy_move();
+    void minusCD();
     void update();
     void print();
     void setEnemySelectedIndex(int index);
@@ -30,5 +31,6 @@ private:
     Board board;
     Player player;
     Enemy enemy;
+    int move_amount;
 };
 #endif

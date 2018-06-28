@@ -3,9 +3,9 @@
 
 void Player::init(state *s){
     //set the basic value
-    this->pon.setValue(47, 310);
-    this->naya.setValue(61, 225);
-    this->dica.setValue(56, 253);
+    this->pon.setValue(693, 3119, 10);
+    this->naya.setValue(502, 1857, 8);
+    this->dica.setValue(240, 1591, 8);
     //Set up the characters' diamond buff
     this->pon.setDiamondBuff(1.41, 2.83, 5.67);
     this->naya.setDiamondBuff(1.58, 3.16, 6.6);
@@ -128,11 +128,18 @@ bool Player::player_dead(){
     return false;
 }
 
+void Player::minusCD(){
+    this->pon.minusCD();
+    this->naya.minusCD();
+    this->dica.minusCD();
+}
+
 void Player::update(){
     this->pon.update();
     this->naya.update();
     this->dica.update();
 }
+
 void Player::print()
 {
     if(this->selectedCharacterIndex == 0)

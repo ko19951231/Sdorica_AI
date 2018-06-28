@@ -105,7 +105,7 @@ void EnemyState::addStrengthen(int round){
         strengthen[0] = round;
 }
 
-void EnemyState::update(){
+void EnemyState::minusCD(){
     //update the Enemies's buff state
     //update the CD time
     for(int i = 0; i < 3; i++){
@@ -118,6 +118,10 @@ void EnemyState::update(){
 
 void EnemyState::recoverCD(){
     CD = CD_interval;
+}
+
+void EnemyState::update(){
+    //recover shield
 }
 
 float EnemyState::calculateMinusHarm(){

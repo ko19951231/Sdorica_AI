@@ -13,30 +13,45 @@ int main()
     srand(time(NULL));
     state game;
     Trainer trainer; 
-    game.init();
-    trainer.open_episode();
-    while(1){
-        game.print();
-        int n;
-        scanf("%d", &n);
-        vector<int> r;
-        vector<int> c;
-        for(int i=0;i<n;i++){
-            int rr, cc;
-            scanf("%d %d", &rr, &cc);
-            r.push_back(rr);
-            c.push_back(cc);
+    int num_episode = 1;
+    for(int i = 0 ; i < num_episode ; i++){
+        int total_point = 0;
+        game.init();
+        trainer.open_episode();
+        while(1){
+            game.print();
+            //Input the sliding value
+            int n;
+            scanf("%d", &n);
+            vector<int> r;
+            vector<int> c;
+            for(int i=0;i<n;i++){
+                int rr, cc;
+                scanf("%d %d", &rr, &cc);
+                r.push_back(rr);
+                c.push_back(cc);
+            }
+            //Return value
+            //The reward will be returned after one round
+            int point = game.player_move(r, c);
+            game.print();
+            trainer.add_state(game);
+            
+            //Add the reward
+            total_point += point;
+            //The 5th state will give 100 for bonus
+            //So if the point > 100, means that an episode is over
+            if(point > 100) break;
+            
+            //update the CD part
+            game.minusCD();
+            bool gameOver = game.enemy_move();
+            if(gameOver) break;
+            
+            //update the "state" after one round
+            game.update();
         }
-        //Return value
-        //True: the game is over, False: the game isn't over
-        game.player_move(r, c);
-        game.print();
-        trainer.add_state(game);
-        //update the game state
-        //including the player's buff cd and enemies' cd
-        game.update();
-        bool gameOver = game.enemy_move();
-        if(gameOver) break;
+        trainer.close_episode();
     }
-    trainer.close_episode();
+    
 }

@@ -20,17 +20,23 @@ public:
     //add state buff to enemy
     void addEasyHarmFirst(int round);
     void addEasyHarmSelected(int round);
-    //update CD value
+    //minus CD value
+    void minusCD();
+    //update the enemies state
     void update();
     //attack the player
     void attack();
+    //Go to next stage
+    bool nextStage();
+    //others
     int getAmount();
-    void nextStage();
+    int getStage();
     int getFirstIndex();
     void print();
 private:
     EnemyState enemies[5];
     int stage;  // after all the enemy is dead, a new stage is begin
+    int stage_amount; //the amount of the enemy in the stage begining
     int amount; // the amount of the "living" enemy
     int selectedEnemyIndex;
     state *game;

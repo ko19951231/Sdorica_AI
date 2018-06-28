@@ -5,8 +5,9 @@ void state::init()
     this->board.init();
     this->player.init(this);
     this->enemy.init(0, this);
+    this->move_amount = 0;
 }
-void state::player_move(vector<int> r, vector<int> c)
+int state::player_move(vector<int> r, vector<int> c)
 {
     // slide on the board to get the color and number of eliminated daimonds
     int color=board.slide(r, c);
@@ -35,8 +36,15 @@ void state::player_move(vector<int> r, vector<int> c)
         else
             this->player.dica_recover(count);
     }
-    if(this->enemy.getAmount() == 0)
-        this->enemy.nextStage();
+    if(this->enemy.getAmount() == 0){
+        int reward = 100 - move_amount;
+        bool gameEnd = this->enemy.nextStage();
+        if(gameEnd) reward += 100;
+        move_amount = 0;
+        return reward;
+    }
+    return 0;
+        
 }
 bool state::enemy_move()
 {
@@ -45,6 +53,10 @@ bool state::enemy_move()
     if(this->player.player_dead())
         return true;
     return false;
+}
+void state::minusCD(){
+    this->player.minusCD();
+    this->enemy.minusCD();
 }
 void state::update(){
     this->player.update();
