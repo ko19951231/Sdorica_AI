@@ -54,10 +54,6 @@ bool state::enemy_move()
         return true;
     return false;
 }
-void state::minusCD(){
-    this->player.minusCD();
-    this->enemy.minusCD();
-}
 void state::update(){
     this->player.update();
     this->enemy.update();

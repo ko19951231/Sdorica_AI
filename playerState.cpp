@@ -103,17 +103,13 @@ void PlayerState::recoverDiamond(int daimond){
     }
 }
 
-void PlayerState::minusCD(){
+void PlayerState::update(){
     //update the Player's buff state
     for(int i = 0; i < 3; i++){
         if(easyHarm[i] > 0) easyHarm[i]--;
         if(minusHarm[i] > 0) minusHarm[i]--;
         if(strengthen[i] > 0) strengthen[i]--;
     }
-}
-
-void PlayerState::update(){
-    //nothing in this case
 }
 
 float PlayerState::calculateMinusHarm(){

@@ -128,12 +128,6 @@ bool Player::player_dead(){
     return false;
 }
 
-void Player::minusCD(){
-    this->pon.minusCD();
-    this->naya.minusCD();
-    this->dica.minusCD();
-}
-
 void Player::update(){
     this->pon.update();
     this->naya.update();

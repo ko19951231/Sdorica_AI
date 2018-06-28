@@ -10,9 +10,9 @@ void Enemy::init(int s, state *st)
     this->amount = 3;
     int CD_start = 3;
     for(int i = 0 ; i < 5; i++)
-    this->enemies[i].setValue(0, i + CD_start, 36);
-    if(s >= 1) this->enemies[1].setValue(1, CD_start + 1, 72);
-    if(s >= 2) this->enemies[2].setValue(2, CD_start + 2, 36);*/
+    this->enemies[i].setValue(0);
+    if(s >= 1) this->enemies[1].setValue(1);
+    if(s >= 2) this->enemies[2].setValue(2);*/
     this->selectedEnemyIndex = 0;
 }
 void Enemy::setSelectedIndex(int index){
@@ -53,12 +53,6 @@ void Enemy::addEasyHarmSelected(int round){
 //Add the "easy harm" state to the first enemy
 void Enemy::addEasyHarmFirst(int round){
     this->enemies[getFirstIndex()].addEasyHarm(round);
-}
-
-void Enemy::minusCD(){
-    for(int i = 0 ; i < 3; i++)
-        if(!this->enemies[i].isDead())
-            this->enemies[i].minusCD();
 }
 
 void Enemy::update(){

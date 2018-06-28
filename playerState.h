@@ -21,9 +21,7 @@ public:
     void addStrengthen(int round);
     //If the player is dead -> recover with diamond
     void recoverDiamond(int daimond);
-    //update buff cd value
-    void minusCD();
-    //update buff after one round
+    //update buff and CD after one round
     void update();
     //others
     float getHP(){return HP;}

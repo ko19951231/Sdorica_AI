@@ -24,7 +24,6 @@ public:
     bool naya_isDead(){return naya.isDead();}
     bool dica_isDead(){return dica.isDead();}
     bool player_dead();
-    void minusCD();
     void update();
     void print();
     

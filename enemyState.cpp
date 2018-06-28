@@ -3,144 +3,183 @@
 EnemyState::EnemyState(){
     //initial states
     for(int i = 0 ; i < 3; i++){
-        minusHarm[i] = 0;
-        easyHarm[i] = 0;
-        strengthen[i] = 0;
+        this->minusHarm[i] = 0;
+        this->easyHarm[i] = 0;
+        this->strengthen[i] = 0;
     }
 }
 
-EnemyState::EnemyState(int k, int cd, float atk){
-    kind = k; CD = cd; ATK = atk;
-    if(kind == 0){      //mushroom
-        HP = MAX_HP = 120;
-        CD_interval = 3;
+EnemyState::EnemyState(int k){
+    this->kind = k;
+    init();
+}
+
+void EnemyState::setValue(int k){
+    this->kind = k;
+    init();
+}
+
+void EnemyState::init(){
+    if(this->kind == 0){      //紅球角鯨
+        this->HP = this->MAX_HP = this->shield = 1084;
+        this->ATK = 163;
+        this->CD = 4;
+        this->CD_interval = 3;
     }
-    else if(kind == 1){ //round monster
-        HP = MAX_HP =239;
-        CD_interval = 4;
+    else if(this->kind == 1){ //草葉巨蚤
+        this->HP = this->MAX_HP = this->shield = 1149;
+        this->ATK = 173;
+        this->CD = 0;
+        this->CD_interval = 4;
     }
-    else if(kind == 2){ //cube monster
-        HP = MAX_HP =239;
-        CD_interval = 3;
+    else if(this->kind == 2){ //結草鵝
+        this->HP = this->MAX_HP = this->shield = 1149;
+        this->ATK = 305;
+        this->CD = 3;
+        this->CD_interval = 3;
+    }
+    else if(this->kind == 3){ //組合偶屍
+        this->HP = this->MAX_HP = this->shield = 1614;
+        this->ATK = 388;
+        this->CD = 1;
+        this->CD_interval = 3;
+    }
+    else if(this->kind == 4){ //狼人盾兵
+        this->HP = this->MAX_HP = this->shield = 2306;
+        this->ATK = 346;
+        this->CD = 3;
+        this->CD_interval = 3;
+    }
+    else if(this->kind == 5){ //王國符文師
+        this->HP = this->MAX_HP = this->shield = 4852;
+        this->ATK = 934;
+        this->CD = 3;
+        this->CD_interval = 3;
     }
     //initial states
     for(int i = 0 ; i < 3; i++){
-        minusHarm[i] = 0;
-        easyHarm[i] = 0;
-        strengthen[i] = 0;
-    }
-}
-
-void EnemyState::setValue(int k, int cd, float atk){
-    kind = k; CD = cd; ATK = atk;
-    if(kind == 0){      //mushroom
-        HP = MAX_HP =120;
-        CD_interval = 3;
-    }
-    else if(kind == 1){ //round monster
-        HP = MAX_HP =239;
-        CD_interval = 4;
-    }
-    else if(kind == 2){ //cube monster
-        HP = MAX_HP =239;
-        CD_interval = 3;
+        this->minusHarm[i] = 0;
+        this->easyHarm[i] = 0;
+        this->strengthen[i] = 0;
     }
 }
 
 float EnemyState::attack(){
     //If the enemy is dead, return nothing
     if(isDead()) return 0;
-    float currentATK = ATK * calculateStrengthen();
+    float currentATK = this->ATK * calculateStrengthen();
     return currentATK;
 }
 
 bool EnemyState::getDamage(float damage){
-    HP -= damage * calculateMinusHarm() * calculateEasyHarm();
+    this->HP -= damage * calculateMinusHarm() * calculateEasyHarm();
     //if the character is dead, return true, otherwise, false
     if(HP <= 0) return true;
     return false;
 }
 
 void EnemyState::heal(float hp){
-    HP += hp;
-    if(HP > MAX_HP) HP = MAX_HP;
+    this->HP += hp;
+    if(this->HP > this->MAX_HP) this->HP = this->MAX_HP;
 }
 
 void EnemyState::addEasyHarm(int round){
     int i;
     //Add 'round' to the array
     for(i = 0 ; i < 3 ; i++)
-        if(easyHarm[i] == 0){
-            easyHarm[i] = round;
+        if(this->easyHarm[i] == 0){
+            this->easyHarm[i] = round;
             break;
         }
     //The array is full, add it to the first one
     if(i == 3)
-        easyHarm[0] = round;
+        this->easyHarm[0] = round;
 }
 
 void EnemyState::addMinusHarm(int round){
     int i;
     //Add 'round' to the array
     for(i = 0 ; i < 3 ; i++)
-        if(minusHarm[i] == 0){
-            minusHarm[i] = round;
+        if(this->minusHarm[i] == 0){
+            this->minusHarm[i] = round;
             break;
         }
     //The array is full, add it to the first one
     if(i == 3)
-        minusHarm[0] = round;
+        this->minusHarm[0] = round;
 }
 
 void EnemyState::addStrengthen(int round){
     int i;
     //Add 'round' to the array
     for(i = 0 ; i < 3 ; i++)
-        if(strengthen[i] == 0){
-            strengthen[i] = round;
+        if(this->strengthen[i] == 0){
+            this->strengthen[i] = round;
             break;
         }
     //The array is full, add it to the first one
     if(i == 3)
-        strengthen[0] = round;
-}
-
-void EnemyState::minusCD(){
-    //update the Enemies's buff state
-    //update the CD time
-    for(int i = 0; i < 3; i++){
-        if(easyHarm[i] > 0) easyHarm[i]--;
-        if(minusHarm[i] > 0) minusHarm[i]--;
-        if(strengthen[i] > 0) strengthen[i]--;
-    }
-    if(!isDead()) CD--;
+        this->strengthen[0] = round;
 }
 
 void EnemyState::recoverCD(){
-    CD = CD_interval;
+    this->CD = this->CD_interval;
 }
 
 void EnemyState::update(){
-    //recover shield
+
+    //update the Enemies's buff state
+    //update the CD time
+    for(int i = 0; i < 3; i++){
+        if(this->easyHarm[i] > 0) this->easyHarm[i]--;
+        if(this->minusHarm[i] > 0) this->minusHarm[i]--;
+        if(this->strengthen[i] > 0) this->strengthen[i]--;
+    }
+    if(!isDead()) this->CD--;
+    
+    //recover hp with shield value (盾轉)
+    //1:草葉巨蚤 2:結草鵝 只有1層盾轉 其餘3層
+    float recover_hp = 0;
+    if((this->kind == 1) || (this->kind == 2)){
+        recover_hp = this->shield * 0.3;
+    }
+    else if((this->kind == 0) || (this->kind == 3) || (this->kind == 4) || (this->kind == 5)){
+        recover_hp = 3 * (this->shield * 0.3);
+    }
+    this->HP += recover_hp;
+    if(this->HP > MAX_HP)
+        this->HP = MAX_HP;
+    
+    //recover shield for kind == 4, 5 (狼人盾兵 & 王國符文師)
+    if(this->kind == 4){
+        this->shield += 554;
+        if(this->shield > this->MAX_HP)
+            this->shield = this->MAX_HP;
+    }
+    if(this->kind == 5){
+        this->shield += 350;
+        if(this->shield > this->MAX_HP)
+            this->shield = this->MAX_HP;
+    }
 }
 
 float EnemyState::calculateMinusHarm(){
     float v = 1.0;
     for(int i = 0 ; i < 3; i++)
-        if(minusHarm[i] > 0) v *= 0.7;
+        if(this->minusHarm[i] > 0) v *= 0.7;
     return v;
 }
 
 float EnemyState::calculateEasyHarm(){
     float v = 1.0;
     for(int i = 0 ; i < 3; i++)
-        if(easyHarm[i] > 0) v *= 1.3;
+        if(this->easyHarm[i] > 0) v *= 1.3;
     return v;
 }
 
 float EnemyState::calculateStrengthen(){
     float v = 1.0;
     for(int i = 0 ; i < 3; i++)
-        if(strengthen[i] > 0) v *= 1.3;
+        if(this->strengthen[i] > 0) v *= 1.3;
     return v;
 }

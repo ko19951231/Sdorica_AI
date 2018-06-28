@@ -5,7 +5,7 @@ class EnemyState{
 public:
     //Constructor
     EnemyState();
-    EnemyState(int k, int cd, float atk);
+    EnemyState(int k);
     //Attack player
     float attack();
     //Get damage from player
@@ -16,10 +16,9 @@ public:
     void addMinusHarm(int round);
     void addEasyHarm(int round);
     void addStrengthen(int round);
-    //CD value
-    void minusCD();
+    //recove CD value
     void recoverCD();
-    //update value after one round
+    //update value and CD after one round
     void update();
     //get value
     float getHP(){return HP;}
@@ -27,10 +26,10 @@ public:
     int getCD(){return CD;}
     int getKind(){return kind;}
     //set value
-    void setValue(int k, int cd, float atk);
+    void setValue(int k);
     bool isDead(){return HP <= 0? true:false;}
 private:
-    int kind;   // 0 for mushroom, 1 for round, 2 for cube
+    int kind;   //0: 紅球角鯨 1:草葉巨蚤 2:結草鵝 3:組合偶屍 4:狼人盾兵 5:王國符文師
     float ATK;
     float HP;
     float MAX_HP;
@@ -42,9 +41,13 @@ private:
     int minusHarm[3];
     int strengthen[3];
     int easyHarm[3];
+    //被攻擊時，每層轉盾獲得總護盾 10% 的護盾，最高 3 層。
+    //此次只會有level 3
+    int transferShield;
     float calculateMinusHarm();
     float calculateEasyHarm();
     float calculateStrengthen();
+    void init();
 };
 
 #endif

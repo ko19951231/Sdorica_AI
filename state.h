@@ -15,7 +15,6 @@ public:
     void init();
     int player_move(vector<int> r, vector<int> c);
     bool enemy_move();
-    void minusCD();
     void update();
     void print();
     void setEnemySelectedIndex(int index);
