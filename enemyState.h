@@ -12,6 +12,8 @@ public:
     bool getDamage(float damage);
     //Recover hp
     void heal(float hp);
+    //Recover shield
+    void addShield(float s);
     //Buff add or no
     void addMinusHarm(int round);
     void addEasyHarm(int round);

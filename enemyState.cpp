@@ -32,7 +32,7 @@ void EnemyState::init(){
         this->HP = this->MAX_HP = this->shield = 1149;
         this->ATK = 173;
         this->CD = 0;
-        this->CD_interval = 4;
+        this->CD_interval = 2;
         this->shieldTransfer_level = 0;
     }
     else if(this->kind == 2){ //結草鵝
@@ -107,6 +107,12 @@ void EnemyState::heal(float hp){
         this->HP = this->MAX_HP;
 }
 
+void EnemyState::addShield(float s){
+    this->shield += s;
+    if(this->shield > this->MAX_HP)
+        this->shield = this->MAX_HP;
+}
+
 void EnemyState::addEasyHarm(int round){
     int i;
     //Add 'round' to the array
@@ -175,18 +181,6 @@ void EnemyState::update(){
     float recover_hp = 0;
     recover_hp = this->shieldTransfer_level * this->shield * 0.3;
     heal(recover_hp);
-    
-    //recover shield for kind == 4, 5 (狼人盾兵 & 王國符文師)
-    if(this->kind == 4){
-        this->shield += 554;
-        if(this->shield > this->MAX_HP)
-            this->shield = this->MAX_HP;
-    }
-    if(this->kind == 5){
-        this->shield += 350;
-        if(this->shield > this->MAX_HP)
-            this->shield = this->MAX_HP;
-    }
     
     //transferShield
     if(transferShield > 0)

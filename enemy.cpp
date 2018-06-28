@@ -104,11 +104,13 @@ void Enemy::attack(){
             else if(this->enemies[i].getKind() == 4){
                 float atk = this->enemies[i].attack();
                 this->game->PlayerHurtFirst(atk);
+                this->enemies[i].addShield(554);
             }
             else if(this->enemies[i].getKind() == 5){
                 float atk = this->enemies[i].attack();
                 this->game->PlayerHurtLess(atk);
                 this->enemies[i].setTransferShield(1);
+                this->enemies[i].addShield(350);
             }
             this->enemies[i].recoverCD();
         }

@@ -41,12 +41,13 @@ int main()
             game.print();
             trainer.add_state(game);
             
+            //Add the reward
+            total_point += point;
+            
             //debug
             if(point > 0)
                 printf("Reward: %d\tTotal Reward: %d\n", point, total_point);
             
-            //Add the reward
-            total_point += point;
             //The 5th state will give 100 for bonus
             //So if the point > 100, means that an episode is over
             if(point > 100) break;
