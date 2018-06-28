@@ -16,14 +16,14 @@ void Enemy::init(int s, state *st)
     if(s >= 1) this->enemies[1].setValue(1, CD_start + 1, 72);
     if(s >= 2) this->enemies[2].setValue(2, CD_start + 2, 36);
 }
-void selectedEnemyIndex(int index){
+void setSelectedIndex(int index){
     this->selectedEnemyIndex = index;
 }
 
 void Enemy::get_hurt(int index, float hurt)
 {
     //if the enemy is dead, then return
-    if(this->enemies[index].isDead()) return 0;
+    if(this->enemies[index].isDead()) return ;
 
     bool dead = this->enemies[index].getDamage(hurt);
     if(dead){
@@ -69,7 +69,7 @@ void Enemy::attack(){
         //Add back the CD time and attack
         if((this->enemies[i].getCD() == 0)&& !this->enemies[i].isDead()){
             if(this->enemies[i].getKind() <= 1){
-                this->game->PlayerHurtFist(this->enemies[i].attack());
+                this->game->PlayerHurtFirst(this->enemies[i].attack());
             }
             else{
                 this->game->PlayerHurtAll(this->enemies[i].attack());

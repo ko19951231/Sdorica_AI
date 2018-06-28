@@ -15,7 +15,7 @@ void Player::init(state *s){
 void Player::setSelectedIndex(int index){
     this->selectedCharacterIndex = index;
 }
-float Player::pon_attack(int daimond)
+void Player::pon_attack(int daimond)
 {
     //Select an enemy to attack
     if(daimond != 1){
@@ -60,14 +60,14 @@ void Player::dica_attack(int daimond)
         
         PlayerState *p = getSelectedCharater();
         p->heal(atk_value);
-        p->strengthen(3);
+        p->addStrengthen(3);
         
     }
     else if(daimond==2){
         int n = -1;
         printf("Select an enemy: 0~4");
         scanf("%d" , &n);
-        this->game->selectedEnemyIndex(n);
+        this->game->setEnemySelectedIndex(n);
         this->game->enemyHurtSelected(atk_value);
     }
     else if(daimond==4){     //choose the one who has the least HP to heal
