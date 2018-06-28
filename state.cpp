@@ -38,8 +38,8 @@ int state::player_move(vector<int> r, vector<int> c)
     }
     if(this->enemy.getAmount() == 0){
         int reward = 100 - move_amount;
-        bool gameEnd = this->enemy.nextStage();
-        if(gameEnd) reward += 100;
+        bool gameContinue = this->enemy.nextStage();
+        if(!gameContinue) reward += 100;
         move_amount = 0;
         return reward;
     }

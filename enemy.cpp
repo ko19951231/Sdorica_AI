@@ -91,7 +91,7 @@ int Enemy::getStage(){
     return this->stage;
 }
 
-void Enemy::nextStage(){
+bool Enemy::nextStage(){
     //no more enemies -> go to the next stage
     if(this->amount == 0) {
         if(this->state == 4)
