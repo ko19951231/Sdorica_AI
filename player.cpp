@@ -15,18 +15,18 @@ void Player::init(state *s){
 void Player::setSelectedIndex(int index){
     this->selectedCharacterIndex = index;
 }
-void Player::pon_attack(int daimond)
+void Player::pon_attack(int diamond)
 {
     //Select an enemy to attack
-    if(daimond != 1){
+    if(diamond != 1){
         int n = -1;
         printf("Select an enemy for pon to attack(0~4): ");
         scanf("%d" , &n);
         this->game->setEnemySelectedIndex(n);
     }
-    float atk_value = this->pon.attack(daimond);
+    float atk_value = this->pon.attack(diamond);
     //one diamond . minus harm
-    if(daimond == 1){
+    if(diamond == 1){
         this->game->enemyHurtFirst(atk_value);
         this->pon.addMinusHarm(3);
     }
@@ -34,7 +34,7 @@ void Player::pon_attack(int daimond)
         this->game->enemyHurtSelected(atk_value);
     }    
 }
-void Player::naya_attack(int daimond)
+void Player::naya_attack(int diamond)
 {
     //Select an enemy to attack
     int n = -1;
@@ -42,16 +42,23 @@ void Player::naya_attack(int daimond)
     scanf("%d" , &n);
     this->game->setEnemySelectedIndex(n);
     //Attack the enemy
-    float atk_value = this->naya.attack(daimond);
+    float atk_value = this->naya.attack(diamond);
+    
+    //20% will give *2 attack in 2 diamond
+    if(diamond == 2){
+        if(rand()/(float)RAND_MAX < 0.2)
+            atk_value *= 2;
+    }
+
     this->game->enemyHurtSelected(atk_value);
-    if(daimond == 1)
+    if(diamond == 1)
         this->game->enemyAddEasyHarmFirst(3);
 }
-void Player::dica_attack(int daimond)
+void Player::dica_attack(int diamond)
 {
-    float atk_value = this->dica.attack(daimond);
+    float atk_value = this->dica.attack(diamond);
 
-    if(daimond==1){
+    if(diamond==1){
         //Select a character to heal
         int n = -1;
         printf("Select an character (0 for pon, 1 for naya, 2 for dica): ");
@@ -63,14 +70,14 @@ void Player::dica_attack(int daimond)
         p->addStrengthen(3);
         
     }
-    else if(daimond==2){
+    else if(diamond==2){
         int n = -1;
         printf("Select an enemy for dica to attack (0~4):");
         scanf("%d" , &n);
         this->game->setEnemySelectedIndex(n);
         this->game->enemyHurtSelected(atk_value);
     }
-    else if(daimond==4){     //choose the one who has the least HP to heal
+    else if(diamond==4){     //choose the one who has the least HP to heal
         float HP_pon = this->pon.getHP();
         float HP_naya = this->naya.getHP();
         float HP_dica = this->dica.getHP();

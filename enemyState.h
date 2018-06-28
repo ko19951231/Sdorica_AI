@@ -28,6 +28,8 @@ public:
     //set value
     void setValue(int k);
     bool isDead(){return HP <= 0? true:false;}
+    //transfer shield
+    void setTransferShield(int v);
 private:
     int kind;   //0: 紅球角鯨 1:草葉巨蚤 2:結草鵝 3:組合偶屍 4:狼人盾兵 5:王國符文師
     float ATK;

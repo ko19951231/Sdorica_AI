@@ -7,6 +7,7 @@ EnemyState::EnemyState(){
         this->easyHarm[i] = 0;
         this->strengthen[i] = 0;
     }
+    this->transferShield = 0;
 }
 
 EnemyState::EnemyState(int k){
@@ -62,6 +63,7 @@ void EnemyState::init(){
         this->easyHarm[i] = 0;
         this->strengthen[i] = 0;
     }
+    this->transferShield = 0;
 }
 
 float EnemyState::attack(){
@@ -72,7 +74,21 @@ float EnemyState::attack(){
 }
 
 bool EnemyState::getDamage(float damage){
-    this->HP -= damage * calculateMinusHarm() * calculateEasyHarm();
+    float totalDamage = damage * calculateMinusHarm() * calculateEasyHarm();
+    //shield first
+    if(totalDamage > this->shield){
+        totalDamage -= this->shield;
+        this->HP -= totalDamage;
+    }
+    else{
+        this->shield -= totalDamage;
+    }
+    //Tranfer Shield
+    if(this->transferShield > 0){
+        this->shield += this->MAX_HP * 0.1 * 3;
+        if(this->shield > this->MAX_HP)
+            this->shield = this->MAX_HP;
+    }
     //if the character is dead, return true, otherwise, false
     if(HP <= 0) return true;
     return false;
@@ -80,7 +96,8 @@ bool EnemyState::getDamage(float damage){
 
 void EnemyState::heal(float hp){
     this->HP += hp;
-    if(this->HP > this->MAX_HP) this->HP = this->MAX_HP;
+    if(this->HP > this->MAX_HP)
+        this->HP = this->MAX_HP;
 }
 
 void EnemyState::addEasyHarm(int round){
@@ -146,9 +163,7 @@ void EnemyState::update(){
     else if((this->kind == 0) || (this->kind == 3) || (this->kind == 4) || (this->kind == 5)){
         recover_hp = 3 * (this->shield * 0.3);
     }
-    this->HP += recover_hp;
-    if(this->HP > MAX_HP)
-        this->HP = MAX_HP;
+    heal(recover_hp);
     
     //recover shield for kind == 4, 5 (狼人盾兵 & 王國符文師)
     if(this->kind == 4){
@@ -161,6 +176,14 @@ void EnemyState::update(){
         if(this->shield > this->MAX_HP)
             this->shield = this->MAX_HP;
     }
+    
+    //transferShield
+    if(transferShield > 0)
+        transferShield--;
+}
+
+void EnemyState::setTransferShield(int v){
+    this->transferShield = v;
 }
 
 float EnemyState::calculateMinusHarm(){
