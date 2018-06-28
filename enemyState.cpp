@@ -84,6 +84,7 @@ bool EnemyState::getDamage(float damage){
     //shield first
     if(totalDamage > this->shield){
         totalDamage -= this->shield;
+        this->shield = 0;
         this->HP -= totalDamage;
     }
     else{
