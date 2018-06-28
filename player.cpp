@@ -78,12 +78,13 @@ void Player::dica_attack(int diamond)
         this->game->enemyHurtSelected(atk_value);
     }
     else if(diamond==4){     //choose the one who has the least HP to heal
-        float HP_pon = this->pon.getHP();
-        float HP_naya = this->naya.getHP();
-        float HP_dica = this->dica.getHP();
-        if(HP_pon<HP_naya&&HP_pon<HP_dica) this->pon.heal(atk_value);
-        else if(HP_naya<HP_pon&&HP_naya<HP_dica) this->naya.heal(atk_value);
-        else if(HP_dica<HP_pon&&HP_dica<HP_naya) this->dica.heal(atk_value);
+        int leastHP_id = findLeastHP();
+        if(leastHP_id == 0)
+            this->pon.heal(atk_value);
+        else if(leastHP_id == 1)
+            this->naya.heal(atk_value);
+        else if(leastHP_id == 2)
+            this->dica.heal(atk_value);
     }
 }
 
@@ -119,12 +120,7 @@ void Player::get_hurt_selected(float hurt){
 }
 
 void Player::get_hurt_less(float hurt){
-    float HP_pon = this->pon.getHP();
-    float HP_naya = this->naya.getHP();
-    float HP_dica = this->dica.getHP();
-    if(HP_pon<HP_naya&&HP_pon<HP_dica) get_hurt(0, hurt);
-    else if(HP_naya<HP_pon&&HP_naya<HP_dica) get_hurt(1, hurt);
-    else if(HP_dica<HP_pon&&HP_dica<HP_naya) get_hurt(2, hurt);
+    get_hurt(findLeastHP(), hurt);
 }
 
 void Player::get_hurt_index(int index, float hurt){
@@ -219,4 +215,24 @@ void Player::checkSelectedCharacterState(){
         if(this->dica.isDead())
             updateSelectedIndex();
     }
+}
+int Player::findLeastHP(){
+    float leastHP = RAND_MAX;
+    int id = -1;
+    if(!this->pon.isDead())
+        if(this->pon.getHP() < leastHP){
+            leastHP = this->pon.getHP();
+            id = 0;
+        }
+    if(!this->naya.isDead())
+        if(this->naya.getHP() < leastHP){
+            leastHP = this->naya.getHP();
+            id = 1;
+        }
+    if(!this->dica.isDead())
+        if(this->dica.getHP() < leastHP){
+            leastHP = this->dica.getHP();
+            id = 2;
+        }
+    return id;
 }

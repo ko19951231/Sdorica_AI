@@ -40,6 +40,7 @@ private:
     PlayerState* getSelectedCharater();
     void updateSelectedIndex();
     void checkSelectedCharacterState();
+    int findLeastHP();
 };
 
 #endif
