@@ -41,6 +41,10 @@ int main()
             game.print();
             trainer.add_state(game);
             
+            //debug
+            if(point > 0)
+                printf("Reward: %d\tTotal Reward: %d\n", point, total_point);
+            
             //Add the reward
             total_point += point;
             //The 5th state will give 100 for bonus
