@@ -54,7 +54,7 @@ void Player::dica_attack(int daimond)
     if(daimond==1){
         //Select a character to heal
         int n = -1;
-        printf("Select an character: (0 for pon, 1 for naya, 2 for dica)");
+        printf("Select an character (0 for pon, 1 for naya, 2 for dica): ");
         scanf("%d" , &n);
         this->game->setPlayerSelectedIndex(n);
         
@@ -65,7 +65,7 @@ void Player::dica_attack(int daimond)
     }
     else if(daimond==2){
         int n = -1;
-        printf("Select an enemy: 0~4");
+        printf("Select an enemy for dica to attack (0~4):");
         scanf("%d" , &n);
         this->game->setEnemySelectedIndex(n);
         this->game->enemyHurtSelected(atk_value);
