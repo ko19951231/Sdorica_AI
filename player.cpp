@@ -56,7 +56,7 @@ void Player::dica_attack(int daimond)
         int n = -1;
         printf("Select an character: (0 for pon, 1 for naya, 2 for dica)");
         scanf("%d" , &n);
-        this->game->setSelectedIndex(n);
+        this->game->setPlayerSelectedIndex(n);
         
         PlayerState *p = getSelectedCharater();
         p->heal(atk_value);
@@ -81,15 +81,15 @@ void Player::dica_attack(int daimond)
 }
 
 void Player::pon_recover(int diamond){
-    this->pon->recoverDiamond(daimond);
+    this->pon.recoverDiamond(daimond);
 }
 
 void Player::naya_recover(int diamond){
-    this->naya->recoverDiamond(daimond);
+    this->naya.recoverDiamond(daimond);
 }
 
 void Player::dica_recover(int diamond){
-    this->dica->recoverDiamond(daimond);
+    this->dica.recoverDiamond(daimond);
 }
 
 void Player::get_hurt(int index, float hurt)

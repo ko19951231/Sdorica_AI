@@ -25,6 +25,7 @@ public:
     void enemyHurtFirst(float hurt);
     void enemyHurtSelected(float hurt);
     void enemyAddEasyHarmFirst(int round);
+    void enemyAddEasyHarmSelected(int round);
 private:
     Board board;
     Player player;
