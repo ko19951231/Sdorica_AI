@@ -16,7 +16,7 @@ void Enemy::init(int s, state *st)
     if(s >= 1) this->enemies[1].setValue(1, CD_start + 1, 72);
     if(s >= 2) this->enemies[2].setValue(2, CD_start + 2, 36);
 }
-void setSelectedIndex(int index){
+void Enemy::setSelectedIndex(int index){
     this->selectedEnemyIndex = index;
 }
 

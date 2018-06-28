@@ -91,7 +91,7 @@ void PlayerState::addStrengthen(int round){
         strengthen[0] = round;
 }
 
-void PlayerState::recover_diamond(int daimond){
+void PlayerState::recoverDiamond(int daimond){
     recover_diamond -= daimond;
     if(recover_diamond <= 0){
         HP = MAX_HP / 2.0f;
