@@ -3,9 +3,9 @@
 
 void Player::init(state *s){
     //set the basic value
-    this->pon.setValue(693, 3119, 10);
+    this->pon.setValue(341, 2256, 10);
     this->naya.setValue(502, 1857, 8);
-    this->dica.setValue(240, 1591, 8);
+    this->dica.setValue(693, 3119, 8);
     //Set up the characters' diamond buff
     this->pon.setDiamondBuff(1.41, 2.83, 5.67);
     this->naya.setDiamondBuff(1.58, 3.16, 6.6);
