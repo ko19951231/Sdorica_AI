@@ -155,6 +155,7 @@ void EnemyState::addStrengthen(int round){
 void EnemyState::addShieldTransferLevel(){
     if(this->shieldTransfer_level >= 3){
         //Not sure
+        return;
         heal(305);
     }
     else{

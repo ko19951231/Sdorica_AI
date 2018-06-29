@@ -7,9 +7,9 @@ void Player::init(state *s){
     this->naya.setValue(502, 1857, 8);
     this->dica.setValue(693, 3119, 8);
     //Set up the characters' diamond buff
-    this->pon.setDiamondBuff(1.41, 2.83, 5.67);
-    this->naya.setDiamondBuff(1.58, 3.16, 6.6);
-    this->dica.setDiamondBuff(2.07, 2.91, 10.37);
+    this->pon.setDiamondBuff(255, 511, 1023);
+    this->naya.setDiamondBuff(301, 602, 1255);
+    this->dica.setDiamondBuff(311, 1039, 1559);
     this->game = s;
 }
 void Player::setSelectedIndex(int index){

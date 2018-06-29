@@ -4,11 +4,12 @@
 class PlayerState{
 public:
     //Constructor
+    //actually there's nothing to deal with atk
     PlayerState();
     PlayerState(float atk, float hp, int diamond);
     //Set initial value
     void setValue(float atk, float hp, int diamond);
-    void setDiamondBuff(float n1, float n2, float n3);
+    void setSkillBuff(float n1, float n2, float n3);
     //Attack enemy
     float attack(int diamond);
     //Get hurt
@@ -35,7 +36,7 @@ private:
     float shield;
     //The percentage depend by the diamond
     //There are actually only 3 kinds of value of the diamond
-    float diamondBuff[4];
+    float skillBuff[4];
     //Player's state
     //minusHarm(減傷), easyHarm(易傷), strengthen(強化) with there rounds (maximum with 3 times of state)
     int minusHarm[3];

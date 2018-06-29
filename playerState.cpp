@@ -28,18 +28,18 @@ void PlayerState::setValue(float atk, float hp, int diamond){
     ATK = atk; HP = MAX_HP = hp; RECOVER_DIAMOND_AMOUNT = diamond;
 }
 
-void PlayerState::setDiamondBuff(float n1, float n2, float n3){
-    diamondBuff[0] = n1;
-    diamondBuff[1] = n2;
-    diamondBuff[2] = 0;
-    diamondBuff[3] = n3;
+void PlayerState::setSkillBuff(float n1, float n2, float n3){
+    skillBuff[0] = n1;
+    skillBuff[1] = n2;
+    skillBuff[2] = 0;
+    skillBuff[3] = n3;
 }
 
 float PlayerState::attack(int diamond){
     //If the player is dead, return nothing
     if(isDead()) return 0;
     float currentATK = ATK * calculateStrengthen();
-    return currentATK * diamondBuff[diamond - 1];
+    return calculateStrengthen() * skillBuff[diamond - 1];
 }
 
 bool PlayerState::getDamage(float damage){
