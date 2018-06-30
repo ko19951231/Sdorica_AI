@@ -36,12 +36,12 @@ public:
     void setShield(float shield){this->shield = shield}
     float getMAXHP(){return this->MAX_HP;}
     void setMAXHP(float maxHP){this->MAX_HP = maxHP;}
-    int[] getMinusHarm(){return this->minusHarm;}
-    void setMinusHarm(int[] m){ for(int i = 0 ; i < 3 ; i++) this->minusHarm[i] = m[i];}
-    int[] getStrengthen(){return this->strengthen;}
-    void setStrengthen(int[] s){ for(int i = 0 ; i < 3 ; i++) this->strengthen[i] = s[i];}
-    int[] getEasyHarm(){return this->easyHarm;}
-    void setEasyHarm(int[] e){ for(int i = 0 ; i < 3 ; i++) this->easyHarm[i] = e[i];}
+    int* getMinusHarm(){return this->minusHarm;}
+    void setMinusHarm(int* m){ for(int i = 0 ; i < 3 ; i++) this->minusHarm[i] = m[i];}
+    int* getStrengthen(){return this->strengthen;}
+    void setStrengthen(int* s){ for(int i = 0 ; i < 3 ; i++) this->strengthen[i] = s[i];}
+    int* getEasyHarm(){return this->easyHarm;}
+    void setEasyHarm(int* e){ for(int i = 0 ; i < 3 ; i++) this->easyHarm[i] = e[i];}
     void setDiamondAmount(int d) {this->recover_diamond = d;}
 private:
     float ATK;

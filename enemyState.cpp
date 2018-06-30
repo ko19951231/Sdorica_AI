@@ -15,7 +15,7 @@ EnemyState::EnemyState(int k){
     init();
 }
 
-void EnemyState::setValue(int k){
+void EnemyState::setEnemy(int k){
     this->kind = k;
     init();
 }

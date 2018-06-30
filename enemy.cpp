@@ -7,28 +7,28 @@ void Enemy::init(int s, state *st)
     this->game = st;
     if(this->stage == 0){
         this->init_amount = this->amount = 3;
-        this->enemies[0].setKind(0);
-        this->enemies[1].setKind(0);
-        this->enemies[2].setKind(0);
+        this->enemies[0].setEnemy(0);
+        this->enemies[1].setEnemy(0);
+        this->enemies[2].setEnemy(0);
     }
     else if(this->stage == 1){
         this->init_amount = this->amount = 3;
-        this->enemies[0].setKind(1);
-        this->enemies[1].setKind(1);
-        this->enemies[2].setKind(2);
+        this->enemies[0].setEnemy(1);
+        this->enemies[1].setEnemy(1);
+        this->enemies[2].setEnemy(2);
     }
     else if(this->stage == 2){
         this->init_amount = this->amount = 1;
-        this->enemies[0].setKind(3);
+        this->enemies[0].setEnemy(3);
     }
     else if(this->stage == 3){
         this->init_amount = this->amount = 1;
-        this->enemies[0].setKind(4);
+        this->enemies[0].setEnemy(4);
     }
     else if(this->stage == 4){
         this->init_amount = this->amount = 2;
-        this->enemies[0].setKind(5);
-        this->enemies[1].setKind(2);
+        this->enemies[0].setEnemy(5);
+        this->enemies[1].setEnemy(2);
     }
 
     this->selectedEnemyIndex = 0;

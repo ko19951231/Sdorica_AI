@@ -29,7 +29,7 @@ public:
     int getCD(){return this->CD;}
     int getKind(){return this->kind;}
     //set value
-    void setKind(int k);
+    void setEnemy(int k);
     bool isDead(){return this->HP <= 0? true:false;}
     //transfer shield
     void setTransferShield(int v);
@@ -46,12 +46,12 @@ public:
     void setCDInterval(int cd_inter){this->CD_interval = cd_inter;}
     int getShieldTransferLevel(){return this->shieldTransfer_level;}
     int setShieldTransferLevel(int s){this->shieldTransfer_level = s;}
-    int[] getMinusHarm(){return this->minusHarm;}
-    void setMinusHarm(int[] m){ for(int i = 0 ; i < 3 ; i++) this->minusHarm[i] = m[i];}
-    int[] getStrengthen(){return this->strengthen;}
-    void setStrengthen(int[] s){ for(int i = 0 ; i < 3 ; i++) this->strengthen[i] = s[i];}
-    int[] getEasyHarm(){return this->easyHarm;}
-    void setEasyHarm(int[] e){ for(int i = 0 ; i < 3 ; i++) this->easyHarm[i] = e[i];}
+    int* getMinusHarm(){return this->minusHarm;}
+    void setMinusHarm(int* m){ for(int i = 0 ; i < 3 ; i++) this->minusHarm[i] = m[i];}
+    int* getStrengthen(){return this->strengthen;}
+    void setStrengthen(int* s){ for(int i = 0 ; i < 3 ; i++) this->strengthen[i] = s[i];}
+    int* getEasyHarm(){return this->easyHarm;}
+    void setEasyHarm(int* e){ for(int i = 0 ; i < 3 ; i++) this->easyHarm[i] = e[i];}
     int getTransferShield(){return this->transferShield;}
 private:
     int kind;   //0: 紅球角鯨 1:草葉巨蚤 2:結草鵝 3:組合偶屍 4:狼人盾兵 5:王國符文師
