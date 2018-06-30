@@ -38,7 +38,7 @@ public:
     void setKind(int k) {this->kind = k;}
     void setHP(float hp){this->HP = hp;}
     void setATK(float atk){this->ATK = atk;}
-    void setShield(float shield){this->shield = shield}
+    void setShield(float shield){this->shield = shield;}
     float getMAXHP(){return this->MAX_HP;}
     void setMAXHP(float maxHP){this->MAX_HP = maxHP;}
     void setCD(int cd){this->CD = cd;}

@@ -33,7 +33,7 @@ public:
     void setHP(float hp){this->HP = hp;}
     void setATK(float atk){this->ATK = atk;}
     float getShield(){return this->shield;}
-    void setShield(float shield){this->shield = shield}
+    void setShield(float shield){this->shield = shield;}
     float getMAXHP(){return this->MAX_HP;}
     void setMAXHP(float maxHP){this->MAX_HP = maxHP;}
     int* getMinusHarm(){return this->minusHarm;}
