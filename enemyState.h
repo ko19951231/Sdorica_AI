@@ -29,23 +29,18 @@ public:
     int getCD(){return this->CD;}
     int getKind(){return this->kind;}
     //set value
-    void setValue(int k);
+    void setKind(int k);
     bool isDead(){return this->HP <= 0? true:false;}
     //transfer shield
     void setTransferShield(int v);
     void addShieldTransferLevel();
     //parameter function
-    int getKind(){return this->kind;}
     void setKind(int k) {this->kind = k;}
-    float getHP(){return this->HP;}
     void setHP(float hp){this->HP = hp;}
-    void getATK(){return this->ATK;}
     void setATK(float atk){this->ATK = atk;}
-    float getShield(){return this->shield;}
     void setShield(float shield){this->shield = shield}
     float getMAXHP(){return this->MAX_HP;}
     void setMAXHP(float maxHP){this->MAX_HP = maxHP;}
-    int getCD(){return this->CD;}
     void setCD(int cd){this->CD = cd;}
     int getCDInterval(){return this->CD_interval;}
     void setCDInterval(int cd_inter){this->CD_interval = cd_inter;}

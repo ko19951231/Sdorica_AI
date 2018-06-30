@@ -30,9 +30,7 @@ public:
     int getDiamondAount(){return recover_diamond;}
     bool isDead(){return HP <= 0? true:false;}
     //parameter function
-    float getHP(){return this->HP;}
     void setHP(float hp){this->HP = hp;}
-    void getATK(){return this->ATK;}
     void setATK(float atk){this->ATK = atk;}
     float getShield(){return this->shield;}
     void setShield(float shield){this->shield = shield}
@@ -44,8 +42,7 @@ public:
     void setStrengthen(int[] s){ for(int i = 0 ; i < 3 ; i++) this->strengthen[i] = s[i];}
     int[] getEasyHarm(){return this->easyHarm;}
     void setEasyHarm(int[] e){ for(int i = 0 ; i < 3 ; i++) this->easyHarm[i] = e[i];}
-    int getRecoverDiamond() {return this->recover_diamond;}
-    void setRecoverDiamond(int d) {this->recover_diamond = d;}
+    void setDiamondAmount(int d) {this->recover_diamond = d;}
 private:
     float ATK;
     float HP;
