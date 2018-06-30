@@ -4,7 +4,7 @@ void Board::init() // generate a new board
 {
     for(int r=0;r<2;r++){
         for(int c=0;c<7;c++){
-            //The color of the diamond is randomized initially
+            //The color of the daimond is randomized initially
             daimond[r][c]=rand()%3;
         }
     }
@@ -50,4 +50,39 @@ void Board::print()
         printf("|\n");
     }
     puts("=========");
+}
+vector<tiles> Board::get_available_moves()
+{
+    vector<tiles> v;
+    for(int r=0;r<2;r++){
+        for(int c=0;c<7;c++){
+            tiles one;
+            one.r.push_back(r);
+            one.c.push_back(c);
+            v.push_back(one);
+            if(r==0&&daimond[r][c]==daimond[r+1][c]){
+                tiles two=one;
+                two.r.push_back(r+1);
+                two.c.push_back(c);
+                v.push_back(two);
+            }
+            if(c<6&&daimond[r][c]==daimond[r][c+1]){
+                tiles two=one;
+                two.r.push_back(r);
+                two.c.push_back(c+1);
+                v.push_back(two);
+            }
+            if(r==0&&c<6&&daimond[r][c]==daimond[r][c+1]&&daimond[r][c]==daimond[r+1][c]&&daimond[r][c]==daimond[r+1][c+1]){
+                tiles four=one;
+                four.r.push_back(r);
+                four.c.push_back(c+1);
+                four.r.push_back(r+1);
+                four.c.push_back(c+1);
+                four.r.push_back(r+1);
+                four.c.push_back(c);
+                v.push_back(four);
+            }
+        }
+    }
+    return v;
 }

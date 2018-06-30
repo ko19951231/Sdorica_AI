@@ -98,3 +98,6 @@ void state::enemyAddEasyHarmFirst(int round){
 void state::enemyAddEasyHarmSelected(int round){
     this->enemy.addEasyHarmSelected(round);
 }
+vector<tiles> state::get_available_moves(){
+    return this->board.get_available_moves();
+}

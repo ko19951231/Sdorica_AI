@@ -28,6 +28,7 @@ public:
     void enemyHurtSelected(float hurt);
     void enemyAddEasyHarmFirst(int round);
     void enemyAddEasyHarmSelected(int round);
+    vector<tiles> get_available_moves();
 private:
     Board board;
     Player player;

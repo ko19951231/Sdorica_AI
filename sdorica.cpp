@@ -25,16 +25,21 @@ int main()
 
             game.print();
             //Input the sliding value
-            int n;
-            scanf("%d", &n);
-            vector<int> r;
-            vector<int> c;
-            for(int i=0;i<n;i++){
-                int rr, cc;
-                scanf("%d %d", &rr, &cc);
-                r.push_back(rr);
-                c.push_back(cc);
+            vector<tiles> next_move = game.get_available_moves();
+            for(int j=0;j<next_move.size();j++){
+                tiles candidate=next_move[j];
+                printf("choice %d: ", j);
+                for(int k=0;k<candidate.r.size();k++){
+                    printf("(%d,%d) ", candidate.r[k], candidate.c[k]);
+                }
+                puts("");
             }
+            printf("select a choice: ");
+            int idx;
+            scanf("%d", &idx);
+            vector<int> r=next_move[idx].r;
+            vector<int> c=next_move[idx].c;
+            
             //Return value
             //The reward will be returned after one round
             int point = game.player_move(r, c);
