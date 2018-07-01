@@ -236,3 +236,7 @@ int Player::findLeastHP(){
         }
     return id;
 }
+
+int Player::getSelectedCharaterIndex(){
+    return this->selectedCharacterIndex;
+}

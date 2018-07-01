@@ -28,11 +28,12 @@ public:
     bool player_dead();
     void update();
     void print();
-    
-private:
+    int getSelectedCharaterIndex();
+
     PlayerState pon;
     PlayerState naya;
-    PlayerState dica;
+    PlayerState dica;    
+private:
     state *game;
     int selectedCharacterIndex;
     int getFirstCharacterIndex();

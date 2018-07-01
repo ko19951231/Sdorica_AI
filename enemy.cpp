@@ -163,3 +163,7 @@ void Enemy::checkSelectedEnemyState(){
     if(enemies[selectedEnemyIndex].isDead())
         updateSelectedIndex();
 }
+
+int Enemy::getSelectedEnemyIndex(){
+    return this->selectedEnemyIndex;
+}

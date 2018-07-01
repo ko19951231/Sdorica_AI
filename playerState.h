@@ -26,6 +26,7 @@ public:
     void update();
     //others
     float getHP(){return HP;}
+    int getSimplifiedHP(int interval){return (int)(interval*this->HP/(this->MAX_HP-this->HP));}
     float getATK(){return ATK;}
     int getDiamondAount(){return recover_diamond;}
     bool isDead(){return HP <= 0? true:false;}
