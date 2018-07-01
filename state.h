@@ -9,6 +9,32 @@
 #include "player.h"
 #include "enemy.h"
 using namespace std;
+struct simple_state
+{
+    //from enemy.h
+    int stage; 
+    int amount;
+    int selectedEnemyIndex;
+    //from player.h
+    int selectedCharacterIndex;
+    //from enemyState.h
+    int kind[3]; 
+    int HP[3];
+    int shield[3];
+    int CD[3];
+    int shieldTransfer_level[3];
+    int minusHarm[3][3];
+    int strengthen[3][3];
+    int easyHarm[3][3];
+    int transferShield[3];
+    //from playerState.h
+    int HP[3];
+    int minusHarm[3][3];
+    int strengthen[3][3];
+    int easyHarm[3][3];
+    int recover_diamond[3];
+};
+
 class state
 {
 public:
