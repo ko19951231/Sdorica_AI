@@ -7,7 +7,7 @@
 class Feature {
 public:
 	Feature(size_t len) : length(len), weight(alloc(len)) {}
-	Feature(Feature&& f) : length(f.length), weight(f.weight) { f.weight = nullptr; }
+	Feature(Feature& f) : length(f.length), weight(f.weight) { f.weight = nullptr; }
 	Feature(const Feature& f) = delete;
 	Feature& operator =(const Feature& f) = delete;
 	virtual ~Feature() { delete[] weight; }
@@ -38,9 +38,9 @@ public:
 	 */
 	//virtual void dump(const board& b, std::ostream& out = info) const;
 
-	friend std::ostream& operator <<(std::ostream& out, const feature& w);
+	friend std::ostream& operator <<(std::ostream& out, const Feature& w);
 
-	friend std::istream& operator >>(std::istream& in, feature& w);
+	friend std::istream& operator >>(std::istream& in, Feature& w);
 
 protected:
 	static float* alloc(size_t num);

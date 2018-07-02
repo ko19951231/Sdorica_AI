@@ -4,7 +4,7 @@
 	out << b << "estimate = " << estimate(b) << std::endl;
 }*/
 
-friend std::ostream& Feature::operator <<(std::ostream& out, const feature& w) {
+std::ostream& Feature::operator <<(std::ostream& out, const Feature  & w) {
 	std::string name = w.name();
 	int len = name.length();
 	out.write(reinterpret_cast<char*>(&len), sizeof(int));
@@ -16,22 +16,22 @@ friend std::ostream& Feature::operator <<(std::ostream& out, const feature& w) {
 	return out;
 }
 
-friend std::istream& Feature::operator >>(std::istream& in, feature& w) {
+std::istream& Feature::operator >>(std::istream& in, Feature& w) {
 	std::string name;
 	int len = 0;
 	in.read(reinterpret_cast<char*>(&len), sizeof(int));
 	name.resize(len);
 	in.read(&name[0], len);
 	if (name != w.name()) {
-		error << "unexpected feature: " << name << " (" << w.name() << " is expected)" << std::endl;
+		std::cerr << "unexpected feature: " << name << " (" << w.name() << " is expected)" << std::endl;
 		std::exit(1);
 	}
 	float* weight = w.weight;
 	size_t size;
 	in.read(reinterpret_cast<char*>(&size), sizeof(size_t));
 	if (size != w.size()) {
-		error << "unexpected feature size " << size << "for " << w.name();
-		error << " (" << w.size() << " is expected)" << std::endl;
+		std::cerr << "unexpected feature size " << size << "for " << w.name();
+		std::cerr << " (" << w.size() << " is expected)" << std::endl;
 		std::exit(1);
 	}
 	in.read(reinterpret_cast<char*>(weight), sizeof(float) * size);
@@ -50,7 +50,7 @@ static float* Feature::alloc(size_t num) {
 		if (total > limit) throw std::bad_alloc();
 		return new float[num]();
 	} catch (std::bad_alloc&) {
-		error << "memory limit exceeded" << std::endl;
+		std::cerr << "memory limit exceeded" << std::endl;
 		std::exit(-1);
 	}
 	return nullptr;
