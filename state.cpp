@@ -110,7 +110,7 @@ simple_state state::get_simple_state(){
     //Enemies data
     for(int i=0;i<3;i++){
         ret.kind[i]=this->enemy.enemies[i].getKind();
-        ret.e_HP[i]=(int)this->enemy.enemies[i].getSimplifiedHP(10);
+        ret.e_HP[i]=(int)this->enemy.enemies[i].getSimplifiedHP(3);
         ret.shield[i]=this->enemy.enemies[i].getShield();
         ret.CD[i]=this->enemy.enemies[i].getCD();
         ret.shieldTransfer_level[i]=this->enemy.enemies[i].getShieldTransferLevel();
@@ -121,9 +121,9 @@ simple_state state::get_simple_state(){
         }
         ret.transferShield[i]=this->enemy.enemies[i].getTransferShield();
     }
-    ret.p_HP[0]=this->player.pon.getSimplifiedHP(10);
-    ret.p_HP[1]=this->player.naya.getSimplifiedHP(10);
-    ret.p_HP[2]=this->player.dica.getSimplifiedHP(10);
+    ret.p_HP[0]=this->player.pon.getSimplifiedHP(3);
+    ret.p_HP[1]=this->player.naya.getSimplifiedHP(3);
+    ret.p_HP[2]=this->player.dica.getSimplifiedHP(3);
     for(int j=0;j<3;j++){
         ret.p_minusHarm[0][j]=*(this->player.pon.getMinusHarm()+j);
         ret.p_strengthen[0][j]=*(this->player.pon.getStrengthen()+j);

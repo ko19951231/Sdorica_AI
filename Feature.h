@@ -4,6 +4,7 @@
 #include<cstdlib>
 #include<string>
 #include<iostream>
+#include "simple_state.h"
 
 class Feature {
 public:
@@ -13,33 +14,27 @@ public:
 	Feature& operator =(const Feature& f) = delete;
 	virtual ~Feature() { delete[] weight; }
 
-	float& operator[] (size_t i) { return weight[i]; }
-	float operator[] (size_t i) const { return weight[i]; }
-	size_t size() const { return length; }
-
-public: // should be implemented
-
-	/**
-	 * estimate the value of a given board
-	 */
-	//virtual float estimate(const board& b) const = 0;
-	/**
-	 * update the value of a given board, and return its updated value
-	 */
-	//virtual float update(const board& b, float u) = 0;
-	/**
-	 * get the name of this feature
-	 */
-	virtual std::string name() const = 0;
+	float& operator[] (size_t i) { return weight[i];}
+	float operator[] (size_t i) const { return weight[i];}
+	size_t size() const { return length;}
 
 public:
 
 	/**
+	 * estimate the value of a given board
+	 */
+	float estimate(const simple_state& s);
+	/**
+	 * update the value of a given board, and return its updated value
+	 */
+	float update(const simple_state& s, float u);
+
+	/**
 	 * dump the detail of weight table of a given board
 	 */
-	/*virtual void dump(const board& b, std::ostream& out = info) const {
-		out << b << "estimate = " << estimate(b) << std::endl;
-	}*/
+	void dump(const simple_state& s, std::ostream& out = info) const {
+		out << s << "estimate = " << estimate(s) << std::endl;
+	}
 
 	friend std::ostream& operator <<(std::ostream& out, const Feature& w) {
 		std::string name = w.name();
@@ -79,7 +74,6 @@ public:
 		return in;
 	}
 
-protected:
 	static float* alloc(size_t num) {
 		static size_t total = 0;
 		static size_t limit = (1 << 30) / sizeof(float); // 1G memory
@@ -93,6 +87,9 @@ protected:
 		}
 		return nullptr;
 	}
+private:
+    int generateIndex(const simple_state &s);
+    int getDiamondIndex(int **diamond);
 	size_t length;
 	float* weight;
 };
