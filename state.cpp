@@ -115,9 +115,9 @@ simple_state state::get_simple_state(){
         ret.CD[i]=this->enemy.enemies[i].getCD();
         ret.shieldTransfer_level[i]=this->enemy.enemies[i].getShieldTransferLevel();
         for(int j=0;j<3;j++){
-            ret.e_minusHarm[i][j]=(this->enemy.enemies[i].getMinusHarm()+j);
-            ret.e_strengthen[i][j]=(this->enemy.enemies[i].getStrengthen()+j);
-            ret.e_easyHarm[i][j]=(this->enemy.enemies[i].getEasyHarm()+j);
+            ret.e_minusHarm[i][j]=*(this->enemy.enemies[i].getMinusHarm()+j);
+            ret.e_strengthen[i][j]=*(this->enemy.enemies[i].getStrengthen()+j);
+            ret.e_easyHarm[i][j]=*(this->enemy.enemies[i].getEasyHarm()+j);
         }
         ret.transferShield[i]=this->enemy.enemies[i].getTransferShield();
     }
@@ -125,19 +125,19 @@ simple_state state::get_simple_state(){
     ret.p_HP[1]=this->player.naya.getSimplifiedHP(10);
     ret.p_HP[2]=this->player.dica.getSimplifiedHP(10);
     for(int j=0;j<3;j++){
-        ret.p_minusHarm[0][j]=(this->player.pon.getMinusHarm()+j);
-        ret.p_strengthen[0][j]=(this->player.pon.getStrengthen()+j);
-        ret.p_easyHarm[0][j]=(this->player.pon.getEasyHarm()+j);
+        ret.p_minusHarm[0][j]=*(this->player.pon.getMinusHarm()+j);
+        ret.p_strengthen[0][j]=*(this->player.pon.getStrengthen()+j);
+        ret.p_easyHarm[0][j]=*(this->player.pon.getEasyHarm()+j);
     }
     for(int j=0;j<3;j++){
-        ret.p_minusHarm[1][j]=(this->player.naya.getMinusHarm()+j);
-        ret.p_strengthen[1][j]=(this->player.naya.getStrengthen()+j);
-        ret.p_easyHarm[1][j]=(this->player.naya.getEasyHarm()+j);
+        ret.p_minusHarm[1][j]=*(this->player.naya.getMinusHarm()+j);
+        ret.p_strengthen[1][j]=*(this->player.naya.getStrengthen()+j);
+        ret.p_easyHarm[1][j]=*(this->player.naya.getEasyHarm()+j);
     }
     for(int j=0;j<3;j++){
-        ret.p_minusHarm[2][j]=(this->player.dica.getMinusHarm()+j);
-        ret.p_strengthen[2][j]=(this->player.dica.getStrengthen()+j);
-        ret.p_easyHarm[2][j]=(this->player.dica.getEasyHarm()+j);
+        ret.p_minusHarm[2][j]=*(this->player.dica.getMinusHarm()+j);
+        ret.p_strengthen[2][j]=*(this->player.dica.getStrengthen()+j);
+        ret.p_easyHarm[2][j]=*(this->player.dica.getEasyHarm()+j);
     }
     ret.recover_diamond[0]=this->player.pon.getDiamondAount();
     ret.recover_diamond[1]=this->player.naya.getDiamondAount(); 
