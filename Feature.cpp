@@ -1,8 +1,8 @@
 #include "Feature.h"
 
-virtual void Feature::dump(const board& b, std::ostream& out = info) const {
+/*virtual void Feature::dump(const board& b, std::ostream& out = info) const {
 	out << b << "estimate = " << estimate(b) << std::endl;
-}
+}*/
 
 friend std::ostream& Feature::operator <<(std::ostream& out, const feature& w) {
 	std::string name = w.name();

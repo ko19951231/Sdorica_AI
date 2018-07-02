@@ -2,6 +2,7 @@
 #define FEATURE_H
 #include<cstdio>
 #include<cstdlib>
+#include<string>
 
 class Feature {
 public:
@@ -20,11 +21,11 @@ public: // should be implemented
 	/**
 	 * estimate the value of a given board
 	 */
-	virtual float estimate(const board& b) const = 0;
+	//virtual float estimate(const board& b) const = 0;
 	/**
 	 * update the value of a given board, and return its updated value
 	 */
-	virtual float update(const board& b, float u) = 0;
+	//virtual float update(const board& b, float u) = 0;
 	/**
 	 * get the name of this feature
 	 */
@@ -35,7 +36,7 @@ public:
 	/**
 	 * dump the detail of weight table of a given board
 	 */
-	virtual void dump(const board& b, std::ostream& out = info) const;
+	//virtual void dump(const board& b, std::ostream& out = info) const;
 
 	friend std::ostream& operator <<(std::ostream& out, const feature& w);
 
