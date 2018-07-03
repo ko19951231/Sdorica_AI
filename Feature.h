@@ -78,7 +78,7 @@ public:
 	 * dump the detail of weight table of a given board
 	 */
 	void dump(const simple_state& s, std::ostream& out = std::cout) const {
-		out << "estimate = " << estimate(s) << std::endl;
+		out << "Sdorica Feature Estimate = " << estimate(s) << std::endl;
 	}
 
 	static float* alloc(size_t num) {
