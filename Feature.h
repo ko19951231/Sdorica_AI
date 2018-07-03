@@ -29,10 +29,17 @@ public:
 	 */
 	float update(const simple_state& s, float u);
 
+    /**
+	 * get the name of this feature
+	 */
+	virtual std::string name() const {
+		return "Sdorica Feature";
+	}
+
 	/**
 	 * dump the detail of weight table of a given board
 	 */
-	void dump(const simple_state& s, std::ostream& out = info) const {
+	void dump(const simple_state& s, std::ostream& out = std::cout) const {
 		out << s << "estimate = " << estimate(s) << std::endl;
 	}
 
