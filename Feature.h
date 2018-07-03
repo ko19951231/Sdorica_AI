@@ -36,13 +36,6 @@ public:
 		return "Sdorica Feature";
 	}
 
-	/**
-	 * dump the detail of weight table of a given board
-	 */
-	void dump(const simple_state& s, std::ostream& out = std::cout) const {
-		out << s << "estimate = " << estimate(s) << std::endl;
-	}
-
 	friend std::ostream& operator <<(std::ostream& out, const Feature& w) {
 		std::string name = w.name();
 		int len = name.length();
@@ -79,6 +72,13 @@ public:
 			std::exit(1);
 		}
 		return in;
+	}
+
+    /**
+	 * dump the detail of weight table of a given board
+	 */
+	void dump(const simple_state& s, std::ostream& out = std::cout) const {
+		out << s << "estimate = " << estimate(s) << std::endl;
 	}
 
 	static float* alloc(size_t num) {
