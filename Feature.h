@@ -92,11 +92,11 @@ public:
 			std::cerr << "memory limit exceeded" << std::endl;
 			std::exit(-1);
 		}
-		return nullptr;
+		return NULL;
 	}
 private:
     int generateIndex(const simple_state &s);
-    int getDiamondIndex(int **diamond);
+    int getDiamondIndex(const int **diamond, int color);
 	size_t length;
 	float* weight;
 };

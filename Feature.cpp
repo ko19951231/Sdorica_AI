@@ -26,9 +26,9 @@ int Feature::generateIndex(const simple_state &s){
     for(int i = 0 ; i < 3; i++){
         enemiesIndex = enemiesIndex << 3;
         if(s.kind[i] >= 4)
-            enemiesIndex | = (1 << 2);
+            enemiesIndex |= (1 << 2);
         if(s.e_HP[i] > 0)
-            enemiesIndex | = (1 << 1);
+            enemiesIndex |= (1 << 1);
         if(s.shield[i] > 0)
             enemiesIndex |= 1;
     }
@@ -36,7 +36,7 @@ int Feature::generateIndex(const simple_state &s){
     return index;
 }
 
-int Feature::getDiamondIndex(int **diamond, int color){
+int Feature::getDiamondIndex(const int **diamond, int color){
     //diamond: 0 for yellow, 1 for purple, 2 for white
     //we choose only one color to reduce the memory
     int index = 0;
