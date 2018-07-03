@@ -36,7 +36,7 @@ int Feature::generateIndex(const simple_state &s){
     return index;
 }
 
-int Feature::getDiamondIndex(const int **diamond, int color){
+int Feature::getDiamondIndex(const int diamond[2][7], int color){
     //diamond: 0 for yellow, 1 for purple, 2 for white
     //we choose only one color to reduce the memory
     int index = 0;

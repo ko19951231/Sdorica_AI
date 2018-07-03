@@ -96,7 +96,7 @@ public:
 	}
 private:
     int generateIndex(const simple_state &s);
-    int getDiamondIndex(const int **diamond, int color);
+    int getDiamondIndex(const int diamond[2][7], int color);
 	size_t length;
 	float* weight;
 };
