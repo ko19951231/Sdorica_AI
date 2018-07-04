@@ -65,6 +65,7 @@ int main()
             int maximum=-1;
             float best_value = 0;
             int best_reward = 0;
+            cout << "here" << endl;
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
