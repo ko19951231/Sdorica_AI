@@ -15,10 +15,10 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 1;
+    int num_episode = 100;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
-    bool load = true;
+    bool load = false;
     bool save = true;
     // set the learning parameters
 	float alpha = 0.1;
@@ -97,10 +97,6 @@ int main()
             //game.print(); 
             //Add the reward
             total_point += point;      
-            //debug
-            if(point > 0)
-                printf("Reward: %d\tTotal Reward: %d\n", point, total_point);
-            
             //The 5th state will give 100 for bonus
             //So if the point > 100, means that an episode is over
             if(point > 100) break;
@@ -110,6 +106,7 @@ int main()
             if(point == 0)
                 game.update();
         }
+        cout << "Episode " << i << " Total Point: " << total_point << endl;
         rewardFile << i << "," << total_point << endl;
         trainer.close_episode(feature, alpha);
     }
