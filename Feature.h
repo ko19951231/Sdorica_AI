@@ -81,13 +81,10 @@ public:
 		out << "Sdorica Feature Estimate = " << estimate(s) << std::endl;
 	}
 
-	static float* alloc(size_t num) {
-		static size_t total = 0;
-		static size_t limit = (1 << 30) / sizeof(float); // 1G memory
+	float* alloc(size_t num) {
 		try {
-			total += num;
 			if (total > limit) throw std::bad_alloc();
-			return new float[num]();
+			return new float[(1 << num)]();
 		} catch (std::bad_alloc&) {
 			std::cerr << "memory limit exceeded" << std::endl;
 			std::exit(-1);
