@@ -10,7 +10,6 @@ float Feature::estimate(const simple_state& s){
     for(int i = 0 ; i < 2; i++){
         value += this->weight[index[i]];
     }
-    cout << value << endl;
     return value;
 }
 

@@ -74,7 +74,6 @@ int main()
                     int rew=dup_game.player_move(r, c, idx);
                     if (!dup_game.player_dead() && (rew < 100)) {
                         //estimate the value after the movement
-                        cout << "here" << endl;
                         float est = feature.estimate(dup_game.get_simple_state());
                         cout << est << endl;
                         if ((est + rew) >= maximum){
