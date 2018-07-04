@@ -26,14 +26,11 @@ int main()
     string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
     fstream rewardFile;
     rewardFile.open(rewardFilename.c_str(), std::ios::out);
-    cout << "berfore initiate" << endl;
     //Game training setup
     state game;
     state dup_game;
     Trainer trainer;
     Feature feature(29);
-
-    cout << "afte initiate" << endl;
     //load Feature data
     if(load){
         ifstream in;
@@ -55,7 +52,6 @@ int main()
         game.init();
         dup_game.init();
         trainer.open_episode();
-        cout << "open" << endl;
         while(1){
             //The enemy attack first
             bool gameOver = game.enemy_move();
@@ -68,7 +64,6 @@ int main()
             int best_object=0;
             int maximum=-1;
             simple_state s;
-            cout << "before move" << endl;
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
@@ -79,7 +74,9 @@ int main()
                     s = dup_game.get_simple_state();
                     s.set_reward(rew);
                     if (!dup_game.player_dead() && (rew < 100)) {
+                        cout << "here" << endl;
 				        s.set_value(s.get_reward() + feature.estimate(dup_game.get_simple_state()));
+                        cout << "here2" << endl;
                         if (s.get_value() > maximum){
                             best_slide=j;
                             best_object=idx;
@@ -90,7 +87,6 @@ int main()
 			        }
                 }
             }
-            cout << "after move" << endl;
             trainer.add_state(s);
 
             //Assign to the real one
