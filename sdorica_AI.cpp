@@ -63,7 +63,8 @@ int main()
             int best_slide=0;
             int best_object=0;
             int maximum=-1;
-            simple_state s;
+            float best_value = 0;
+            int best_reward = 0;
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
@@ -71,31 +72,34 @@ int main()
                     dup_game.assign(game);
                     //reward should be the estimate value + reward
                     int rew=dup_game.player_move(r, c, idx);
-                    s = dup_game.get_simple_state();
-                    s.set_reward(rew);
                     if (!dup_game.player_dead() && (rew < 100)) {
+                        //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
                         cout << est << endl;
-				        s.set_value(s.get_reward() + est);
-                        cout << "here" << endl;
-                        if (s.get_value() >= maximum){
+                        if ((est + rew) >= maximum){
                             best_slide=j;
                             best_object=idx;
                             maximum=rew;
+                            best_reward = rew;
+                            best_value = est;
                         }        
 			        } else {
-				        s.set_value(-100);
+				        best_reward = rew;
+                        best_value = -100;
 			        }
                 }
             }
-            trainer.add_state(s);
 
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
             vector<int> c=next_move[best_slide].c;   
             //Return value
             //The reward will be returned after one round
-            int point = game.player_move(r, c, best_object);    
+            int point = game.player_move(r, c, best_object);  
+            simple_state s = game.get_simple_state();
+            s.set_value(best_value);
+            s.set_reward(best_reward);
+            trainer.add_state()  
             //game.print(); 
             //Add the reward
             total_point += point;      
