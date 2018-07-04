@@ -65,7 +65,6 @@ int main()
             int maximum=-1;
             float best_value = 0;
             int best_reward = 0;
-            cout << "here" << endl;
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
@@ -75,6 +74,7 @@ int main()
                     int rew=dup_game.player_move(r, c, idx);
                     if (!dup_game.player_dead() && (rew < 100)) {
                         //estimate the value after the movement
+                        cout << "here" << endl;
                         float est = feature.estimate(dup_game.get_simple_state());
                         if ((est + rew) > maximum){
                             best_slide=j;
