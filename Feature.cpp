@@ -26,19 +26,19 @@ float Feature::update(const simple_state& s, float u){
 int* Feature::generateIndex(const simple_state &s){
 
     int weight_Index[6];
-    weight_Index[0] = getDiamondIndex(s.diamond, 0, false);
-    weight_Index[1] = getDiamondIndex(s.diamond, 1, false);
-    weight_Index[2] = getDiamondIndex(s.diamond, 2, false);
-    weight_Index[4] = getDiamondIndex(s.diamond, 0, true);
-    weight_Index[5] = getDiamondIndex(s.diamond, 1, true);
-    weight_Index[6] = getDiamondIndex(s.diamond, 2, true);
+    weight_Index[0] = generateIndex(s.diamond, 0, false);
+    weight_Index[1] = generateIndex(s.diamond, 1, false);
+    weight_Index[2] = generateIndex(s.diamond, 2, false);
+    weight_Index[4] = generateIndex(s.diamond, 0, true);
+    weight_Index[5] = generateIndex(s.diamond, 1, true);
+    weight_Index[6] = generateIndex(s.diamond, 2, true);
     return weight_Index;
 }
 
-int Feature::generateIndex(simple_state&s, int color){
+int Feature::generateIndex(const simple_state&s, int color, bool flip){
     int index = 0;
     //Get the specific diamond index
-    index = getDiamondIndex(s.diamond, color) << 18;
+    index = getDiamondIndex(s.diamond, color, flip) << 14;
     //player's state index
     //we only get player's hp
     int playerIndex = s.p_HP[color];
