@@ -8,10 +8,9 @@ float Feature::estimate(const simple_state& s){
     generateIndex(s, index);
     float value = 0;
     for(int i = 0 ; i < 6; i++){
-        cout << index[i] << endl;
         value += weight[index[i]];
     }
-        
+    cout << value << endl;
     return value;
 }
 
