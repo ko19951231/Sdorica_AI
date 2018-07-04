@@ -23,11 +23,11 @@ public:
 	/**
 	 * estimate the value of a given board
 	 */
-	float estimate(const simple_state& s);
+	float estimate(simple_state& s);
 	/**
 	 * update the value of a given board, and return its updated value
 	 */
-	float update(const simple_state& s, float u);
+	float update(simple_state& s, float u);
 
     /**
 	 * get the name of this feature
