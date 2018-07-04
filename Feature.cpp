@@ -1,16 +1,16 @@
 #include"Feature.h"
 
-float Feature::estimate(simple_state& s){
+float Feature::estimate(const simple_state& s){
     
     int* index = generateIndex(s);
     float value = 0;
     for(int i = 0 ; i < 6; i++)
-        value += weight[weight_Index[i]];
+        value += weight[index[i]];
 
     return value;
 }
 
-float Feature::update(simple_state& s, float u){
+float Feature::update(const simple_state& s, float u){
 
     float value = 0;
     float u_spilt = u / 6.0;
@@ -23,27 +23,15 @@ float Feature::update(simple_state& s, float u){
     return value;
 }
 
-int* Feature::generateIndex(simple_state &s){
+int* Feature::generateIndex(const simple_state &s){
 
     int weight_Index[6];
-    weight_Index[0] = getDiamondIndex(s.diamond, 0);
-    weight_Index[1] = getDiamondIndex(s.diamond, 1);
-    weight_Index[2] = getDiamondIndex(s.diamond, 2);
-    //flip the diamond
-    for(int i = 0; i < 7 ; i++){
-        int t = s.diamond[0][i];
-        s.diamond[0][i] = s.diamond[1][i];
-        s.diamond[1][i] = t;
-    }
-    weight_Index[4] = getDiamondIndex(s.diamond, 0);
-    weight_Index[5] = getDiamondIndex(s.diamond, 1);
-    weight_Index[6] = getDiamondIndex(s.diamond, 2);
-    //flip the diamond back
-    for(int i = 0; i < 7 ; i++){
-        int t = s.diamond[0][i];
-        s.diamond[0][i] = s.diamond[1][i];
-        s.diamond[1][i] = t;
-    }
+    weight_Index[0] = getDiamondIndex(s.diamond, 0, false);
+    weight_Index[1] = getDiamondIndex(s.diamond, 1, false);
+    weight_Index[2] = getDiamondIndex(s.diamond, 2, false);
+    weight_Index[4] = getDiamondIndex(s.diamond, 0, true);
+    weight_Index[5] = getDiamondIndex(s.diamond, 1, true);
+    weight_Index[6] = getDiamondIndex(s.diamond, 2, true);
     return weight_Index;
 }
 
@@ -74,19 +62,27 @@ int Feature::generateIndex(simple_state&s, int color){
     return index;
 }
 
-int Feature::getDiamondIndex(int diamond[2][7], int color){
+int Feature::getDiamondIndex(int diamond[2][7], int color, bool flip){
     //diamond: 0 for yellow, 1 for purple, 2 for white
     //we choose only one color to reduce the memory
     int index = 0;
     /* index:
       0  1  2  3  4  5  6
       7  8  9 10 11 12 13 */
-    for(int i = 1 ; i >= 0; i--)
-        for(int j = 6 ; j >= 0 ; j--){
-            index = index << 1;
-            if(diamond[i][j] == color)
-                index |= 1;
-        } 
+    if(!flip)
+        for(int i = 1 ; i >= 0; i--)
+            for(int j = 6 ; j >= 0 ; j--){
+                index = index << 1;
+                if(diamond[i][j] == color)
+                    index |= 1;
+            }
+    else
+        for(int i = 0 ; i < 2; i++)
+            for(int j = 6 ; j >= 0 ; j--){
+                index = index << 1;
+                if(diamond[i][j] == color)
+                    index |= 1;
+            } 
     return index;
 }
 
