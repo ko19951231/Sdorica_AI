@@ -5,6 +5,8 @@ using namespace std;
 float Feature::estimate(const simple_state& s){
     int index = generateIndex(s);
     cout << index << endl;
+    cout << weight[index] << endl;
+    cout << "3" << endl;
     return weight[index];
 }
 
