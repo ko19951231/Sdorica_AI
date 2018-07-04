@@ -116,7 +116,6 @@ int main()
             rewardFile << i << "," << total_point << endl;
         trainer.close_episode(feature, alpha);
     }
-    rewardFile << num_episode << "," << total_point << endl;
     rewardFile.close();
 
     cout << "The best score is: " << before_score << endl;
