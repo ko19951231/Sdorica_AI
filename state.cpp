@@ -1,4 +1,6 @@
 #include"state.h"
+#include<iostream>
+using namespace std;
 
 void state::init()
 {
@@ -43,6 +45,8 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         move_amount = 0;
         return reward;
     }
+    if(move_amount > 100)
+        cout << move_amount << endl;
     return 0;
         
 }
