@@ -1,7 +1,10 @@
 #include"Feature.h"
+#include<iostream>
+using namespace std;
 
 float Feature::estimate(const simple_state& s){
     int index = generateIndex(s);
+    cout << index << endl;
     return operator[](index);
 }
 
