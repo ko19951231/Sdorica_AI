@@ -99,7 +99,7 @@ int main()
             simple_state s = game.get_simple_state();
             s.set_value(best_value);
             s.set_reward(best_reward);
-            trainer.add_state()  
+            trainer.add_state(s); 
             //game.print(); 
             //Add the reward
             total_point += point;      
