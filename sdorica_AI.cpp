@@ -75,7 +75,7 @@ int main()
                     s.set_reward(rew);
                     if (!dup_game.player_dead() && (rew < 100)) {
                         float est = feature.estimate(dup_game.get_simple_state());
-                        
+                        cout << est << endl;
 				        s.set_value(s.get_reward() + est);
                         cout << "here" << endl;
                         if (s.get_value() >= maximum){
