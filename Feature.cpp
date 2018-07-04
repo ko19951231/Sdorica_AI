@@ -2,18 +2,18 @@
 
 float Feature::estimate(simple_state& s){
     
-    s.weight_Index[0] = generateIndex(s.diamond, 0);
-    s.weight_Index[1] = generateIndex(s.diamond, 1);
-    s.weight_Index[2] = generateIndex(s.diamond, 2);
+    s.weight_Index[0] = getDiamondIndex(s.diamond, 0);
+    s.weight_Index[1] = getDiamondIndex(s.diamond, 1);
+    s.weight_Index[2] = getDiamondIndex(s.diamond, 2);
     //flip the diamond
     for(int i = 0; i < 7 ; i++){
         int t = s.diamond[0][i];
         s.diamond[0][i] = s.diamond[1][i];
         s.diamond[1][i] = t;
     }
-    s.weight_Index[4] = generateIndex(s.diamond, 0);
-    s.weight_Index[5] = generateIndex(s.diamond, 1);
-    s.weight_Index[6] = generateIndex(s.diamond, 2);
+    s.weight_Index[4] = getDiamondIndex(s.diamond, 0);
+    s.weight_Index[5] = getDiamondIndex(s.diamond, 1);
+    s.weight_Index[6] = getDiamondIndex(s.diamond, 2);
     //flip the diamond back
     for(int i = 0; i < 7 ; i++){
         int t = s.diamond[0][i];
