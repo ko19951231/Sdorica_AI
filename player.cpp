@@ -15,13 +15,10 @@ void Player::init(state *s){
 void Player::setSelectedIndex(int index){
     this->selectedCharacterIndex = index;
 }
-void Player::pon_attack(int diamond)
+void Player::pon_attack(int diamond, int n)
 {
     //Select an enemy to attack
     if(diamond != 1){
-        int n = -1;
-        printf("Select an enemy for pon to attack: ");
-        scanf("%d" , &n);
         this->game->setEnemySelectedIndex(n);
     }
     float atk_value = this->pon.attack(diamond);
@@ -34,12 +31,9 @@ void Player::pon_attack(int diamond)
         this->game->enemyHurtSelected(atk_value);
     }    
 }
-void Player::naya_attack(int diamond)
+void Player::naya_attack(int diamond, int n)
 {
     //Select an enemy to attack
-    int n = -1;
-    printf("Select an enemy for naya to attack: ");
-    scanf("%d" , &n);
     this->game->setEnemySelectedIndex(n);
     //Attack the enemy
     float atk_value = this->naya.attack(diamond);
@@ -54,15 +48,12 @@ void Player::naya_attack(int diamond)
     if(diamond == 1)
         this->game->enemyAddEasyHarmFirst(3);
 }
-void Player::dica_attack(int diamond)
+void Player::dica_attack(int diamond, int n)
 {
     float atk_value = this->dica.attack(diamond);
 
     if(diamond==1){
         //Select a character to heal
-        int n = -1;
-        printf("Select an character (0 for pon, 1 for naya, 2 for dica): ");
-        scanf("%d" , &n);
         this->game->setPlayerSelectedIndex(n);
         
         PlayerState *p = getSelectedCharater();
@@ -71,9 +62,6 @@ void Player::dica_attack(int diamond)
         
     }
     else if(diamond==2){
-        int n = -1;
-        printf("Select an enemy for dica to attack:");
-        scanf("%d" , &n);
         this->game->setEnemySelectedIndex(n);
         this->game->enemyHurtSelected(atk_value);
     }

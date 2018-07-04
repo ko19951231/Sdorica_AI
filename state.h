@@ -15,7 +15,7 @@ class state
 {
 public:
     void init();
-    int player_move(vector<int> r, vector<int> c);
+    int player_move(vector<int> r, vector<int> c, int idx);
     bool enemy_move();
     void update();
     void print();

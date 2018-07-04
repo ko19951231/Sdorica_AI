@@ -7,7 +7,7 @@ void state::init()
     this->enemy.init(0, this);
     this->move_amount = 0;
 }
-int state::player_move(vector<int> r, vector<int> c)
+int state::player_move(vector<int> r, vector<int> c, int idx)
 {
     move_amount++;
     // slide on the board to get the color and number of eliminated daimonds
@@ -18,21 +18,21 @@ int state::player_move(vector<int> r, vector<int> c)
     float hurt = 0;
     if(color==0){
         if(!this->player.pon_isDead()){
-            this->player.pon_attack(count);
+            this->player.pon_attack(count, idx);
         }
         else
             this->player.pon_recover(count);
     }
     else if(color==1){
         if(!this->player.naya_isDead()){
-            this->player.naya_attack(count);
+            this->player.naya_attack(count, idx);
         }    
         else   
             this->player.naya_recover(count);
     }
     else if(color==2){
         if(!this->player.dica_isDead()){
-            this->player.dica_attack(count);
+            this->player.dica_attack(count, idx);
         }    
         else
             this->player.dica_recover(count);
