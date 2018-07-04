@@ -97,7 +97,7 @@ public:
 private:
     int* generateIndex(const simple_state &s);
 	int generateIndex(const simple_state &s, int color, bool flip);
-    int getDiamondIndex(int diamond[2][7], int color, bool flip);
+    int getDiamondIndex(const int diamond[2][7], int color, bool flip);
 	size_t length;
 	float* weight;
 };
