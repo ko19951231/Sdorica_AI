@@ -36,25 +36,23 @@ void Feature::generateIndex(const simple_state &s, int *index){
 int Feature::generateIndex(const simple_state&s, int color, bool flip){
     int index = 0;
     //Get the specific diamond index
-    index = getDiamondIndex(s.diamond, color, flip) << 14;
+    index = getDiamondIndex(s.diamond, color, flip) << 15;
     //player's state index
     //we only get player's hp
-    int playerIndex = s.p_HP[color];
-    index |= (playerIndex << 12);
+    int playerIndex = (s.p_HP[0] << 4) | (s.p_HP[1] << 2) | s.p_HP[0];
+    index |= (playerIndex << 9);
     //enemies's state index
     //only get if enemies can recover shield itself
     //enemies is dead, enemies' shield is out.
     int enemiesIndex = 0;
     for(int i = 0 ; i < 3; i++){
-        enemiesIndex = enemiesIndex << 4;
+        enemiesIndex = enemiesIndex << 3;
         if(s.kind[i] >= 4)
-            enemiesIndex |= (1 << 3);
-        if(s.e_HP[i] > 0)
             enemiesIndex |= (1 << 2);
-        if(s.shield[i] > 0)
+        if(s.e_HP[i] > 0)
             enemiesIndex |= (1 << 1);
-        if(s.transferShield[i] > 0)
-            enemiesIndex |= 1;
+        if(s.shield[i] > 0)
+            enemiesIndex |= (1 << 0);
     }
     index |= enemiesIndex;
     return index;
