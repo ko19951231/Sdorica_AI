@@ -63,7 +63,7 @@ int main()
             //Select the best slide and object
             int best_slide=0;
             int best_object=0;
-            int maximum=0;
+            int maximum=-1;
             simple_state s;
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
@@ -73,11 +73,12 @@ int main()
                     //reward should be the estimate value + reward
                     int rew=dup_game.player_move(r, c, idx);
                     s = dup_game.get_simple_state();
-                    cout << rew << endl;
                     s.set_reward(rew);
                     if (!dup_game.player_dead() && (rew < 100)) {
+                        cout << "1" << endl;
 				        s.set_value(s.get_reward() + feature.estimate(dup_game.get_simple_state()));
-				        if (s.get_value() > maximum){
+				        cout << "2" << endl;
+                        if (s.get_value() > maximum){
                             best_slide=j;
                             best_object=idx;
                             maximum=rew;
