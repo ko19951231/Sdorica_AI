@@ -1,17 +1,46 @@
 #include"Feature.h"
 
-float Feature::estimate(const simple_state& s){
-    int index = generateIndex(s);
-    return weight[index];
+float Feature::estimate(simple_state& s){
+    
+    s.weight_Index[0] = generateIndex(s, 0);
+    s.weight_Index[1] = generateIndex(s, 1);
+    s.weight_Index[2] = generateIndex(s, 2);
+    //flip the diamond
+    for(int i = 0; i < 7 ; i++){
+        int t = s.diamond[0][i];
+        diamond[0][i] = diamond[1][i];
+        diamond[1][i] = t;
+    }
+    s.weight_Index[4] = generateIndex(s, 0);
+    s.weight_Index[5] = generateIndex(s, 1);
+    s.weight_Index[6] = generateIndex(s, 2);
+    //flip the diamond back
+    for(int i = 0; i < 7 ; i++){
+        int t = s.diamond[0][i];
+        diamond[0][i] = diamond[1][i];
+        diamond[1][i] = t;
+    }
+
+    float value = 0;
+    for(int i = 0 ; i < 6; i++)
+        value += weight[s.weight_Index[i]];
+
+    return v;
 }
 
-float Feature::update(const simple_state& s, float u){
-    int index = generateIndex(s);
-    weight[index] += u;
-    return weight[index];
+float Feature::update(simple_state& s, float u){
+
+    float value = 0;
+    float u_spilt = u / 6.0;
+    for(int i = 0 ; i < 6 ; i++){
+        weight[s.weight_Index[i]] += u_spilt;
+        value += weight[s.weight_Index[i]];
+    }
+
+    return value;
 }
 
-int Feature::generateIndex(const simple_state &s){
+int Feature::generateIndex(simple_state &s){
     int index = 0;
     //Get the purple diamond index
     index = getDiamondIndex(s.daimond, 1) << 13;
@@ -30,6 +59,33 @@ int Feature::generateIndex(const simple_state &s){
         if(s.e_HP[i] > 0)
             enemiesIndex |= (1 << 1);
         if(s.shield[i] > 0)
+            enemiesIndex |= 1;
+    }
+    index |= enemiesIndex;
+    return index;
+}
+
+int Feature::generateIndex(const simple_state&s, int color){
+    int index = 0;
+    //Get the specific diamond index
+    index = getDiamondIndex(s.daimond, color) << 18;
+    //player's state index
+    //we only get player's hp
+    int playerIndex = s.p_HP[color];
+    index |= (playerIndex << 12);
+    //enemies's state index
+    //only get if enemies can recover shield itself
+    //enemies is dead, enemies' shield is out.
+    int enemiesIndex = 0;
+    for(int i = 0 ; i < 3; i++){
+        enemiesIndex = enemiesIndex << 4;
+        if(s.kind[i] >= 4)
+            enemiesIndex |= (1 << 3);
+        if(s.e_HP[i] > 0)
+            enemiesIndex |= (1 << 2);
+        if(s.shield[i] > 0)
+            enemiesIndex |= (1 << 1);
+        if(s.transferShield[i] > 0)
             enemiesIndex |= 1;
     }
     index |= enemiesIndex;

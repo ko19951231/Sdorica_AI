@@ -32,6 +32,7 @@ public:
     //For training
     int estimate_value;
     int reward;
+    int weight_Index[6];
 
     void set_value(int v) {this->estimate_value = v;}
     int get_value(){return this->estimate_value;}
