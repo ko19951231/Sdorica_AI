@@ -31,7 +31,7 @@ int main()
     state game;
     state dup_game;
     Trainer trainer;
-    Feature feature(29);
+    Feature feature(28);
 
     //load Feature data
     if(load){
