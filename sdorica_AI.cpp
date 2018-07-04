@@ -83,7 +83,7 @@ int main()
                             maximum=rew;
                         }        
 			        } else {
-				        s.set_value(-std::numeric_limits<float>::max());
+				        s.set_value(-100);
 			        }
                 }
             }
@@ -111,7 +111,7 @@ int main()
             if(point == 0)
                 game.update();
         }
-        rewardFile << episode << "," << total_point << endl;
+        rewardFile << i << "," << total_point << endl;
         trainer.close_episode(feature, alpha);
     }
     rewardFile.close();

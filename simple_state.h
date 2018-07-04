@@ -34,9 +34,9 @@ public:
     int reward;
 
     void set_value(int v) {this->estimate_value = v;}
-    void get_value(){return this->estimate_value;}
+    int get_value(){return this->estimate_value;}
     void set_reward(int v){this->reward = reward;}
-    void get_reward(){return this->reward;}
+    int get_reward(){return this->reward;}
 };
 
 #endif

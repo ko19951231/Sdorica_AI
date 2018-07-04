@@ -13,7 +13,7 @@ class Trainer
 public:
     void open_episode();
     void add_state(simple_state s);
-    void close_episode(Feature& feature);
+    void close_episode(Feature& feature, float alpha);
 private:
     vector<simple_state> path;
     // some data structure to save the weights
