@@ -28,8 +28,8 @@ public:
     float getShield(){return this->shield;}
     int getCD(){return this->CD;}
     int getKind(){return this->kind;}
-    int getSimplifiedHP(int interval){return this->HP>0?((int)(interval*(this->HP-1)/(this->MAX_HP))):interval;}
-    int getSimplifiedShiled(int interval){return this->shield>0?((int)(interval*(this->shield-1)/(this->MAX_HP))):interval;}
+    int getSimplifiedHP(int interval){return this->HP>0?((int)(interval*(float)(this->HP-1)/(float)(this->MAX_HP))):0;}
+    int getSimplifiedShiled(int interval){return this->shield>0?((int)(interval*(float)(this->shield-1)/(float)(this->MAX_HP))):0;}
     //set value
     void setEnemy(int k);
     bool isDead(){return this->HP <= 0? true:false;}

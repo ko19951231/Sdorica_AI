@@ -8,12 +8,10 @@
 
 class Feature {
 public:
-	Feature(size_t len) : length(len), weight(alloc(len)) {}
-	Feature(Feature& f) : length(f.length), weight(f.weight) { f.weight = NULL; }
-	Feature(const Feature& f) = delete;
-	Feature& operator =(const Feature& f) = delete;
+	Feature() : {
+		weight = new float[(1 << 26)];
+	}
 	virtual ~Feature() { delete[] weight; }
-
 	float& operator[] (size_t i) { return weight[i];}
 	float operator[] (size_t i) const { return weight[i];}
 	size_t size() const { return length;}
@@ -95,10 +93,10 @@ public:
 		return NULL;
 	}
 private:
-    void generateIndex(const simple_state &s, int *index);
-	int generateIndex(const simple_state &s, int color, bool flip);
+    void generateIndex1(const simple_state &s, int color, int *index);
+	int generateIndex1(const simple_state &s, int color, bool flip);
     int getDiamondIndex(const int diamond[2][7], int color, bool flip);
-	size_t length;
+	int generateIndex2(const simple_state &s);
 	float* weight;
 };
 

@@ -4,57 +4,73 @@ using namespace std;
 
 float Feature::estimate(const simple_state& s){
     
-    int index[2];
-    generateIndex(s, index);
     float value = 0;
-    for(int i = 0 ; i < 2; i++){
-        value += this->weight[index[i]];
+    
+    //player's character feature
+    int index[3][2];
+    for(int i = 0 ; i < 3; i++){
+        generateIndex1(s, i, &index[i]);
+        value += this->weight[(1 << 22) * i + index[i][0]];
+        value += this->weight[(1 << 22) * i + index[i][1]];
     }
+    //enemies feature
+    value += this->weight[(1 << 22) * 3 + generateIndex2(s)];
+
     return value;
 }
 
 float Feature::update(const simple_state& s, float u){
 
     float value = 0;
-    float u_spilt = u / 2.0;
-    int index[2];
-    generateIndex(s, index);
-    for(int i = 0 ; i < 2 ; i++){
-        this->weight[index[i]] += u_spilt;
-        value += this->weight[index[i]];
+    float u_spilt = u / 4.0;
+    
+    //player's character feature
+    int index[3][2];
+    for(int i = 0 ; i < 3; i++){
+        generateIndex1(s, i, &index[i]);
+        this->weight[(1 << 22) * i + index[i][0]] += u_spilt;
+        this->weight[(1 << 22) * i + index[i][1]] += u_spilt;
+        value += this->weight[(1 << 22) * i + index[i][0]];
+        value += this->weight[(1 << 22) * i + index[i][1]];
     }
+
+    //enemies feature
+    int enemies_index = generateIndex2(s);
+    this->weight[(1 << 22) * 3 + enemies_index] += u_spilt;
+    value += this->weight[(1 << 22) * 3 + enemies_index];
 
     return value;
 }
 
-void Feature::generateIndex(const simple_state &s, int *index){
-
-    index[0] = generateIndex(s, 2, false);
-    index[1] = generateIndex(s, 2, true);
+void Feature::generateIndex1(const simple_state &s, int color, int *index){
+    index[0] = generateIndex(s, color, false);
+    index[1] = generateIndex(s, color, true);
 }
 
-int Feature::generateIndex(const simple_state&s, int color, bool flip){
+int Feature::generateIndex1(const simple_state&s, int color, bool flip){
+    
     int index = 0;
     //Get the specific diamond index
-    index = getDiamondIndex(s.diamond, color, flip) << 15;
+    index = getDiamondIndex(s.diamond, color, flip) << 8; 
     //player's state index
-    //we only get player's hp
-    int playerIndex = (s.p_HP[0] << 4) | (s.p_HP[1] << 2) | s.p_HP[0];
-    index |= (playerIndex << 9);
-    //enemies's state index
-    //only get if enemies can recover shield itself
-    //enemies is dead, enemies' shield is out.
-    int enemiesIndex = 0;
-    for(int i = 0 ; i < 3; i++){
-        enemiesIndex = enemiesIndex << 3;
-        if(s.kind[i] >= 4)
-            enemiesIndex |= (1 << 2);
-        if(s.e_HP[i] > 0)
-            enemiesIndex |= (1 << 1);
-        if(s.shield[i] > 0)
-            enemiesIndex |= (1 << 0);
+    //HP: 2 bit, strengthen: 1 bit, minusHarm: 1 bit, recover: 4 bit
+    index |= (s.p_HP[color] << 8);
+    //strengthen
+    for(int i = 0 ; i < 3 ; i++){
+        if(s.p_strengthen[color][i] > 0){
+            index |= (1 << 5);
+            break;
+        }
     }
-    index |= enemiesIndex;
+    //minus harm
+    for(int i = 0 ; i < 3 ; i++){
+        if(s.p_minusHarm[color][i] > 0){
+            index |= (1 << 4);
+            break;
+        }
+    }
+    //recover diamond
+    index |= s.recover_diamond[color];
     return index;
 }
 
@@ -79,6 +95,23 @@ int Feature::getDiamondIndex(const int diamond[2][7], int color, bool flip){
                 if(diamond[i][j] == color)
                     index |= 1;
             } 
+    return index;
+}
+
+int Feature::generateIndex2(const simple_state&s){
+    //Enemies Index
+    //kind : 1 bit, HP: 2 bit, shield: 1 bit, CD: 2 bit, transfer shield: 1bit
+    int index = 0;
+    for(int i = 0 ; i < 3; i++){
+        index = index << 7;
+        if(s.kind[i] >= 4)
+            index |= (1 << 6);
+        index |= (s.e_HP[i] << 4);
+        if(s.shield[i] > 0)
+            index |= (1 << 3);
+        index |= ((s.CD[i] - 1) << 1);
+        index |= (s.transferShield[i]);
+    }
     return index;
 }
 

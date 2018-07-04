@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 100000;
+    int num_episode = 1;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -30,7 +30,7 @@ int main()
     state game;
     state dup_game;
     Trainer trainer;
-    Feature feature(29);
+    Feature feature;
     //load Feature data
     if(load){
         ifstream in;
@@ -78,7 +78,7 @@ int main()
                         if ((est + rew) > maximum){
                             best_slide=j;
                             best_object=idx;
-                            maximum=rew;
+                            maximum = rew + est;
                             best_reward = rew;
                             best_value = est;
                         }        
