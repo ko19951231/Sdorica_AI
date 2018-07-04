@@ -74,7 +74,8 @@ int main()
                     s = dup_game.get_simple_state();
                     s.set_reward(rew);
                     if (!dup_game.player_dead() && (rew < 100)) {
-				        s.set_value(s.get_reward() + feature.estimate(dup_game.get_simple_state()));
+                        float est = feature.estimate(dup_game.get_simple_state());
+				        s.set_value(s.get_reward() + est);
                         if (s.get_value() > maximum){
                             best_slide=j;
                             best_object=idx;
