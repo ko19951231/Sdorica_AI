@@ -99,7 +99,7 @@ int main()
             total_point += point;      
             //The 5th state will give 100 for bonus
             //So if the point > 100, means that an episode is over
-            if(point > 100) break;
+            if(point >= 100) break;
 
             //update the CD and "state" after one round
             //don't update when in new stage
