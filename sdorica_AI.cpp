@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 3000;
+    int num_episode = 100000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -46,7 +46,8 @@ int main()
             exit(1);
         }
     }
-
+    int best_score = 0;
+    float avg_score = 0;
     srand(time(NULL));
     for(int i = 0 ; i < num_episode ; i++){
         int total_point = 0;
@@ -107,11 +108,19 @@ int main()
                 game.update();
         }
         cout << "Episode " << i << " Total Point: " << total_point << endl;
-        rewardFile << i << "," << total_point << endl;
+        if(total_point > best_score)
+            best_score = total_point;
+        if(i > (num_episode - 1000))
+            avg_score += total_point;
+        if(i % 1000 == 0)
+            rewardFile << i << "," << total_point << endl;
         trainer.close_episode(feature, alpha);
     }
+    rewardFile << num_episode << "," << total_point << endl;
     rewardFile.close();
 
+    cout << "The best score is: " << before_score << endl;
+    cout << "The average score is: " << avg_score << endl;
     //Save 
     if(save){
         ofstream out;
