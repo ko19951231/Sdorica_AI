@@ -18,7 +18,7 @@ int main()
     int num_episode = 1;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
-    bool load = false;
+    bool load = true;
     bool save = true;
     // set the learning parameters
 	float alpha = 0.1;
@@ -74,7 +74,6 @@ int main()
                     int rew=dup_game.player_move(r, c, idx);
                     if (!dup_game.player_dead() && (rew < 100)) {
                         //estimate the value after the movement
-                        cout << "here" << endl;
                         float est = feature.estimate(dup_game.get_simple_state());
                         if ((est + rew) > maximum){
                             best_slide=j;
