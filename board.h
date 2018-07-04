@@ -21,6 +21,7 @@ public:
     void print();
     vector<tiles> get_available_moves();
     int daimond[2][7];  // 0 for yellow, 1 for purple, 2 for white
+    void assign(const board& b);
 };
 
 #endif

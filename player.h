@@ -29,6 +29,7 @@ public:
     void update();
     void print();
     int getSelectedCharaterIndex();
+    void assign(const Player& p);
 
     PlayerState pon;
     PlayerState naya;

@@ -1,8 +1,9 @@
 #ifndef SIMPLE_STATE_H
 #define SIMPLE_STATE_H
 
-struct simple_state
+class simple_state
 {
+public:
     //from enemy.h
     int stage; 
     int amount;
@@ -27,6 +28,15 @@ struct simple_state
     int recover_diamond[3];
     //from board.h
     int daimond[2][7];
+
+    //For training
+    int estimate_value;
+    int reward;
+
+    void set_value(int v) {this->estimate_value = v;}
+    void get_value(){return this->estimate_value;}
+    void set_reward(int v){this->reward = reward;}
+    void get_reward(){return this->reward;}
 };
 
 #endif

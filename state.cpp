@@ -149,3 +149,10 @@ simple_state state::get_simple_state(){
     }
     return ret;
 }
+
+void state::assign(const state& s){
+    this->move_amount = s.move_amount;
+    this->board.assign(s.board);
+    this->player.assign(s.player);
+    this->enemy.assign(s.enemy);
+}

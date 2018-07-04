@@ -44,6 +44,7 @@ public:
     int* getEasyHarm(){return this->easyHarm;}
     void setEasyHarm(int* e){ for(int i = 0 ; i < 3 ; i++) this->easyHarm[i] = e[i];}
     void setDiamondAmount(int d) {this->recover_diamond = d;}
+    void assign(const PlayerState &p);
 private:
     float ATK;
     float HP;

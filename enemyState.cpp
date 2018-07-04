@@ -212,3 +212,20 @@ float EnemyState::calculateStrengthen(){
         if(this->strengthen[i] > 0) v *= 1.3;
     return v;
 }
+
+void EnemyState::assign(const EnemyState &e){
+    this->kind = e.kind;
+    this->ATK = e.ATK;
+    this->HP = e.HP;
+    this->MAX_HP = e.MAX_HP;
+    this->shield = e.shield;
+    this->CD = e.CD;
+    this->CD_interval = e.CD_interval;
+    this->shieldTransfer_level = e.shieldTransfer_level;
+    this->transferShield = e.transferShield;
+    for(int i = 0 ; i < 3; i++){
+        this->easyHarm[i] = e.easyHarm[i];
+        this->strengthen[i] = e.strengthen[i];
+        this->minusHarm[i] = e.minusHarm[i];
+    }
+}

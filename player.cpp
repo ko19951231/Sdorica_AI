@@ -11,6 +11,7 @@ void Player::init(state *s){
     this->naya.setSkillBuff(301, 602, 1255);
     this->dica.setSkillBuff(311, 1039, 1559);
     this->game = s;
+    this->selectedCharacterIndex = 0;
 }
 void Player::setSelectedIndex(int index){
     this->selectedCharacterIndex = index;
@@ -227,4 +228,11 @@ int Player::findLeastHP(){
 
 int Player::getSelectedCharaterIndex(){
     return this->selectedCharacterIndex;
+}
+
+void Player::assign(const Player&p){
+    this->selectedCharacterIndex = p.selectedCharacterIndex;
+    this->pon.assign(p.pon);
+    this->naya.assign(p.naya);
+    this->dica.assign(p.dica);
 }

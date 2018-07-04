@@ -6,16 +6,16 @@
 #include<vector>
 
 using namespace std;
-class state;
+class simple_state;
+class Feature;
 class Trainer
 {
 public:
     void open_episode();
-    void add_state(state s);
-    void close_episode();
-    int get_value(state s);
+    void add_state(simple_state s);
+    void close_episode(Feature& feature);
 private:
-    vector<state> episode;
+    vector<simple_state> path;
     // some data structure to save the weights
 };
 

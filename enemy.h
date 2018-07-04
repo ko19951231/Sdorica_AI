@@ -32,6 +32,7 @@ public:
     int getFirstIndex();
     void print();
     int getSelectedEnemyIndex();
+    void assign(const Enemy &e);
     EnemyState enemies[3];
 private:
     int stage;  // after all the enemy is dead, a new stage is begin

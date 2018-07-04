@@ -29,7 +29,6 @@ public:
     int getCD(){return this->CD;}
     int getKind(){return this->kind;}
     int getSimplifiedHP(int interval){return this->HP>0?((int)(interval*(this->HP-1)/(this->MAX_HP))):interval;}
-
     int getSimplifiedShiled(int interval){return this->shield>0?((int)(interval*(this->shield-1)/(this->MAX_HP))):interval;}
     //set value
     void setEnemy(int k);
@@ -56,6 +55,7 @@ public:
     int* getEasyHarm(){return this->easyHarm;}
     void setEasyHarm(int* e){ for(int i = 0 ; i < 3 ; i++) this->easyHarm[i] = e[i];}
     int getTransferShield(){return this->transferShield;}
+    void assign(const EnemyState &e);
 private:
     int kind;   //0: 紅球角鯨 1:草葉巨蚤 2:結草鵝 3:組合偶屍 4:狼人盾兵 5:王國符文師
     float ATK;

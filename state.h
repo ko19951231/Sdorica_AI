@@ -30,6 +30,7 @@ public:
     void enemyHurtSelected(float hurt);
     void enemyAddEasyHarmFirst(int round);
     void enemyAddEasyHarmSelected(int round);
+    void assign(const state& s);
     vector<tiles> get_available_moves();
     simple_state get_simple_state();
 private:

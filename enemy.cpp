@@ -34,7 +34,8 @@ void Enemy::init(int s, state *st)
     this->selectedEnemyIndex = 0;
 }
 void Enemy::setSelectedIndex(int index){
-    this->selectedEnemyIndex = index;
+    if(!this->enemies[index].isDead())
+        this->selectedEnemyIndex = index;
 }
 
 void Enemy::get_hurt(int index, float hurt)
@@ -166,4 +167,14 @@ void Enemy::checkSelectedEnemyState(){
 
 int Enemy::getSelectedEnemyIndex(){
     return this->selectedEnemyIndex;
+}
+
+void Enemy::assign(const Enemy &e){
+    this->stage = e.stage;
+    this->init_amount = e.init_amount;
+    this->amount = e.amount;
+    this->selectedEnemyIndex = e.selectedEnemyIndex;
+    for(int i = 0 ; i < 3; i++){
+        this->enemies[i].assign(e.enemies[i]);
+    }
 }

@@ -25,6 +25,13 @@ PlayerState::PlayerState(float atk, float hp, int diamond){
 }
 
 void PlayerState::setValue(float atk, float hp, int diamond){
+    for(int i = 0 ; i < 3; i++){
+        minusHarm[i] = 0;
+        easyHarm[i] = 0;
+        strengthen[i] = 0;
+    }
+    RECOVER_DIAMOND_AMOUNT = 8;
+    recover_diamond = 0;
     ATK = atk; HP = MAX_HP = hp; RECOVER_DIAMOND_AMOUNT = diamond;
 }
 
@@ -131,4 +138,20 @@ float PlayerState::calculateStrengthen(){
     for(int i = 0 ; i < 3; i++)
         if(strengthen[i] > 0) v *= 1.3;
     return v;
+}
+
+void PlayerState::assign(const PlayerState &p){
+    this->ATK = p.ATK;
+    this->HP = p.HP;
+    this->MAX_HP = p.MAX_HP;
+    this->shield = p.shield;
+    this->recover_diamond = p.recover_diamond;
+    this->RECOVER_DIAMOND_AMOUNT = p.RECOVER_DIAMOND_AMOUNT;
+    for(int i = 0 ; i < 4; i++)
+        this->skillBuff[i] = p.skillBuff[i];
+    for(int i = 0 ; i < 3; i++){
+        this->easyHarm[i] = p.easyHarm[i];
+        this->strengthen[i] = p.strengthen[i];
+        this->minusHarm[i] = p.minusHarm[i];
+    }
 }
