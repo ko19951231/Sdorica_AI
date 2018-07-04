@@ -146,7 +146,7 @@ simple_state state::get_simple_state(){
     ret.recover_diamond[2]=this->player.dica.getDiamondAount(); 
     for(int r=0;r<2;r++){
         for(int c=0;c<7;c++){
-            ret.daimond[r][c]=board.daimond[r][c];
+            ret.diamond[r][c]=board.daimond[r][c];
         }
     }
     return ret;

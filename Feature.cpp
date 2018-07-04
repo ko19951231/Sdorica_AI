@@ -2,28 +2,10 @@
 
 float Feature::estimate(simple_state& s){
     
-    s.weight_Index[0] = getDiamondIndex(s.diamond, 0);
-    s.weight_Index[1] = getDiamondIndex(s.diamond, 1);
-    s.weight_Index[2] = getDiamondIndex(s.diamond, 2);
-    //flip the diamond
-    for(int i = 0; i < 7 ; i++){
-        int t = s.diamond[0][i];
-        s.diamond[0][i] = s.diamond[1][i];
-        s.diamond[1][i] = t;
-    }
-    s.weight_Index[4] = getDiamondIndex(s.diamond, 0);
-    s.weight_Index[5] = getDiamondIndex(s.diamond, 1);
-    s.weight_Index[6] = getDiamondIndex(s.diamond, 2);
-    //flip the diamond back
-    for(int i = 0; i < 7 ; i++){
-        int t = s.diamond[0][i];
-        s.diamond[0][i] = s.diamond[1][i];
-        s.diamond[1][i] = t;
-    }
-
+    int* index = generateIndex(s);
     float value = 0;
     for(int i = 0 ; i < 6; i++)
-        value += weight[s.weight_Index[i]];
+        value += weight[weight_Index[i]];
 
     return value;
 }
@@ -32,37 +14,37 @@ float Feature::update(simple_state& s, float u){
 
     float value = 0;
     float u_spilt = u / 6.0;
+    int* index = generateIndex(s);
     for(int i = 0 ; i < 6 ; i++){
-        weight[s.weight_Index[i]] += u_spilt;
-        value += weight[s.weight_Index[i]];
+        weight[index[i]] += u_spilt;
+        value += weight[index[i]];
     }
 
     return value;
 }
 
-int Feature::generateIndex(simple_state &s){
-    int index = 0;
-    //Get the purple diamond index
-    index = getDiamondIndex(s.diamond, 1) << 13;
-    //player's state index
-    //we only get player's hp
-    int playerIndex = s.p_HP[0] << 4 | s.p_HP[1] << 2 | s.p_HP[2];
-    index |= (playerIndex << 9);
-    //enemies's state index
-    //only get if enemies can recover shield itself
-    //enemies is dead, enemies' shield is out.
-    int enemiesIndex = 0;
-    for(int i = 0 ; i < 3; i++){
-        enemiesIndex = enemiesIndex << 3;
-        if(s.kind[i] >= 4)
-            enemiesIndex |= (1 << 2);
-        if(s.e_HP[i] > 0)
-            enemiesIndex |= (1 << 1);
-        if(s.shield[i] > 0)
-            enemiesIndex |= 1;
+int* Feature::generateIndex(simple_state &s){
+
+    int weight_Index[6];
+    weight_Index[0] = getDiamondIndex(s.diamond, 0);
+    weight_Index[1] = getDiamondIndex(s.diamond, 1);
+    weight_Index[2] = getDiamondIndex(s.diamond, 2);
+    //flip the diamond
+    for(int i = 0; i < 7 ; i++){
+        int t = s.diamond[0][i];
+        s.diamond[0][i] = s.diamond[1][i];
+        s.diamond[1][i] = t;
     }
-    index |= enemiesIndex;
-    return index;
+    weight_Index[4] = getDiamondIndex(s.diamond, 0);
+    weight_Index[5] = getDiamondIndex(s.diamond, 1);
+    weight_Index[6] = getDiamondIndex(s.diamond, 2);
+    //flip the diamond back
+    for(int i = 0; i < 7 ; i++){
+        int t = s.diamond[0][i];
+        s.diamond[0][i] = s.diamond[1][i];
+        s.diamond[1][i] = t;
+    }
+    return weight_Index;
 }
 
 int Feature::generateIndex(simple_state&s, int color){
