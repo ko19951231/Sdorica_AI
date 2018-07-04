@@ -118,7 +118,7 @@ int main()
     }
     rewardFile.close();
 
-    cout << "The best score is: " << before_score << endl;
+    cout << "The best score is: " << best_score << endl;
     cout << "The average score is: " << avg_score/1000.0 << endl;
     //Save 
     if(save){
