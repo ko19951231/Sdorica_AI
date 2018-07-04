@@ -15,7 +15,8 @@ float Feature::update(const simple_state& s, float u){
 
     float value = 0;
     float u_spilt = u / 6.0;
-    int* index = generateIndex(s);
+    int index[6];
+    generateIndex(s, index);
     for(int i = 0 ; i < 6 ; i++){
         weight[index[i]] += u_spilt;
         value += weight[index[i]];
