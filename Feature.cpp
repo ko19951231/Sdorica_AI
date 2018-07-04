@@ -12,10 +12,11 @@ float Feature::estimate(const simple_state& s){
         generateIndex1(s, i, &index[i]);
         value += this->weight[(1 << 22) * i + index[i][0]];
         value += this->weight[(1 << 22) * i + index[i][1]];
+        cout << index[i][0] << " " << index[i][1] << endl;
     }
     //enemies feature
     value += this->weight[(1 << 22) * 3 + generateIndex2(s)];
-
+    
     return value;
 }
 
