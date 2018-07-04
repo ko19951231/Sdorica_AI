@@ -4,10 +4,10 @@ using namespace std;
 
 float Feature::estimate(const simple_state& s){
     
-    int index[6];
+    int index[2];
     generateIndex(s, index);
     float value = 0;
-    for(int i = 0 ; i < 6; i++){
+    for(int i = 0 ; i < 2; i++){
         value += this->weight[index[i]];
     }
     cout << value << endl;
@@ -17,10 +17,10 @@ float Feature::estimate(const simple_state& s){
 float Feature::update(const simple_state& s, float u){
 
     float value = 0;
-    float u_spilt = u / 6.0;
-    int index[6];
+    float u_spilt = u / 2.0;
+    int index[2];
     generateIndex(s, index);
-    for(int i = 0 ; i < 6 ; i++){
+    for(int i = 0 ; i < 2 ; i++){
         this->weight[index[i]] += u_spilt;
         value += this->weight[index[i]];
     }
@@ -30,12 +30,8 @@ float Feature::update(const simple_state& s, float u){
 
 void Feature::generateIndex(const simple_state &s, int *index){
 
-    index[0] = generateIndex(s, 0, false);
-    index[1] = generateIndex(s, 1, false);
-    index[2] = generateIndex(s, 2, false);
-    index[4] = generateIndex(s, 0, true);
-    index[5] = generateIndex(s, 1, true);
-    index[6] = generateIndex(s, 2, true);
+    index[0] = generateIndex(s, 2, false);
+    index[1] = generateIndex(s, 2, true);
 }
 
 int Feature::generateIndex(const simple_state&s, int color, bool flip){
