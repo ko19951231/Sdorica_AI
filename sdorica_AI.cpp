@@ -57,7 +57,6 @@ int main()
             //The enemy attack first
             bool gameOver = game.enemy_move();
             if(gameOver) break;
-
             game.print();
             //Input the sliding value
             vector<tiles> next_move = game.get_available_moves();
@@ -71,6 +70,7 @@ int main()
                 vector<int> c=next_move[j].c;
                 for(int idx=0;idx<3;idx++){
                     dup_game.assign(game);
+                    cout << j << " " << idx << endl;
                     //reward should be the estimate value + reward
                     int rew=dup_game.player_move(r, c, idx);
                     s = dup_game.get_simple_state();
