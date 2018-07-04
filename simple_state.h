@@ -27,7 +27,7 @@ public:
     int p_easyHarm[3][3];
     int recover_diamond[3];
     //from board.h
-    int daimond[2][7];
+    int diamond[2][7];
 
     //For training
     int estimate_value;

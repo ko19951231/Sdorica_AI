@@ -25,7 +25,7 @@ float Feature::estimate(simple_state& s){
     for(int i = 0 ; i < 6; i++)
         value += weight[s.weight_Index[i]];
 
-    return v;
+    return value;
 }
 
 float Feature::update(simple_state& s, float u){
@@ -43,7 +43,7 @@ float Feature::update(simple_state& s, float u){
 int Feature::generateIndex(simple_state &s){
     int index = 0;
     //Get the purple diamond index
-    index = getDiamondIndex(s.daimond, 1) << 13;
+    index = getDiamondIndex(s.diamond, 1) << 13;
     //player's state index
     //we only get player's hp
     int playerIndex = s.p_HP[0] << 4 | s.p_HP[1] << 2 | s.p_HP[2];
@@ -68,7 +68,7 @@ int Feature::generateIndex(simple_state &s){
 int Feature::generateIndex(const simple_state&s, int color){
     int index = 0;
     //Get the specific diamond index
-    index = getDiamondIndex(s.daimond, color) << 18;
+    index = getDiamondIndex(s.diamond, color) << 18;
     //player's state index
     //we only get player's hp
     int playerIndex = s.p_HP[color];
