@@ -8,8 +8,9 @@ float Feature::estimate(const simple_state& s){
     generateIndex(s, index);
     float value = 0;
     for(int i = 0 ; i < 6; i++){
-        value += weight[index[i]];
+        value += this->weight[index[i]];
     }
+    delete index;
     cout << value << endl;
     return value;
 }
@@ -21,8 +22,8 @@ float Feature::update(const simple_state& s, float u){
     int index[6];
     generateIndex(s, index);
     for(int i = 0 ; i < 6 ; i++){
-        weight[index[i]] += u_spilt;
-        value += weight[index[i]];
+        this->weight[index[i]] += u_spilt;
+        value += this->weight[index[i]];
     }
 
     return value;
