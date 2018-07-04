@@ -87,7 +87,7 @@ vector<tiles> Board::get_available_moves()
     return v;
 }
 
-void Board::assign(const Board& b){
+void Board::assign(Board& b){
     for(int i = 0 ; i < 2 ; i++)
         for(int j = 0 ; j < 7 ; j++)
             this->daimond[i][j] = b.daimond[i][j];
