@@ -43,8 +43,8 @@ float Feature::update(const simple_state& s, float u){
 }
 
 void Feature::generateIndex1(const simple_state &s, int color, int *index){
-    index[0] = generateIndex(s, color, false);
-    index[1] = generateIndex(s, color, true);
+    index[0] = generateIndex1(s, color, false);
+    index[1] = generateIndex1(s, color, true);
 }
 
 int Feature::generateIndex1(const simple_state&s, int color, bool flip){

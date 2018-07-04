@@ -8,7 +8,8 @@
 
 class Feature {
 public:
-	Feature() : {
+	Feature(){
+		length = 22;
 		weight = new float[(1 << 26)];
 	}
 	virtual ~Feature() { delete[] weight; }
@@ -98,6 +99,7 @@ private:
     int getDiamondIndex(const int diamond[2][7], int color, bool flip);
 	int generateIndex2(const simple_state &s);
 	float* weight;
+	size_t length;
 };
 
 #endif
