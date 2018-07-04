@@ -83,7 +83,6 @@ public:
 
 	float* alloc(size_t num) {
 		size_t total = 0;
-		std::cerr << sizeof(float) << std::endl;
 		size_t limit = (1 << 30); // 1G memory
 		try {
 			total += 1 << num;

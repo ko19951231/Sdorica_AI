@@ -75,9 +75,7 @@ int main()
                     s = dup_game.get_simple_state();
                     s.set_reward(rew);
                     if (!dup_game.player_dead() && (rew < 100)) {
-                        cout << "1" << endl;
 				        s.set_value(s.get_reward() + feature.estimate(dup_game.get_simple_state()));
-				        cout << "2" << endl;
                         if (s.get_value() > maximum){
                             best_slide=j;
                             best_object=idx;
