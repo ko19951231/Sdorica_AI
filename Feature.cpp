@@ -2,23 +2,23 @@
 
 float Feature::estimate(simple_state& s){
     
-    s.weight_Index[0] = generateIndex(s, 0);
-    s.weight_Index[1] = generateIndex(s, 1);
-    s.weight_Index[2] = generateIndex(s, 2);
+    s.weight_Index[0] = generateIndex(s.diamond, 0);
+    s.weight_Index[1] = generateIndex(s.diamond, 1);
+    s.weight_Index[2] = generateIndex(s.diamond, 2);
     //flip the diamond
     for(int i = 0; i < 7 ; i++){
         int t = s.diamond[0][i];
-        diamond[0][i] = diamond[1][i];
-        diamond[1][i] = t;
+        s.diamond[0][i] = s.diamond[1][i];
+        s.diamond[1][i] = t;
     }
-    s.weight_Index[4] = generateIndex(s, 0);
-    s.weight_Index[5] = generateIndex(s, 1);
-    s.weight_Index[6] = generateIndex(s, 2);
+    s.weight_Index[4] = generateIndex(s.diamond, 0);
+    s.weight_Index[5] = generateIndex(s.diamond, 1);
+    s.weight_Index[6] = generateIndex(s.diamond, 2);
     //flip the diamond back
     for(int i = 0; i < 7 ; i++){
         int t = s.diamond[0][i];
-        diamond[0][i] = diamond[1][i];
-        diamond[1][i] = t;
+        s.diamond[0][i] = s.diamond[1][i];
+        s.diamond[1][i] = t;
     }
 
     float value = 0;
@@ -65,7 +65,7 @@ int Feature::generateIndex(simple_state &s){
     return index;
 }
 
-int Feature::generateIndex(const simple_state&s, int color){
+int Feature::generateIndex(simple_state&s, int color){
     int index = 0;
     //Get the specific diamond index
     index = getDiamondIndex(s.diamond, color) << 18;
@@ -92,7 +92,7 @@ int Feature::generateIndex(const simple_state&s, int color){
     return index;
 }
 
-int Feature::getDiamondIndex(const int diamond[2][7], int color){
+int Feature::getDiamondIndex(int diamond[2][7], int color){
     //diamond: 0 for yellow, 1 for purple, 2 for white
     //we choose only one color to reduce the memory
     int index = 0;
