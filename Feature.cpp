@@ -2,7 +2,8 @@
 
 float Feature::estimate(const simple_state& s){
     
-    int* index = generateIndex(s);
+    int index[6];
+    generateIndex(s, index);
     float value = 0;
     for(int i = 0 ; i < 6; i++)
         value += weight[index[i]];
@@ -23,16 +24,14 @@ float Feature::update(const simple_state& s, float u){
     return value;
 }
 
-int* Feature::generateIndex(const simple_state &s){
+void Feature::generateIndex(const simple_state &s, int *index){
 
-    int weight_Index[6];
-    weight_Index[0] = generateIndex(s, 0, false);
-    weight_Index[1] = generateIndex(s, 1, false);
-    weight_Index[2] = generateIndex(s, 2, false);
-    weight_Index[4] = generateIndex(s, 0, true);
-    weight_Index[5] = generateIndex(s, 1, true);
-    weight_Index[6] = generateIndex(s, 2, true);
-    return weight_Index;
+    index[0] = generateIndex(s, 0, false);
+    index[1] = generateIndex(s, 1, false);
+    index[2] = generateIndex(s, 2, false);
+    index[4] = generateIndex(s, 0, true);
+    index[5] = generateIndex(s, 1, true);
+    index[6] = generateIndex(s, 2, true);
 }
 
 int Feature::generateIndex(const simple_state&s, int color, bool flip){

@@ -95,7 +95,7 @@ public:
 		return NULL;
 	}
 private:
-    int* generateIndex(const simple_state &s);
+    void generateIndex(const simple_state &s, int *index);
 	int generateIndex(const simple_state &s, int color, bool flip);
     int getDiamondIndex(const int diamond[2][7], int color, bool flip);
 	size_t length;
