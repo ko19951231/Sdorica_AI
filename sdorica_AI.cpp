@@ -57,7 +57,7 @@ int main()
             //The enemy attack first
             bool gameOver = game.enemy_move();
             if(gameOver) break;
-            game.print();
+            //game.print();
             //Input the sliding value
             vector<tiles> next_move = game.get_available_moves();
             //Select the best slide and object
@@ -94,7 +94,7 @@ int main()
             //Return value
             //The reward will be returned after one round
             int point = game.player_move(r, c, best_object);    
-            game.print(); 
+            //game.print(); 
             //Add the reward
             total_point += point;      
             //debug
