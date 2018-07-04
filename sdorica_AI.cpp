@@ -110,7 +110,7 @@ int main()
         cout << "Episode " << i << " Total Point: " << total_point << endl;
         if(total_point > best_score)
             best_score = total_point;
-        if(i > (num_episode - 1000))
+        if(i >= (num_episode - 1000))
             avg_score += total_point;
         if(i % 1000 == 0)
             rewardFile << i << "," << total_point << endl;
@@ -120,7 +120,7 @@ int main()
     rewardFile.close();
 
     cout << "The best score is: " << before_score << endl;
-    cout << "The average score is: " << avg_score << endl;
+    cout << "The average score is: " << avg_score/1000.0 << endl;
     //Save 
     if(save){
         ofstream out;
