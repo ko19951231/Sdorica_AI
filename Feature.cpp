@@ -5,13 +5,13 @@ using namespace std;
 float Feature::estimate(const simple_state& s){
     int index = generateIndex(s);
     cout << index << endl;
-    return operator[](index);
+    return weight[index];
 }
 
 float Feature::update(const simple_state& s, float u){
     int index = generateIndex(s);
-    operator[](index) += u;
-    return operator[](index);
+    weight[index] += u;
+    return weight[index];
 }
 
 int Feature::generateIndex(const simple_state &s){
