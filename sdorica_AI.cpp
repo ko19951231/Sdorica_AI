@@ -26,11 +26,13 @@ int main()
     string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
     fstream rewardFile;
     rewardFile.open(rewardFilename.c_str(), std::ios::out);
+    cout << "Start to train" << endl;
     //Game training setup
     state game;
     state dup_game;
     Trainer trainer;
     Feature feature;
+    cout << "init finised" << endl;
     //load Feature data
     if(load){
         ifstream in;
