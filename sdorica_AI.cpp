@@ -71,7 +71,7 @@ int main()
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
                 for(int idx=0;idx<3;idx++){
-                    up_game.assign(game);
+                    dup_game.assign(game);
                     //reward should be the estimate value + reward
                     int rew=dup_game.player_move(r, c, idx);
                     if ((!dup_game.player_dead()) && (dup_game.game_continue()) && (move_amount <= 3000)) {
