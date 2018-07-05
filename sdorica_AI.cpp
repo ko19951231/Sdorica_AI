@@ -48,6 +48,7 @@ int main()
     }
     int best_score = 0;
     float avg_score = 0;
+    int best_episode = 0;
     srand(time(NULL));
     for(int i = 0 ; i < num_episode + test_threshold ; i++){
         int total_point = 0;
@@ -130,8 +131,11 @@ int main()
                 game.update();
         }
         cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << endl;
-        if(total_point > best_score)
+        if(total_point > best_score){
             best_score = total_point;
+            best_episode = i;
+        }
+            
         if(i >= (num_episode - 1000))
             avg_score += total_point;
         if(i % 1000 == 0)
@@ -140,7 +144,7 @@ int main()
     }
     rewardFile.close();
 
-    cout << "The best score is: " << best_score << endl;
+    cout << "The best score is: " << best_score << " appear in episode#" << best_episode << endl;
     cout << "The average score is: " << avg_score/1000.0 << endl;
     //Save 
     if(save){
