@@ -117,13 +117,13 @@ int main()
             if(game.get_point() == 0)
                 game.update();
         }
-        cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Finished: " << finished << endl;
+        cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << this->game.get_stage() << endl;
         if(total_point > best_score)
             best_score = total_point;
         if(i >= (num_episode - 1000))
             avg_score += total_point;
         if(i % 1000 == 0)
-            rewardFile << i << "," << total_point << "," << move_amount << "," << finished << endl;
+            rewardFile << i << "," << total_point << "," << move_amount << "," << this->game.get_stage() << endl;
         trainer.close_episode(feature, alpha);
     }
     rewardFile.close();

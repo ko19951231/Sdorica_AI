@@ -50,7 +50,7 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
     else{
         this->point = 0;
     }
-    return hurt;
+    return this->point;
 }
 bool state::enemy_move()
 {
