@@ -120,11 +120,14 @@ int main()
             //Return value
             //The reward will be returned after one round
             //int point = game.player_move(r, c, best_object);  
-            game.player_move(r, c, best_object);  
+            
+            //Add to the trainer
             simple_state s = game.get_simple_state();
             s.set_value(best_value);
             s.set_reward(best_reward);
             trainer.add_state(s); 
+
+            game.player_move(r, c, best_object);  
             //Add the reward
             if(game.get_point() >= 0)
                 total_point += game.get_point();     
