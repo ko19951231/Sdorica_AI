@@ -81,20 +81,13 @@ int main()
                         //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
                         if (((int)est + rew) > maximum){
+                            if(est > 1e+05)
+                                cout << est << " " << i << " " << move_amount << endl;
                             best_slide=j;
                             best_object=idx;
                             maximum = rew + est;
                             best_reward = rew;
                             best_value = est + rew;
-                        }
-                        else if(((int)est + rew) == maximum){
-                            if(r.size() > next_move[best_slide].r.size()){
-                                best_slide=j;
-                                best_object=idx;
-                                maximum = rew + est;
-                                best_reward = rew;
-                                best_value = est + rew;
-                            }
                         }
 			        } else {
 				        best_reward = rew;
