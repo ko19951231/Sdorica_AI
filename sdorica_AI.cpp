@@ -77,8 +77,8 @@ int main()
                         //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
                         if (((int)est + rew) > maximum){
-                            if((est + rew) > 1e+05)
-                                cout << i << " " << move_amount << " " << est << " " << rew << endl;
+                            //if((est + rew) > 1e+05)
+                            //    cout << i << " " << move_amount << " " << est << " " << rew << endl;
                             best_slide=j;
                             best_object=idx;
                             maximum = rew + est;

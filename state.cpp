@@ -48,7 +48,6 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         return reward;
     }
     return 0;
-        
 }
 bool state::enemy_move()
 {
