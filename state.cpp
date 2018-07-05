@@ -47,6 +47,9 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         this->point = reward;
         move_amount = 0;
     }
+    else{
+        this->point = 0;
+    }
     return hurt;
 }
 bool state::enemy_move()
