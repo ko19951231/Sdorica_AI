@@ -98,7 +98,7 @@ int main()
                 best_slide= rand() % next_move.size();
                 best_object= rand() % 3;
                 dup_game.assign(game);
-                best_reward = rew=dup_game.player_move(next_move[best_slide].r, next_move[best_slide].c, best_object);
+                best_reward = dup_game.player_move(next_move[best_slide].r, next_move[best_slide].c, best_object);
                 best_value = best_reward + feature.estimate(dup_game.get_simple_state());
             }
             //Assign to the real one
