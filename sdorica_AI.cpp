@@ -69,7 +69,7 @@ int main()
             int best_object=0;
             int maximum=-1;
             float best_value = 0;
-            int best_reward = 0;
+            float best_reward = 0;
             if(i % 100 != 0)
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
@@ -95,7 +95,7 @@ int main()
                             if (((int)est + rew) > maximum){
                                 best_slide=j;
                                 best_object=idx;
-                                maximum = rew + est;
+                                maximum = ((int)est + rew);
                                 best_reward = rew;
                                 best_value = est + rew;
                             }
