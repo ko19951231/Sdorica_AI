@@ -49,6 +49,7 @@ int main()
     srand(time(NULL));
     for(int i = 0 ; i < num_episode ; i++){
         int total_point = 0;
+        int finished = 0;
         game.init();
         dup_game.init();
         trainer.open_episode();
@@ -104,20 +105,23 @@ int main()
             total_point += point;      
             //The 5th state will give 100 for bonus
             //So if the point > 100, means that an episode is over
-            if(point >= 100) break;
+            if(point >= 100) {
+                finished = 1;
+                break;
+            }
 
             //update the CD and "state" after one round
             //don't update when in new stage
             if(point == 0)
                 game.update();
         }
-        cout << "Episode " << i << " Total Point: " << total_point << endl;
+        cout << "Episode " << i << " Total Point: " << total_point << " Finished: " << finished << endl;
         if(total_point > best_score)
             best_score = total_point;
         if(i >= (num_episode - 1000))
             avg_score += total_point;
         if(i % 1000 == 0)
-            rewardFile << i << "," << total_point << endl;
+            rewardFile << i << "," << total_point << "," << finished << endl;
         trainer.close_episode(feature, alpha);
     }
     rewardFile.close();
