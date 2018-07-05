@@ -176,7 +176,7 @@ void EnemyState::update(){
         if(this->minusHarm[i] > 0) this->minusHarm[i]--;
         if(this->strengthen[i] > 0) this->strengthen[i]--;
     }
-    if(!isDead()) this->CD--;
+    if(!isDead() && (this->CD > 0)) this->CD--;
     
     //recover hp with shield value (盾轉)
     float recover_hp = 0;
