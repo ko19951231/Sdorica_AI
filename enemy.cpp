@@ -82,7 +82,7 @@ void Enemy::attack(){
     for(int i = 0 ; i < init_amount; i++){
         //if the enemy's CD is downcounting to 0
         //Add back the CD time and attack
-        if((this->enemies[i].getCD() == 0)&& !this->enemies[i].isDead()){
+        if((this->enemies[i].getCD() <= 0) && !this->enemies[i].isDead()){
             if(this->enemies[i].getKind() == 0){
                 float atk = this->enemies[i].attack();
                 this->game->PlayerHurtFirst(atk);
