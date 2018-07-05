@@ -91,8 +91,8 @@ int main()
                             }
                         }
                         else{
-                            cout << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
-                            if (((int)est + rew) > maximum){
+                            //cout << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
+                            if (((int)est + rew) < maximum){
                                 best_slide=j;
                                 best_object=idx;
                                 maximum = ((int)est + rew);
