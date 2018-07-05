@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 50000;
+    int num_episode = 2000000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -106,13 +106,13 @@ int main()
                 total_point += game.get_point();      
             move_amount++;
             //After the 5th stage, the game over
-            /*if(!game.game_continue()) {
+            if(!game.game_continue()) {
                 finished = 1;
                 break;
-            }*/
-            if(game.get_stage() == 4){
-                break;
             }
+            /*if(game.get_stage() == 4){
+                break;
+            }*/
             //update the CD and "state" after one round
             //don't update when in new stage
             if(game.get_point() == 0)
