@@ -76,9 +76,9 @@ int main()
                     if (!dup_game.player_dead() && (rew < 100)) {
                         //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
-                        if ((est + rew) >= maximum){
-                            if((rew) > 0)
-                                cout << est << " "  << (rew) << endl;
+                        if (((int)est + rew) >= maximum){
+                            if((est + rew) > 1e+05)
+                                cout << i << " " << est << " "  << (rew) << endl;
                             best_slide=j;
                             best_object=idx;
                             maximum = rew + est;
