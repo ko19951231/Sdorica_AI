@@ -53,8 +53,8 @@ int main()
         int total_point = 0;
         int finished = 0;
         int move_amount = 0;
-        for(int i = 0 ; i < 4 ; i++)
-            move[i] = 0;
+        for(int j = 0 ; j < 4 ; j++)
+            move[j] = 0;
         game.init();
         dup_game.init();
         trainer.open_episode();
@@ -124,8 +124,8 @@ int main()
         }
         cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Finised: " << finished << endl;
         cout << "Movement: ";
-        for(int i = 0 ; i < 4 ; i++)
-            cout << (i + 1) << ":" << move[i] << " ";
+        for(int j = 0 ; j < 4 ; j++)
+            cout << (j + 1) << ":" << move[j] << " ";
         cout << endl;
         if(total_point > best_score){
             best_score = total_point;
