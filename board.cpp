@@ -24,13 +24,13 @@ int Board::slide(vector<int> r, vector<int> c) // a sequence of points to slide
         daimond[r[i]][c[i]]=-1;
     }
     //push back the diamond
-    /*for(int r=0;r<2;r++){
+    for(int r=0;r<2;r++){
         vector<int> new_c;
         for(int c=0;c<7;c++){
             if(daimond[r][c]!=-1) new_c.push_back(daimond[r][c]);
         }
         for(int c=0;c<new_c.size();c++) daimond[r][c]=new_c[c];
-    }*/
+    }
 
     return color;            // return the color
 }
