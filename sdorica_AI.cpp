@@ -106,7 +106,7 @@ int main()
                 total_point += point;      
             move_amount++;
             //After the 5th stage, the game over
-            if(!game->game_continue()) {
+            if(!game.game_continue()) {
                 finished = 1;
                 break;
             }
