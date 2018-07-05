@@ -77,7 +77,7 @@ int main()
                         dup_game.assign(game);
                         //reward should be the estimate value + reward
                         int rew=dup_game.player_move(r, c, idx);
-                        if ((!dup_game.player_dead()) && (dup_game.game_continue())) {
+                        if ((!dup_game.player_dead()) && (dup_game.game_continue()) && (move_amount =< 3000)) {
                             //estimate the value after the movement
                             float est = feature.estimate(dup_game.get_simple_state());
                             if (((int)est + rew) > maximum){
@@ -116,6 +116,8 @@ int main()
             if(game.get_point() >= 0)
                 total_point += game.get_point();      
             move_amount++;
+            if(move_amount > 3000)
+                break;
             //After the 5th stage, the game over
             if(!game.game_continue()) {
                 finished = 1;
