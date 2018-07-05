@@ -105,8 +105,6 @@ int main()
             if(game.get_point() >= 0)
                 total_point += game.get_point();      
             move_amount++;
-            if(move_amount > 3000)
-                break;
             //After the 5th stage, the game over
             /*if(!game.game_continue()) {
                 finished = 1;
