@@ -69,7 +69,7 @@ int main()
             int maximum=-1;
             float best_value = 0;
             int best_reward = 0;
-            if(i < test_threshold){
+            if(i > test_threshold){
                 for(int j=0;j<next_move.size();j++){
                     vector<int> r=next_move[j].r;
                     vector<int> c=next_move[j].c;
@@ -100,7 +100,6 @@ int main()
                 dup_game.assign(game);
                 best_reward = dup_game.player_move(next_move[best_slide].r, next_move[best_slide].c, best_object);
                 best_value = best_reward + feature.estimate(dup_game.get_simple_state());
-                cout << next_move[best_slide].r.size() << " " << best_reward << " " << best_value << endl;
             }
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
