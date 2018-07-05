@@ -32,6 +32,7 @@ public:
     void enemyAddEasyHarmSelected(int round);
     void assign(state& s);
     bool player_dead(){return player.player_dead();}
+    bool game_continue(){return this->gameContinue;}
     vector<tiles> get_available_moves();
     simple_state get_simple_state();
 private:
@@ -39,5 +40,6 @@ private:
     Player player;
     Enemy enemy;
     int move_amount;
+    bool gameContinue;
 };
 #endif

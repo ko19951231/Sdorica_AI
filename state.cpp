@@ -8,6 +8,7 @@ void state::init()
     this->player.init(this);
     this->enemy.init(0, this);
     this->move_amount = 0;
+    this->gameContinue = true;
 }
 int state::player_move(vector<int> r, vector<int> c, int idx)
 {
@@ -41,8 +42,8 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
     if(this->enemy.getAmount() == 0){
         int reward = 100 - move_amount;
         //if(reward < 0) reward = 0;
-        bool gameContinue = this->enemy.nextStage();
-        if(!gameContinue) reward += 100;
+        this->gameContinue = this->enemy.nextStage();
+        if(!this->gameContinue) reward += 100;
         move_amount = 0;
         return reward;
     }
@@ -154,6 +155,7 @@ simple_state state::get_simple_state(){
 
 void state::assign(state& s){
     this->move_amount = s.move_amount;
+    this->gameContinue = s.gameContinue;
     this->board.assign(s.board);
     this->player.assign(s.player);
     this->enemy.assign(s.enemy);

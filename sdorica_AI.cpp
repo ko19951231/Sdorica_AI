@@ -58,7 +58,6 @@ int main()
             //The enemy attack first
             bool gameOver = game.enemy_move();
             if(gameOver) break;
-            //game.print();
             //Input the sliding value
             vector<tiles> next_move = game.get_available_moves();
             //Select the best slide and object
@@ -74,7 +73,7 @@ int main()
                     dup_game.assign(game);
                     //reward should be the estimate value + reward
                     int rew=dup_game.player_move(r, c, idx);
-                    if (!dup_game.player_dead() && (rew < 100)) {
+                    if (!dup_game.player_dead() && (dup_game.game_continue())) {
                         //estimate the value after the movement
                         cout << "M: " << move_amount << " ";
                         float est = feature.estimate(dup_game.get_simple_state());
@@ -102,14 +101,12 @@ int main()
             s.set_value(best_value);
             s.set_reward(best_reward);
             trainer.add_state(s); 
-            //game.print(); 
             //Add the reward
             if(point >= 0)
                 total_point += point;      
             move_amount++;
-            //The 5th state will give 100 for bonus
-            //So if the point > 100, means that an episode is over
-            if(point >= 100) {
+            //After the 5th stage, the game over
+            if(!game->game_continue()) {
                 finished = 1;
                 break;
             }
