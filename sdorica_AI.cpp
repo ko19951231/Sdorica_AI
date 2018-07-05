@@ -50,6 +50,7 @@ int main()
     for(int i = 0 ; i < num_episode ; i++){
         int total_point = 0;
         int finished = 0;
+        int move_amount = 0;
         game.init();
         dup_game.init();
         trainer.open_episode();
@@ -77,8 +78,8 @@ int main()
                         //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
                         if (((int)est + rew) >= maximum){
-                            if((est + rew) > 1e+05)
-                                cout << i << " " << est << " "  << (rew) << endl;
+                            if((est + rew) > 0)
+                                cout << move_amount << " " << est << " "  << (rew) << endl;
                             best_slide=j;
                             best_object=idx;
                             maximum = rew + est;
@@ -117,13 +118,13 @@ int main()
             if(point == 0)
                 game.update();
         }
-        cout << "Episode " << i << " Total Point: " << total_point << " Finished: " << finished << endl;
+        cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Finished: " << finished << endl;
         if(total_point > best_score)
             best_score = total_point;
         if(i >= (num_episode - 1000))
             avg_score += total_point;
         if(i % 1000 == 0)
-            rewardFile << i << "," << total_point << "," << finished << endl;
+            rewardFile << i << "," << total_point << "," << move_amount << "," << finished << endl;
         trainer.close_episode(feature, alpha);
     }
     rewardFile.close();
