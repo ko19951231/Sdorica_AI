@@ -123,7 +123,7 @@ int main()
             best_episode = i;
         }
             
-        if(i >= (num_episode + test_threshold- 1000))
+        if(i >= (num_episode - 1000))
             avg_score += total_point;
         if(i % 1000 == 0)
             rewardFile << i << "," << total_point << "," << move_amount << "," << game.get_stage() << "," << finished << endl;
