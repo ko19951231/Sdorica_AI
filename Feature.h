@@ -11,6 +11,9 @@ public:
 	Feature(){
 		length = 22;
 		weight = new float[(1 << 26)];
+		for(int i = 0 ; i < (1 << 26) ; i++){
+			weight[i] = 0;
+		}
 	}
 	virtual ~Feature() { delete[] weight; }
 	float& operator[] (size_t i) { return weight[i];}
