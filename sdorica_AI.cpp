@@ -22,6 +22,8 @@ int main()
     bool save = true;
     // set the learning parameters
 	float alpha = 0.1;
+    //testing threshold
+    int test_threshold = 1000;
     //recording data
     string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
     fstream rewardFile;
@@ -47,7 +49,7 @@ int main()
     int best_score = 0;
     float avg_score = 0;
     srand(time(NULL));
-    for(int i = 0 ; i < num_episode ; i++){
+    for(int i = 0 ; i < num_episode + test_threshold ; i++){
         int total_point = 0;
         int finished = 0;
         int move_amount = 0;
@@ -66,39 +68,38 @@ int main()
             int maximum=-1;
             float best_value = 0;
             int best_reward = 0;
-            for(int j=0;j<next_move.size();j++){
-                vector<int> r=next_move[j].r;
-                vector<int> c=next_move[j].c;
-                for(int idx=0;idx<3;idx++){
-                    dup_game.assign(game);
-                    //reward should be the estimate value + reward
-                    int rew=dup_game.player_move(r, c, idx);
-                    if ((!dup_game.player_dead()) && (dup_game.game_continue())) {
-                        //estimate the value after the movement
-                        float est = feature.estimate(dup_game.get_simple_state());
-                        if (((int)est + rew) > maximum){
-                            best_slide=j;
-                            best_object=idx;
-                            maximum = rew + est;
-                            best_reward = rew;
-                            best_value = est + rew;
-                        }
-                        else if(((int)est + rew) == maximum){
-                            if(r.size() > next_move[best_slide].r.size()){
+            if(i < test_threshold){
+                for(int j=0;j<next_move.size();j++){
+                    vector<int> r=next_move[j].r;
+                    vector<int> c=next_move[j].c;
+                    for(int idx=0;idx<3;idx++){
+                        dup_game.assign(game);
+                        //reward should be the estimate value + reward
+                        int rew=dup_game.player_move(r, c, idx);
+                        if ((!dup_game.player_dead()) && (dup_game.game_continue())) {
+                            //estimate the value after the movement
+                            float est = feature.estimate(dup_game.get_simple_state());
+                            if (((int)est + rew) > maximum){
                                 best_slide=j;
                                 best_object=idx;
                                 maximum = rew + est;
                                 best_reward = rew;
                                 best_value = est + rew;
                             }
-                        }
-			        } else {
-				        best_reward = rew;
-                        best_value = -100;
-			        }
+			            } else {
+				            best_reward = rew;
+                            best_value = -100;
+			            }
+                    }
                 }
             }
-
+            else{
+                best_slide = rand() % next_move.size();
+                best_object = rand() % 3;
+                dup_game.assign(game);
+                best_reward = dup_game.player_move(next_move[best_slide].r, next_move[best_slide].c, best_object);
+                best_value = best_reward + feature.estimate(dup_game.get_simple_state());
+            }
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
             vector<int> c=next_move[best_slide].c;   
