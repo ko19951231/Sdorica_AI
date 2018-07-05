@@ -108,8 +108,11 @@ int main()
             if(move_amount > 3000)
                 break;
             //After the 5th stage, the game over
-            if(!game.game_continue()) {
+            /*if(!game.game_continue()) {
                 finished = 1;
+                break;
+            }*/
+            if(game.get_stage() == 4){
                 break;
             }
             //update the CD and "state" after one round
