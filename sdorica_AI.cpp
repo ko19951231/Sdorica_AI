@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 30000;
+    int num_episode = 100000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -23,7 +23,7 @@ int main()
     // set the learning parameters
 	float alpha = 0.1;
     //testing threshold
-    int test_threshold = 1000;
+    int test_threshold = 5000;
     //recording data
     string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
     fstream rewardFile;
