@@ -106,6 +106,7 @@ int main()
             //game.print(); 
             //Add the reward
             total_point += point;      
+            move_amount++;
             //The 5th state will give 100 for bonus
             //So if the point > 100, means that an episode is over
             if(point >= 100) {
