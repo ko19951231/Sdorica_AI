@@ -109,7 +109,9 @@ int main()
                 finished = 1;
                 break;
             }
-
+            if(move_amount > 3000){
+                game.print();
+            }
             //update the CD and "state" after one round
             //don't update when in new stage
             if(point == 0)
