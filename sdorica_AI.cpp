@@ -81,7 +81,7 @@ int main()
                             best_object=idx;
                             maximum = rew + est;
                             best_reward = rew;
-                            best_value = est;
+                            best_value = est + rew;
                         }        
 			        } else {
 				        best_reward = rew;
@@ -110,10 +110,10 @@ int main()
                 finished = 1;
                 break;
             }
-            if(move_amount > 1500){
+            /*if(move_amount > 1500){
                 game.print();
                 cout << next_move[best_slide].r.size()  << " " << best_reward << " " << best_value<< endl;
-            }
+            }*/
             //update the CD and "state" after one round
             //don't update when in new stage
             if(game.get_point() == 0)
