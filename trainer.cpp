@@ -1,6 +1,8 @@
 #include "trainer.h"
 #include "simple_state.h"
 #include "Feature.h"
+#include<iostream>
+using namespace std;
 
 void Trainer::open_episode()
 {
