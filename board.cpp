@@ -30,6 +30,7 @@ int Board::slide(vector<int> r, vector<int> c) // a sequence of points to slide
             if(daimond[r][c]!=-1) new_c.push_back(daimond[r][c]);
         }
         for(int c=0;c<new_c.size();c++) daimond[r][c]=new_c[c];
+        for(int c=new_c.size();c<7;c++) daimond[r][c]=-1;
     }
 
     return color;            // return the color

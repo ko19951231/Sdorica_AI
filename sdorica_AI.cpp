@@ -57,9 +57,6 @@ int main()
         while(1){
             //The enemy attack first
             bool gameOver = game.enemy_move();
-            if(move_amount > 3000){
-                game.print();
-            }
             if(gameOver) break;
             //Input the sliding value
             vector<tiles> next_move = game.get_available_moves();
@@ -104,7 +101,6 @@ int main()
             s.set_reward(best_reward);
             trainer.add_state(s); 
             if(move_amount > 3000){
-                cout << r.size() << endl;
                 game.print();
             }
             //Add the reward
