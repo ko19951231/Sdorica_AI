@@ -23,7 +23,6 @@ float Feature::update(const simple_state& s, float u){
 
     float value = 0;
     float u_spilt = u / 7.0;
-    cout << u_spilt << endl;
     
     //player's character feature
     int index[2];

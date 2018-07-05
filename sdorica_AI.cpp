@@ -21,7 +21,7 @@ int main()
     bool load = false;
     bool save = true;
     // set the learning parameters
-	float alpha = 0.1;
+	float alpha = 0.2;
     //recording data
     string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
     fstream rewardFile;
@@ -76,9 +76,9 @@ int main()
                     if (!dup_game.player_dead() && (rew < 100)) {
                         //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
-                        if ((est + rew) > maximum){
-                            //if((est + rew) > 0)
-                            //    cout << est << " "  << (rew) << endl;
+                        if ((est + rew) >= maximum){
+                            if((rew) > 0)
+                                cout << est << " "  << (rew) << endl;
                             best_slide=j;
                             best_object=idx;
                             maximum = rew + est;
