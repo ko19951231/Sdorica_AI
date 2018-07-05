@@ -100,6 +100,7 @@ int main()
                 dup_game.assign(game);
                 best_reward = dup_game.player_move(next_move[best_slide].r, next_move[best_slide].c, best_object);
                 best_value = best_reward + feature.estimate(dup_game.get_simple_state());
+                cout << next_move[best_slide].r.size() << " " << best_reward << " " << best_value << endl;
             }
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
@@ -116,10 +117,6 @@ int main()
             if(game.get_point() >= 0)
                 total_point += game.get_point();      
             move_amount++;
-            if(move_amount > 1500){
-                game.print();
-                cout << next_move[best_slide].r.size() << endl;
-            }
             if(move_amount > 3000)
                 break;
             //After the 5th stage, the game over
