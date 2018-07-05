@@ -17,6 +17,7 @@ void Trainer::close_episode(Feature& feature, float alpha)
     //train
     //Update the value in the vector
     float exact = path.back().get_reward();
+	cout << "f " << exact << " ";
 	for (path.pop_back() /* terminal state */; path.size(); path.pop_back()) {
 		simple_state& move = path.back();
 		//move.value(): reward + estimate(afterState)
