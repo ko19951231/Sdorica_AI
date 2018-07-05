@@ -33,6 +33,8 @@ public:
     void assign(state& s);
     bool player_dead(){return player.player_dead();}
     bool game_continue(){return this->gameContinue;}
+    int get_point(){return this->point;}
+    int get_stage(){return this->enemy.getStage();}
     vector<tiles> get_available_moves();
     simple_state get_simple_state();
 private:
@@ -41,5 +43,6 @@ private:
     Enemy enemy;
     int move_amount;
     bool gameContinue;
+    int point;
 };
 #endif

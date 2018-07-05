@@ -97,25 +97,24 @@ int main()
             vector<int> c=next_move[best_slide].c;   
             //Return value
             //The reward will be returned after one round
-            int point = game.player_move(r, c, best_object);  
+            //int point = game.player_move(r, c, best_object);  
+            game.player_move(r, c, best_object);  
             simple_state s = game.get_simple_state();
             s.set_value(best_value);
             s.set_reward(best_reward);
             trainer.add_state(s); 
             //Add the reward
-            if(point >= 0)
-                total_point += point;      
+            if(game.get_point() >= 0)
+                total_point += game.get_point();      
             move_amount++;
             //After the 5th stage, the game over
-            /*if(!game.game_continue()) {
+            if(!game.game_continue()) {
                 finished = 1;
                 break;
-            }*/
-            if((point > 0) || (move_amount > 100))
-                break;
+            }
             //update the CD and "state" after one round
             //don't update when in new stage
-            if(point == 0)
+            if(game.get_point() == 0)
                 game.update();
         }
         cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Finished: " << finished << endl;

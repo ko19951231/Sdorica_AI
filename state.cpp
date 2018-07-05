@@ -20,21 +20,21 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
     float hurt = 0;
     if(color==0){
         if(!this->player.pon_isDead()){
-            this->player.pon_attack(count, idx);
+            hurt = this->player.pon_attack(count, idx);
         }
         else
             this->player.pon_recover(count);
     }
     else if(color==1){
         if(!this->player.naya_isDead()){
-            this->player.naya_attack(count, idx);
+            hurt = this->player.naya_attack(count, idx);
         }    
         else   
             this->player.naya_recover(count);
     }
     else if(color==2){
         if(!this->player.dica_isDead()){
-            this->player.dica_attack(count, idx);
+            hurt = this->player.dica_attack(count, idx);
         }    
         else
             this->player.dica_recover(count);
@@ -44,10 +44,10 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         //if(reward < 0) reward = 0;
         this->gameContinue = this->enemy.nextStage();
         if(!this->gameContinue) reward += 100;
+        this->point = reward;
         move_amount = 0;
-        return reward;
     }
-    return 0;
+    return hurt;
 }
 bool state::enemy_move()
 {
@@ -155,6 +155,7 @@ simple_state state::get_simple_state(){
 void state::assign(state& s){
     this->move_amount = s.move_amount;
     this->gameContinue = s.gameContinue;
+    this->point = s.point;
     this->board.assign(s.board);
     this->player.assign(s.player);
     this->enemy.assign(s.enemy);

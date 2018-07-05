@@ -16,7 +16,7 @@ void Player::init(state *s){
 void Player::setSelectedIndex(int index){
     this->selectedCharacterIndex = index;
 }
-void Player::pon_attack(int diamond, int n)
+float Player::pon_attack(int diamond, int n)
 {
     //Select an enemy to attack
     if(diamond != 1){
@@ -33,8 +33,9 @@ void Player::pon_attack(int diamond, int n)
             atk_value /= 2.0;
         this->game->enemyHurtSelected(atk_value);
     }    
+    return atk_value;
 }
-void Player::naya_attack(int diamond, int n)
+float Player::naya_attack(int diamond, int n)
 {
     //Select an enemy to attack
     this->game->setEnemySelectedIndex(n);
@@ -51,8 +52,9 @@ void Player::naya_attack(int diamond, int n)
     this->game->enemyHurtSelected(atk_value);
     if(diamond == 1)
         this->game->enemyAddEasyHarmFirst(3);
+    return atk_value;
 }
-void Player::dica_attack(int diamond, int n)
+float Player::dica_attack(int diamond, int n)
 {
     float atk_value = this->dica.attack(diamond);
 
@@ -63,11 +65,12 @@ void Player::dica_attack(int diamond, int n)
         PlayerState *p = getSelectedCharater();
         p->heal(atk_value);
         p->addStrengthen(3);
-        
+        return 0;
     }
     else if(diamond==2){
         this->game->setEnemySelectedIndex(n);
         this->game->enemyHurtSelected(atk_value);
+        return atk_value;
     }
     else if(diamond==4){     //choose the one who has the least HP to heal
         atk_value /= 2.0;
@@ -78,6 +81,7 @@ void Player::dica_attack(int diamond, int n)
             this->naya.heal(atk_value);
         else if(leastHP_id == 2)
             this->dica.heal(atk_value);
+        return 0;
     }
 }
 
