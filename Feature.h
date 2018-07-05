@@ -12,7 +12,7 @@ public:
 		length = 22;
 		weight = new float[(1 << 26)];
 		for(int i = 0 ; i < (1 << 26) ; i++){
-			weight[i] = rand()%10;
+			weight[i] = rand()%100;
 		}
 	}
 	virtual ~Feature() { delete[] weight; }
