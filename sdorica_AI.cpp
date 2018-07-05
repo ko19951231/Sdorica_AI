@@ -100,9 +100,6 @@ int main()
             s.set_value(best_value);
             s.set_reward(best_reward);
             trainer.add_state(s); 
-            if(move_amount > 3000){
-                game.print();
-            }
             //Add the reward
             if(point >= 0)
                 total_point += point;      
