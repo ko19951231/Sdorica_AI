@@ -81,13 +81,25 @@ int main()
                     if ((!dup_game.player_dead()) && (dup_game.game_continue()) && (move_amount <= 3000)) {
                         //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
-                        if (((int)est + rew) > maximum){
-                            best_slide=j;
-                            best_object=idx;
-                            maximum = rew + est;
-                            best_reward = rew;
-                            best_value = est + rew;
+                        if(i < 10000){
+                            if (rew > maximum){
+                                best_slide=j;
+                                best_object=idx;
+                                maximum = rew;
+                                best_reward = rew;
+                                best_value = est + rew;
+                            }
                         }
+                        else{
+                            if (((int)est + rew) > maximum){
+                                best_slide=j;
+                                best_object=idx;
+                                maximum = rew + est;
+                                best_reward = rew;
+                                best_value = est + rew;
+                            }
+                        }
+                        
 			        } else {
 				        best_reward = rew;
                         best_value = -100;
