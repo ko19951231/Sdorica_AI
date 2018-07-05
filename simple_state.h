@@ -31,12 +31,12 @@ public:
 
     //For training
     float estimate_value;
-    int reward;
+    float reward;
 
     void set_value(float v) {this->estimate_value = v;}
-    int get_value(){return this->estimate_value;}
-    void set_reward(int v){this->reward = reward;}
-    int get_reward(){return this->reward;}
+    float get_value(){return this->estimate_value;}
+    void set_reward(float v){this->reward = reward;}
+    float get_reward(){return this->reward;}
 };
 
 #endif

@@ -39,23 +39,28 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         else
             this->player.dica_recover(count);
     }
+    float reward = hurt;
     if(this->enemy.getAmount() == 0){
-        int reward = 100 - move_amount;
-        if(reward < 0) reward = 0;
+        this->point = 100 - move_amount;
+        if(this->point < 0) this->point = 0;
         this->gameContinue = this->enemy.nextStage();
-        if(!this->gameContinue) reward += 100;
-        this->point = reward;
+        reward += 10000;
+        if(!this->gameContinue) {
+            this->point += 100;
+            reward += 20000;
+        }
         move_amount = 0;
-        if(this->gameContinue)
+        /*if(this->gameContinue)
             return 100 * (get_stage() + 1) - 1;
         else
-            return 100 * (get_stage() + 1) + 100 - 1;
+            return 100 * (get_stage() + 1) + 100 - 1;*/
     }
     else{
         this->point = 0;
     }
-    return -1;
+    //return -1;
     //return this->point;
+    return reward;
 }
 bool state::enemy_move()
 {

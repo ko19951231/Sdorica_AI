@@ -23,7 +23,7 @@ int main()
     // set the learning parameters
 	float alpha = 0.1;
     //testing threshold
-    int test_threshold = 5000;
+    int test_threshold = 1000;
     //recording data
     string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
     fstream rewardFile;
