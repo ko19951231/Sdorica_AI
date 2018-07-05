@@ -112,6 +112,7 @@ int main()
             }
             if(move_amount > 1500){
                 game.print();
+                cout << next_move[best_slide].size() << endl;
             }
             //update the CD and "state" after one round
             //don't update when in new stage
