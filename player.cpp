@@ -29,8 +29,8 @@ float Player::pon_attack(int diamond, int n)
         this->pon.addMinusHarm(3);
     }
     else{
-        if(diamond == 4)
-            atk_value /= 2.0;
+        //if(diamond == 4)
+        //    atk_value /= 2.0;
         this->game->enemyHurtSelected(atk_value);
     }    
     return atk_value;
@@ -47,8 +47,8 @@ float Player::naya_attack(int diamond, int n)
         if(rand()/(float)RAND_MAX < 0.2)
             atk_value *= 2;
     }
-    if(diamond == 4)
-        atk_value /= 2.0;
+    //if(diamond == 4)
+    //    atk_value /= 2.0;
     this->game->enemyHurtSelected(atk_value);
     if(diamond == 1)
         this->game->enemyAddEasyHarmFirst(3);
@@ -73,7 +73,7 @@ float Player::dica_attack(int diamond, int n)
         return atk_value;
     }
     else if(diamond==4){     //choose the one who has the least HP to heal
-        atk_value /= 2.0;
+        //atk_value /= 2.0;
         int leastHP_id = findLeastHP();
         if(leastHP_id == 0)
             this->pon.heal(atk_value);

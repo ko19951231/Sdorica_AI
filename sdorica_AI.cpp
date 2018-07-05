@@ -47,11 +47,14 @@ int main()
     int best_score = 0;
     float avg_score = 0;
     int best_episode = 0;
+    int move[4] ={0};
     srand(time(NULL));
     for(int i = 0 ; i < num_episode ; i++){
         int total_point = 0;
         int finished = 0;
         int move_amount = 0;
+        for(int i = 0 ; i < 4 ; i++)
+            move[i] = 0;
         game.init();
         dup_game.init();
         trainer.open_episode();
@@ -103,7 +106,8 @@ int main()
             trainer.add_state(s); 
             //Add the reward
             if(game.get_point() >= 0)
-                total_point += game.get_point();      
+                total_point += game.get_point();     
+            move[r.size() - 1]++; 
             move_amount++;
             //After the 5th stage, the game over
             if(!game.game_continue()) {
@@ -119,6 +123,10 @@ int main()
                 game.update();
         }
         cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Finised: " << finished << endl;
+        cout << "Movement: ";
+        for(int i = 0 ; i < 4 ; i++)
+            cout << (i + 1) << ":" << move[i] << " ";
+        cout << endl;
         if(total_point > best_score){
             best_score = total_point;
             best_episode = i;
