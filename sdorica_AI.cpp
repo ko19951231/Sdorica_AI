@@ -73,7 +73,7 @@ int main()
                     dup_game.assign(game);
                     //reward should be the estimate value + reward
                     int rew=dup_game.player_move(r, c, idx);
-                    if (!dup_game.player_dead() && (dup_game.game_continue())) {
+                    if ((!dup_game.player_dead()) && (dup_game.game_continue())) {
                         //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
                         if (((int)est + rew) >= maximum){
