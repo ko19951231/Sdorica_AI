@@ -51,7 +51,7 @@ int Feature::generateIndex1(const simple_state&s, int color, bool flip){
     
     int index = 0;
     //Get the specific diamond index
-    index = getDiamondIndex(s.diamond, color, flip) << 8; 
+    index = getDiamondIndex(s.diamond, color, flip) << 10; 
     //player's state index
     //HP: 2 bit, strengthen: 1 bit, minusHarm: 1 bit, recover: 4 bit
     index |= (s.p_HP[color] << 8);
