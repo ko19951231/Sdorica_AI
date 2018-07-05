@@ -121,25 +121,21 @@ int main()
                 finished = 1;
                 break;
             }
-            /*if(move_amount > 1500){
-                game.print();
-                cout << next_move[best_slide].r.size()  << " " << best_reward << " " << best_value<< endl;
-            }*/
             //update the CD and "state" after one round
             //don't update when in new stage
             if(game.get_point() == 0)
                 game.update();
         }
-        cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << endl;
+        cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Finised: " << finished << endl;
         if(total_point > best_score){
             best_score = total_point;
             best_episode = i;
         }
             
-        if(i >= (num_episode - 1000))
+        if(i >= (num_episode + test_threshold- 1000))
             avg_score += total_point;
         if(i % 1000 == 0)
-            rewardFile << i << "," << total_point << "," << move_amount << "," << game.get_stage() << endl;
+            rewardFile << i << "," << total_point << "," << move_amount << "," << game.get_stage() << "," << finished << endl;
         trainer.close_episode(feature, alpha);
     }
     rewardFile.close();
