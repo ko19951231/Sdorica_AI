@@ -59,8 +59,8 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         this->point = 0;
     }
     //return -1;
-    return this->point;
-    //return reward;
+    //return this->point;
+    return reward;
 }
 bool state::enemy_move()
 {
