@@ -81,7 +81,7 @@ int main()
                     if ((!dup_game.player_dead()) && (dup_game.game_continue()) && (move_amount <= 3000)) {
                         //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
-                        if(i < 1000){
+                        if(i < 100){
                             if (rew > maximum){
                                 best_slide=j;
                                 best_object=idx;
@@ -135,9 +135,6 @@ int main()
                 finished = 1;
                 break;
             }
-            /*if(game.get_stage() == 4){
-                break;
-            }*/
             //update the CD and "state" after one round
             //don't update when in new stage
             if(game.get_point() == 0)
