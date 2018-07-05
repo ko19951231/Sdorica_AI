@@ -78,7 +78,7 @@ int main()
                         float est = feature.estimate(dup_game.get_simple_state());
                         if ((est + rew) > maximum){
                             if((est + rew) > 0)
-                                cout << est << " "  << (est + rew) << endl;
+                                cout << est << " "  << (rew) << endl;
                             best_slide=j;
                             best_object=idx;
                             maximum = rew + est;
