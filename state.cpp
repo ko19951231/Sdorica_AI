@@ -41,14 +41,14 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
     }
     if(this->enemy.getAmount() == 0){
         int reward = 100 - move_amount;
-        //if(reward < 0) reward = 0;
+        if(reward < 0) reward = 0;
         this->gameContinue = this->enemy.nextStage();
         if(!this->gameContinue) reward += 100;
         this->point = reward;
         move_amount = 0;
         if(this->gameContinue)
             return 100;
-        if(this->gameContinue)
+        else
             return 200;
     }
     else{
