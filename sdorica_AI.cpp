@@ -75,7 +75,6 @@ int main()
                     int rew=dup_game.player_move(r, c, idx);
                     if (!dup_game.player_dead() && (dup_game.game_continue())) {
                         //estimate the value after the movement
-                        cout << "M: " << move_amount << " ";
                         float est = feature.estimate(dup_game.get_simple_state());
                         if (((int)est + rew) >= maximum){
                             best_slide=j;
