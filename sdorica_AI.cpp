@@ -70,7 +70,6 @@ int main()
             int maximum=-1;
             float best_value = 0;
             float best_reward = 0;
-            if(i % 100 != 0)
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
@@ -92,10 +91,10 @@ int main()
                         }
                         else{
                             //cout << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
-                            if (((int)est - rew) < maximum){
+                            if (((int)est + rew) > maximum){
                                 best_slide=j;
                                 best_object=idx;
-                                maximum = ((int)est - rew);
+                                maximum = ((int)est + rew);
                                 best_reward = rew;
                                 best_value = est + rew;
                             }
@@ -106,13 +105,6 @@ int main()
                         best_value = -100;
 			        }
                 }
-            }
-            else{
-                best_slide= rand() % next_move.size();
-                best_object= rand() % 3;
-                dup_game.assign(game);
-                best_reward = dup_game.player_move(next_move[best_slide].r, next_move[best_slide].c, best_object);
-                best_value = best_reward + feature.estimate(dup_game.get_simple_state());
             }
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
