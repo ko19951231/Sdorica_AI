@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 2000000;
+    int num_episode = 1;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -114,6 +114,7 @@ int main()
             //int point = game.player_move(r, c, best_object);  
             
             //Add to the trainer
+            cout <<  (best_value + best_reward) << " " << best_value << " " << best_reward << endl;
             simple_state s = game.get_simple_state();
             s.set_value(best_value);
             s.set_reward(best_reward);
