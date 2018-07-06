@@ -145,9 +145,9 @@ int main()
         }
         cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Finised: " << finished << endl;
         cout << "Movement: ";
-        for(int j = 0 ; j < 4 ; j++)
-            cout << (j + 1) << ":" << move[j] << " ";
-        cout << endl;
+        //for(int j = 0 ; j < 4 ; j++)
+        //    cout << (j + 1) << ":" << move[j] << " ";
+        //cout << endl;
         if(total_point > best_score){
             best_score = total_point;
             best_episode = i;
