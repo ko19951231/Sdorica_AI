@@ -18,6 +18,7 @@ void Trainer::close_episode(Feature& feature, float alpha)
     //Update the value in the vector
 	simple_state& next_state = path.back();
 	float exact = next_state.get_reward();
+	cout << exact << " ";
 	for (path.pop_back(); path.size(); path.pop_back()) {
 		simple_state& move = path.back();
 		//move.value(): reward + estimate(afterState)
@@ -26,4 +27,5 @@ void Trainer::close_episode(Feature& feature, float alpha)
 		exact = move.get_reward() + feature.update(next_state, alpha * error);
 		next_state = move;
 	}
+	cout << exact << endl;
 }

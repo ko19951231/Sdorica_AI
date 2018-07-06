@@ -13,10 +13,10 @@ public:
     void init(int s, state *st);
     void setSelectedIndex(int index);
     //hurt the enemy
-    void get_hurt(int index, float hurt);
-    void get_hurt_first(float hurt);
-    void get_hurt_selected(float hurt);
-    void get_hurt_all(float hurt);
+    float get_hurt(int index, float hurt);
+    float get_hurt_first(float hurt);
+    float get_hurt_selected(float hurt);
+    float get_hurt_all(float hurt);
     //add state buff to enemy
     void addEasyHarmFirst(int round);
     void addEasyHarmSelected(int round);
