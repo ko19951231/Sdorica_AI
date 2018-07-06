@@ -41,7 +41,7 @@ void Enemy::setSelectedIndex(int index){
 float Enemy::get_hurt(int index, float hurt)
 {
     //if the enemy is dead, then return
-    if(this->enemies[index].isDead()) return;
+    if(this->enemies[index].isDead()) return 0;
 
     float value = this->enemies[index].getDamage(hurt);
     if(this->enemies[index].isDead()){
