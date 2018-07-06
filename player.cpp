@@ -51,7 +51,7 @@ float Player::naya_attack(int diamond, int n)
     //    atk_value /= 2.0;
     atk_value = atk_value - this->game->enemyHurtSelected(atk_value);
     if(diamond == 1)
-        atk_value = atk_value - this->game->enemyAddEasyHarmFirst(3);
+        this->game->enemyAddEasyHarmFirst(3);
     return atk_value;
 }
 float Player::dica_attack(int diamond, int n)
