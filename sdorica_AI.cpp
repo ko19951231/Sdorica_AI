@@ -144,7 +144,7 @@ int main()
                 game.update();
         }
         cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Finised: " << finished << endl;
-        cout << "Movement: ";
+        //cout << "Movement: ";
         //for(int j = 0 ; j < 4 ; j++)
         //    cout << (j + 1) << ":" << move[j] << " ";
         //cout << endl;
