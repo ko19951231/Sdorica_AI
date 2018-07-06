@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 2000000;
+    int num_episode = 1;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -77,14 +77,33 @@ int main()
                     dup_game.assign(game);
                     //reward should be the estimate value + reward
                     int rew=dup_game.player_move(r, c, idx);
-                    float est = feature.estimate(dup_game.get_simple_state());
-                    if(rew+est>maximum){
-                        best_slide=j;
-                        best_object=idx;
-                        maximum=rew+est;
-                        best_reward = rew;
-                        best_value = est + rew;
-                    }
+                    if ((!dup_game.player_dead()) && (dup_game.game_continue()) && (move_amount <= 3000)) {
+                        //estimate the value after the movement
+                        float est = feature.estimate(dup_game.get_simple_state());
+                        if(i < 0){
+                            if (rew > maximum){
+                                best_slide=j;
+                                best_object=idx;
+                                maximum = rew;
+                                best_reward = rew;
+                                best_value = est + rew;
+                            }
+                        }
+                        else{
+                            //cout << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
+                            if (((int)est + rew) > maximum){
+                                best_slide=j;
+                                best_object=idx;
+                                maximum = ((int)est + rew);
+                                best_reward = rew;
+                                best_value = est + rew;
+                            }
+                        }
+                        
+			        } else {
+				        best_reward = rew;
+                        best_value = -100;
+			        }
                 }
             }
             //Assign to the real one
@@ -95,6 +114,7 @@ int main()
             //int point = game.player_move(r, c, best_object);  
             
             //Add to the trainer
+            cout << best_value << " " << (best_value - best_reward) << " " << best_reward << endl;
             simple_state s = game.get_simple_state();
             s.set_value(best_value);
             s.set_reward(best_reward);
@@ -102,7 +122,8 @@ int main()
 
             game.player_move(r, c, best_object);  
             //Add the reward
-            total_point += game.get_point();     
+            if(game.get_point() >= 0)
+                total_point += game.get_point();     
             move[r.size() - 1]++; 
             move_amount++;
             //After the 5th stage, the game over

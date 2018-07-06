@@ -38,28 +38,31 @@ void Enemy::setSelectedIndex(int index){
         this->selectedEnemyIndex = index;
 }
 
-void Enemy::get_hurt(int index, float hurt)
+float Enemy::get_hurt(int index, float hurt)
 {
     //if the enemy is dead, then return
-    if(this->enemies[index].isDead()) return;
+    if(this->enemies[index].isDead()) return 0;
 
-    bool dead = this->enemies[index].getDamage(hurt);
-    if(dead){
+    float value = this->enemies[index].getDamage(hurt);
+    if(this->enemies[index].isDead()){
         this->amount--;
         checkSelectedEnemyState();
     }
+    return value;
 }
-void Enemy::get_hurt_first(float hurt){
-    get_hurt(getFirstIndex(), hurt);
+float Enemy::get_hurt_first(float hurt){
+    return get_hurt(getFirstIndex(), hurt);
 }
-void Enemy::get_hurt_selected(float hurt){
-    get_hurt(this->selectedEnemyIndex, hurt);
+float Enemy::get_hurt_selected(float hurt){
+    return get_hurt(this->selectedEnemyIndex, hurt);
 }
-void Enemy::get_hurt_all(float hurt){
+float Enemy::get_hurt_all(float hurt){
 
+    float value = 0;
     for(int i = 0 ; i < init_amount; i++){
-        get_hurt(i, hurt);
+        value += get_hurt(i, hurt);
     }
+    return value;
 }
 
 //Add the "easy harm" state to the selected enemy

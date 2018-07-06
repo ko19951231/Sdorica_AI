@@ -79,7 +79,7 @@ float EnemyState::attack(){
     return currentATK;
 }
 
-bool EnemyState::getDamage(float damage){
+float EnemyState::getDamage(float damage){
     float totalDamage = damage * calculateMinusHarm() * calculateEasyHarm();
     //shield first
     if(totalDamage > this->shield){
@@ -92,13 +92,14 @@ bool EnemyState::getDamage(float damage){
     }
     //Tranfer Shield
     if(this->transferShield > 0){
+        float preShield = this->shield;
         this->shield += this->MAX_HP * 0.1 * 3;
         if(this->shield > this->MAX_HP)
             this->shield = this->MAX_HP;
+        return (this->shield - preShield);
     }
-    //if the character is dead, return true, otherwise, false
-    if(HP <= 0) return true;
-    return false;
+    
+    return 0;
 }
 
 void EnemyState::heal(float hp){

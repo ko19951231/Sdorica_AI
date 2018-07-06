@@ -9,7 +9,7 @@ public:
     //Attack player
     float attack();
     //Get damage from player
-    bool getDamage(float damage);
+    float getDamage(float damage);
     //Recover hp
     void heal(float hp);
     //Recover shield

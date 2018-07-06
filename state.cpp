@@ -40,9 +40,26 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
             this->player.dica_recover(count);
     }
     float reward = hurt;
-    this->point = reward;
-    this->gameContinue = this->enemy.nextStage();
-    move_amount = 0;
+    if(this->enemy.getAmount() == 0){
+        this->point = 100 - move_amount;
+        if(this->point < 0) this->point = 0;
+        this->gameContinue = this->enemy.nextStage();
+        reward += 100000;
+        if(!this->gameContinue) {
+            this->point += 100;
+            reward += 200000;
+        }
+        move_amount = 0;
+        /*if(this->gameContinue)
+            return 100 * (get_stage() + 1) - 1;
+        else
+            return 100 * (get_stage() + 1) + 100 - 1;*/
+    }
+    else{
+        this->point = 0;
+    }
+    //return -1;
+    //return this->point;
     return reward;
 }
 bool state::enemy_move()
@@ -84,11 +101,11 @@ void state::PlayerHurtLess(float hurt){
 void state::PlayerHurtIndex(int index, float hurt){
     this->player.get_hurt_index(index, hurt);
 }   
-void state::enemyHurtFirst(float hurt){
-    this->enemy.get_hurt_first(hurt);
+float state::enemyHurtFirst(float hurt){
+    return this->enemy.get_hurt_first(hurt);
 }
-void state::enemyHurtSelected(float hurt){
-    this->enemy.get_hurt_selected(hurt);
+float state::enemyHurtSelected(float hurt){
+    return this->enemy.get_hurt_selected(hurt);
 }
 void state::enemyAddEasyHarmFirst(int round){
     this->enemy.addEasyHarmFirst(round);

@@ -26,8 +26,8 @@ public:
     void PlayerHurtAll(float hurt);
     void PlayerHurtLess(float hurt);
     void PlayerHurtIndex(int index, float hurt);
-    void enemyHurtFirst(float hurt);
-    void enemyHurtSelected(float hurt);
+    float enemyHurtFirst(float hurt);
+    float enemyHurtSelected(float hurt);
     void enemyAddEasyHarmFirst(int round);
     void enemyAddEasyHarmSelected(int round);
     void assign(state& s);
