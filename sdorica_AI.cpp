@@ -114,7 +114,7 @@ int main()
             //int point = game.player_move(r, c, best_object);  
             
             //Add to the trainer
-            cout << best_value << " " << best_reward << endl;
+            cout << best_value << " " << (best_value - best_reward) << " " << best_reward << endl;
             simple_state s = game.get_simple_state();
             s.set_value(best_value);
             s.set_reward(best_reward);
