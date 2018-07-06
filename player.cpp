@@ -25,7 +25,7 @@ float Player::pon_attack(int diamond, int n)
     float atk_value = this->pon.attack(diamond);
     //one diamond . minus harm
     if(diamond == 1){
-        atk_value -= this->game->enemyHurtFirst(atk_value);
+        atk_value = atk_value - this->game->enemyHurtFirst(atk_value);
         this->pon.addMinusHarm(3);
     }
     else{

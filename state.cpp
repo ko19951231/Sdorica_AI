@@ -101,11 +101,11 @@ void state::PlayerHurtLess(float hurt){
 void state::PlayerHurtIndex(int index, float hurt){
     this->player.get_hurt_index(index, hurt);
 }   
-void state::enemyHurtFirst(float hurt){
-    this->enemy.get_hurt_first(hurt);
+float state::enemyHurtFirst(float hurt){
+    return this->enemy.get_hurt_first(hurt);
 }
-void state::enemyHurtSelected(float hurt){
-    this->enemy.get_hurt_selected(hurt);
+float state::enemyHurtSelected(float hurt){
+    return this->enemy.get_hurt_selected(hurt);
 }
 void state::enemyAddEasyHarmFirst(int round){
     this->enemy.addEasyHarmFirst(round);
