@@ -91,7 +91,7 @@ int main()
                         }
                         else{
                             //cout << i << " " << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
-                            if(rew < -1)
+                            if(est > 1e+15 || est < -1e+15)
                                 cout << r.size() << " " << rew << " " << dup_game.get_stage() << " " << idx << " " << est << endl;
                                 
                             if (((int)est + rew) > maximum){
