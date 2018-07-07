@@ -15,13 +15,13 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 0.01;
+    int num_episode = 1000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
     bool save = true;
     // set the learning parameters
-	float alpha = 1.0;
+	float alpha = 0.01;
     //recording data
     string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
     fstream rewardFile;
