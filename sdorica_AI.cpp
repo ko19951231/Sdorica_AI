@@ -21,7 +21,7 @@ int main()
     bool load = false;
     bool save = true;
     // set the learning parameters
-	float alpha = 1.0;
+	float alpha = 0.1;
     //recording data
     string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
     fstream rewardFile;
@@ -161,7 +161,10 @@ int main()
             best_score = total_point;
             best_episode = i;
         }
-            
+
+        if(i < 1000)
+            alpha *= 0.8;   
+        
         if(i >= (num_episode - 1000))
             avg_score += total_point;
         if((i + 1) % 1000 == 0){
