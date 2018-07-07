@@ -41,26 +41,36 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
     }
     float reward = hurt;
     if(this->enemy.getAmount() == 0){
+        //All enemies were cleared
+        this->clearEnemies = true;
+        //calculate the points
         this->point = 100 - move_amount;
         if(this->point < 0) this->point = 0;
+
+        //If it is in 5th stage, then the user can't continue the game
         this->gameContinue = this->enemy.nextStage();
-        reward += 100000;
+        //bonus reward for clearing the stage
+        reward += 3000;
         if(!this->gameContinue) {
             this->point += 100;
-            reward += 200000;
+            reward += 6000;
         }
         move_amount = 0;
-        /*if(this->gameContinue)
-            return 100 * (get_stage() + 1) - 1;
-        else
-            return 100 * (get_stage() + 1) + 100 - 1;*/
     }
     else{
+        this->clearEnemies = false;
         this->point = 0;
     }
-    //return -1;
+
+    //Return the formal points
     //return this->point;
-    return reward;
+    
+    //Return the atk value (divided by 100 to prevent overflow)
+    return reward / 100.0;
+}
+
+void state::next_stage(){
+    this->enemy.go_next_stage();
 }
 bool state::enemy_move()
 {
@@ -122,6 +132,7 @@ simple_state state::get_simple_state(){
     ret.amount=this->enemy.getAmount();
     ret.selectedEnemyIndex=this->enemy.getSelectedEnemyIndex();
     ret.selectedCharacterIndex=this->player.getSelectedCharaterIndex();
+    ret.move_amount = this->move_amount;
     //Enemies data
     for(int i=0;i<3;i++){
         ret.kind[i]=this->enemy.enemies[i].getKind();
@@ -169,6 +180,7 @@ void state::assign(state& s){
     this->move_amount = s.move_amount;
     this->gameContinue = s.gameContinue;
     this->point = s.point;
+    this->clearEnemies = s.clearEnemies;
     this->board.assign(s.board);
     this->player.assign(s.player);
     this->enemy.assign(s.enemy);

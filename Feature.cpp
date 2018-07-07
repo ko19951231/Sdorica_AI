@@ -19,7 +19,7 @@ float Feature::estimate(const simple_state& s){
     return value;
 }
 
-float Feature::update(const simple_state& s, float u){
+float Feature::update(const simple_state& s, float u, bool first){
 
     float value = 0;
     float u_spilt = u / 4.0;
@@ -30,13 +30,13 @@ float Feature::update(const simple_state& s, float u){
         generateIndex1(s, i, index);
         this->weight[(1 << 22) * i + index[0]] += u_spilt / 2.0;
         this->weight[(1 << 22) * i + index[1]] += u_spilt / 2.0;
-        value += this->weight[(1 << 22) * i + index[0]];
+         value += this->weight[(1 << 22) * i + index[0]];
         value += this->weight[(1 << 22) * i + index[1]];
     }
 
     //enemies feature
     int enemies_index = generateIndex2(s);
-    this->weight[(1 << 22) * 3 + enemies_index] += u_spilt;
+    this->weight[(1 << 22) * 3 + enemies_index] += u_spilt;  
     value += this->weight[(1 << 22) * 3 + enemies_index];
 
     return value;
@@ -113,5 +113,10 @@ int Feature::generateIndex2(const simple_state&s){
         index |= (s.transferShield[i]);
     }
     return index;
+}
+
+int Feature::generateIndex3(const simple_state&s){
+    //move_amount
+    return s.move_amount;
 }
 

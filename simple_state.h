@@ -10,6 +10,7 @@ public:
     int selectedEnemyIndex;
     //from player.h
     int selectedCharacterIndex;
+    int move_amount;
     //from enemyState.h
     int kind[3]; 
     int e_HP[3];
@@ -35,7 +36,7 @@ public:
 
     void set_value(float v) {this->estimate_value = v;}
     float get_value(){return this->estimate_value;}
-    void set_reward(float v){this->reward = reward;}
+    void set_reward(float v){this->reward = v;}
     float get_reward(){return this->reward;}
 };
 

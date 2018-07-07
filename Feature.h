@@ -9,7 +9,8 @@
 class Feature {
 public:
 	Feature(){
-		length = 22;
+		//Consist of 4 features: 3 players' state, enemy state
+		length = 26;
 		weight = new float[(1 << 26)];
 		for(int i = 0 ; i < (1 << 26) ; i++){
 			weight[i] = 0;
@@ -18,7 +19,7 @@ public:
 	virtual ~Feature() { delete[] weight; }
 	float& operator[] (size_t i) { return weight[i];}
 	float operator[] (size_t i) const { return weight[i];}
-	size_t size() const { return length;}
+	size_t size() const { return (1 << length);}
 
 public:
 
@@ -29,7 +30,7 @@ public:
 	/**
 	 * update the value of a given board, and return its updated value
 	 */
-	float update(const simple_state& s, float u);
+	float update(const simple_state& s, float u, bool first);
 
     /**
 	 * get the name of this feature
@@ -101,6 +102,7 @@ private:
 	int generateIndex1(const simple_state &s, int color, bool flip);
     int getDiamondIndex(const int diamond[2][7], int color, bool flip);
 	int generateIndex2(const simple_state &s);
+	int generateIndex3(const simple_state &s);
 	float* weight;
 	size_t length;
 };
