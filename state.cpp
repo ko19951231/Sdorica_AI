@@ -63,7 +63,7 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
     //return -1 * move_amount;
     //return this->point;
     if(move_amount < 100)
-        return reward / 10.0;
+        return reward / 100.0;
     else
         return 0;
 }
