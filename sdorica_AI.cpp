@@ -21,7 +21,7 @@ int main()
     bool load = false;
     bool save = true;
     // set the learning parameters
-	float alpha = 0.01;
+	float alpha = 0.05;
     //recording data
     string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
     fstream rewardFile;
@@ -163,8 +163,11 @@ int main()
             
         if(i >= (num_episode - 1000))
             avg_score += total_point;
-        if(i % 1000 == 0)
+        if((i + 1) % 1000 == 0){
             rewardFile << i << "," << total_point << "," << move_amount << "," << game.get_stage() << "," << finished << endl;
+            alpha = alpha / 10.0;
+        }
+            
         trainer.close_episode(feature, alpha);
     }
     rewardFile.close();
