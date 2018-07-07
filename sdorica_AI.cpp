@@ -18,7 +18,7 @@ int main()
     int num_episode = 10000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
-    bool load = false;
+    bool load = true;
     bool save = true;
     // set the learning parameters
 	float alpha = 0.1;
