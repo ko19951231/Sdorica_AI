@@ -134,7 +134,7 @@ int main()
                 finished = 1;
                 break;
             }*/
-            if(game.get_stage() == 4){
+            if(game.get_stage() == 1){
                 break;
             }
             if(game.clear_enemies()){
