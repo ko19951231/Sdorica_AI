@@ -15,10 +15,10 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 1;
+    int num_episode = 500;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
-    bool load = true;
+    bool load = false;
     bool save = true;
     // set the learning parameters
 	float alpha = 0.1;
@@ -90,7 +90,7 @@ int main()
                             }
                         }
                         else{
-                            cout << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
+                           // cout << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
                             if (((int)est + rew) > maximum){
                                 best_slide=j;
                                 best_object=idx;
