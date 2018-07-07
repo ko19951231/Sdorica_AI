@@ -163,7 +163,7 @@ int main()
         }
 
         if(i < 1000)
-            alpha *= 0.8;   
+            alpha *= 0.99;   
         
         if(i >= (num_episode - 1000))
             avg_score += total_point;
