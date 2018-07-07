@@ -9,7 +9,7 @@
 class Feature {
 public:
 	Feature(){
-		length = 22;
+		length = 26;
 		weight = new float[(1 << 26)];
 		for(int i = 0 ; i < (1 << 26) ; i++){
 			weight[i] = 0;
@@ -18,7 +18,7 @@ public:
 	virtual ~Feature() { delete[] weight; }
 	float& operator[] (size_t i) { return weight[i];}
 	float operator[] (size_t i) const { return weight[i];}
-	size_t size() const { return length;}
+	size_t size() const { return (1 << length);}
 
 public:
 
