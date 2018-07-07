@@ -16,16 +16,13 @@ float Feature::estimate(const simple_state& s){
     //enemies feature
     value += this->weight[(1 << 22) * 3 + generateIndex2(s)];
 
-    //move amount feature
-    value += this->weight[(1 << 22) * 4 + generateIndex3(s)];
-
     return value;
 }
 
 float Feature::update(const simple_state& s, float u, bool first){
 
     float value = 0;
-    float u_spilt = u / 5.0;
+    float u_spilt = u / 4.0;
     
     //player's character feature
     int index[2];
@@ -41,11 +38,6 @@ float Feature::update(const simple_state& s, float u, bool first){
     int enemies_index = generateIndex2(s);
     this->weight[(1 << 22) * 3 + enemies_index] += u_spilt;  
     value += this->weight[(1 << 22) * 3 + enemies_index];
-
-    //move_amount feature
-    int move_index = generateIndex3(s);
-    this->weight[(1 << 22) * 4 + move_index] += u_spilt;
-    value += this->weight[(1 << 22) * 4 + move_index];
 
     return value;
 }

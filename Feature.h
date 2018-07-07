@@ -9,6 +9,7 @@
 class Feature {
 public:
 	Feature(){
+		//Consist of 4 features: 3 players' state, enemy state
 		length = 26;
 		weight = new float[(1 << 26)];
 		for(int i = 0 ; i < (1 << 26) ; i++){
