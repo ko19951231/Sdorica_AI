@@ -44,10 +44,10 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         this->point = 100 - move_amount;
         if(this->point < 0) this->point = 0;
         this->gameContinue = this->enemy.nextStage();
-        reward += 100000;
+        reward += 300000;
         if(!this->gameContinue) {
             this->point += 100;
-            reward += 200000;
+            reward += 600000;
         }
         move_amount = 0;
         /*if(this->gameContinue)
