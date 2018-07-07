@@ -51,9 +51,9 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         }
         move_amount = 0;
         if(this->gameContinue)
-            return 100 * (get_stage() + 1) - 1;
+            return 1000 * (get_stage() + 1) - 1;
         else
-            return 100 * (get_stage() + 1) + 100 - 1;
+            return 1000 * (get_stage() + 1) + 1000 - 1;
     }
     else{
         this->point = 0;
