@@ -49,8 +49,6 @@ int main()
     int best_episode = 0;
     int move[4] ={0};
     srand(time(NULL));
-    bool first = true;
-    bool enter = false;
     for(int i = 0 ; i < num_episode ; i++){
         int total_point = 0;
         int finished = 0;
@@ -92,10 +90,9 @@ int main()
                             }
                         }
                         else{
-                            if((move_amount > 100) && first){
-                                enter = true;
-                                cout << i << " " << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
-                            }
+                            //cout << i << " " << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
+                            if(rew < 0)
+                                cout << r.size() << " " << dup_game.get_stage() << " " << idx << " " << est << endl;
                                 
                             if (((int)est + rew) > maximum){
                                 best_slide=j;
@@ -146,8 +143,6 @@ int main()
             if(game.get_point() == 0)
                 game.update();
         }
-        if(enter)
-            first = false;
         cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Finised: " << finished << endl;
         cout << "Movement: ";
         for(int j = 0 ; j < 4 ; j++)
