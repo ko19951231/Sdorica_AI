@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 100000;
+    int num_episode = 10000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -48,8 +48,6 @@ int main()
     float avg_score = 0;
     int best_episode = 0;
     int move[4] ={0};
-                float best_value = 0;
-            float best_reward = 0;
     srand(time(NULL));
     for(int i = 0 ; i < num_episode ; i++){
         int total_point = 0;
@@ -70,8 +68,8 @@ int main()
             int best_slide=0;
             int best_object=0;
             int maximum=-1;
-            best_value = 0;
-            best_reward = 0;
+            float best_value = 0;
+            float best_reward = 0;
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
@@ -99,23 +97,22 @@ int main()
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
             vector<int> c=next_move[best_slide].c;   
-            //Return value
-            //The reward will be returned after one round
-            //int point = game.player_move(r, c, best_object);  
+
+            //Calculate the movement for debugging
+            move[r.size() - 1]++; 
+            move_amount++;
             
-            //Add to the trainer
+            //Add this state to the trainer
             simple_state s = game.get_simple_state();
             s.set_value(best_value);
             s.set_reward(best_reward);
             trainer.add_state(s); 
 
+            //Move the 'real' game
             game.player_move(r, c, best_object);  
             //Add the reward
             if(game.get_point() >= 0)
-                total_point += game.get_point();     
-            //Calculate the movement for debugging
-            move[r.size() - 1]++; 
-            move_amount++;
+                total_point += game.get_point(); 
 
             //If the game cannot be continued, then game over
             //After the 5th stage, the game over
@@ -123,6 +120,8 @@ int main()
                 finished = 1;
                 break;
             }
+
+            //If the enemies are all dead, go to the next stage
             if(game.clear_enemies()){
                 game.next_stage();
             }
@@ -137,7 +136,6 @@ int main()
         for(int j = 0 ; j < 4 ; j++)
             cout << (j + 1) << ":" << move[j] << " ";
         cout << endl;
-        cout << "Est " << best_value << " " << "Rew " << best_reward << endl;
         if(total_point > best_score){
             best_score = total_point;
             best_episode = i;
@@ -152,7 +150,6 @@ int main()
             avg_score += total_point;
         if((i + 1) % 1000 == 0){
             rewardFile << i << "," << total_point << "," << move_amount << "," << game.get_stage() << "," << finished << endl;
-            alpha = alpha / 10.0;
         }    
         trainer.close_episode(feature, alpha);
     }

@@ -41,17 +41,21 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
     }
     float reward = hurt;
     if(this->enemy.getAmount() == 0){
+        //All enemies were cleared
         this->clearEnemies = true;
+        //calculate the points
         this->point = 100 - move_amount;
         if(this->point < 0) this->point = 0;
+
+        //If it is in 5th stage, then the user can't continue the game
         this->gameContinue = this->enemy.nextStage();
+        //bonus reward for clearing the stage
         reward += 3000;
         if(!this->gameContinue) {
             this->point += 100;
             reward += 6000;
         }
         move_amount = 0;
-
     }
     else{
         this->clearEnemies = false;
@@ -59,13 +63,10 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
     }
 
     //Return the formal points
-    return this->point;
+    //return this->point;
     
-    //Return the atk value
-    if(move_amount < 100)
-        return reward / 100.0;
-    else
-        return 0;
+    //Return the atk value (divided by 100 to prevent overflow)
+    return reward / 100.0;
 }
 
 void state::next_stage(){
