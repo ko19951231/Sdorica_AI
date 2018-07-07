@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 1;
+    int num_episode = 0.01;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;

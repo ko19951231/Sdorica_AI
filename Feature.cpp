@@ -31,8 +31,6 @@ float Feature::update(const simple_state& s, float u){
     int index[2];
     for(int i = 0 ; i < 3; i++){
         generateIndex1(s, i, index);
-        if(this->weight[(1 << 22) * i + index[0]] != 0)
-            cout << "player " << i << " " << this->weight[(1 << 22) * i + index[0]] << " " << u_spilt/2.0 << endl;
         this->weight[(1 << 22) * i + index[0]] += u_spilt / 2.0;
         this->weight[(1 << 22) * i + index[1]] += u_spilt / 2.0;
         value += this->weight[(1 << 22) * i + index[0]];
@@ -41,15 +39,11 @@ float Feature::update(const simple_state& s, float u){
 
     //enemies feature
     int enemies_index = generateIndex2(s);
-    if(this->weight[(1 << 22) * 3 + enemies_index] != 0)
-        cout << "enemy "   << this->weight[(1 << 22) * 3 + enemies_index]  << " " << u_spilt << endl;
     this->weight[(1 << 22) * 3 + enemies_index] += u_spilt;
     value += this->weight[(1 << 22) * 3 + enemies_index];
 
     //move_amount feature
     int move_index = generateIndex3(s);
-     if(this->weight[(1 << 22) * 4 + move_index] != 0)
-        cout << "amount "   << this->weight[(1 << 22) * 4 + move_index]  << " " << u_spilt << endl;
     this->weight[(1 << 22) * 4 + move_index] += u_spilt;
     value += this->weight[(1 << 22) * 4 + move_index];
 
