@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 300;
+    int num_episode = 5000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -134,7 +134,7 @@ int main()
                 finished = 1;
                 break;
             }*/
-            if(game.get_stage() == 1){
+            if(game.get_stage() == 2){
                 break;
             }
             if(game.clear_enemies()){
