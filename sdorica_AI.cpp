@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 1;
+    int num_episode = 10000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -80,7 +80,7 @@ int main()
                     if ((!dup_game.player_dead()) && (dup_game.game_continue()) && (move_amount <= 3000)) {
                         //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
-                        if(i < 0){
+                        if(i < 1000){
                             if (rew > maximum){
                                 best_slide=j;
                                 best_object=idx;
