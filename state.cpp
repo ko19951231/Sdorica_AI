@@ -60,7 +60,7 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         this->clearEnemies = false;
         this->point = 0;
     }
-    return -1;
+    return -1 * move_amount;
     return this->point;
     if(move_amount < 100)
         return reward;

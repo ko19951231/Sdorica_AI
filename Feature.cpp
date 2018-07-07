@@ -16,13 +16,16 @@ float Feature::estimate(const simple_state& s){
     //enemies feature
     value += this->weight[(1 << 22) * 3 + generateIndex2(s)];
 
+    //move amount feature
+    value += this->weight[(1 << 22) * 4 + generateIndex3(s)];
+
     return value;
 }
 
 float Feature::update(const simple_state& s, float u){
 
     float value = 0;
-    float u_spilt = u / 4.0;
+    float u_spilt = u / 5.0;
     
     //player's character feature
     int index[2];
@@ -38,6 +41,12 @@ float Feature::update(const simple_state& s, float u){
     int enemies_index = generateIndex2(s);
     this->weight[(1 << 22) * 3 + enemies_index] += u_spilt;
     value += this->weight[(1 << 22) * 3 + enemies_index];
+
+    //move_amount feature
+    int move_index = generateIndex3(s);
+    this->weight[(1 << 22) * 4 + move_index] += u_spilt;
+    value += this->weight[(1 << 22) * 4 + move_index];
+
     return value;
 }
 
@@ -100,7 +109,6 @@ int Feature::getDiamondIndex(const int diamond[2][7], int color, bool flip){
 int Feature::generateIndex2(const simple_state&s){
     //Enemies Index
     //kind : 1 bit, HP: 2 bit, shield: 1 bit, CD: 2 bit, transfer shield: 1bit
-    //move_amount: 1 bit (> 100 or not)
     int index = 0;
     for(int i = 0 ; i < 3; i++){
         index = index << 7;
@@ -112,11 +120,11 @@ int Feature::generateIndex2(const simple_state&s){
         index |= ((s.CD[i] - 1) << 1);
         index |= (s.transferShield[i]);
     }
-    //move aount
-    index = index << 1;
-    if(s.move_amount < 100)
-        index |= 1;
-        
     return index;
+}
+
+int Feature::generateIndex3(const simple_state&s){
+    //move_amount
+    return s.move_amount;
 }
 
