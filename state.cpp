@@ -50,17 +50,17 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
             reward += 600000;
         }
         move_amount = 0;
-        if(this->gameContinue)
+        /*if(this->gameContinue)
             return 1000 * (get_stage() + 1) - 1;
         else
-            return 1000 * (get_stage() + 1) + 1000 - 1;
+            return 1000 * (get_stage() + 1) + 1000 - 1;*/
     }
     else{
         this->point = 0;
     }
-    return -1;
+    //return -1;
     //return this->point;
-    //return reward;
+    return reward / move_amount;
 }
 bool state::enemy_move()
 {
