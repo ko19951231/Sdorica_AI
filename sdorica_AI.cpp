@@ -58,6 +58,8 @@ int main()
         game.init();
         dup_game.init();
         trainer.open_episode();
+        bool first = true;
+        bool enter = false;
         while(1){
             //The enemy attack first
             bool gameOver = game.enemy_move();
@@ -90,8 +92,11 @@ int main()
                             }
                         }
                         else{
-                            if(i == 100)
-                                cout << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
+                            if(move_amount > 100 && first){
+                                enter = true;
+                                cout << i << " " << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
+                            }
+                                
                             if (((int)est + rew) > maximum){
                                 best_slide=j;
                                 best_object=idx;
@@ -107,6 +112,8 @@ int main()
 			        }
                 }
             }
+            if(enter)
+                first = false;
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
             vector<int> c=next_move[best_slide].c;   
