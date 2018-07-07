@@ -130,8 +130,11 @@ int main()
             move_amount++;
             
             //After the 5th stage, the game over
-            if(!game.game_continue()) {
+            /*if(!game.game_continue()) {
                 finished = 1;
+                break;
+            }*/
+            if(game.get_stage() == 4){
                 break;
             }
             if(game.clear_enemies()){
