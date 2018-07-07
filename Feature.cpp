@@ -100,6 +100,7 @@ int Feature::getDiamondIndex(const int diamond[2][7], int color, bool flip){
 int Feature::generateIndex2(const simple_state&s){
     //Enemies Index
     //kind : 1 bit, HP: 2 bit, shield: 1 bit, CD: 2 bit, transfer shield: 1bit
+    //move_amount: 1 bit (> 100 or not)
     int index = 0;
     for(int i = 0 ; i < 3; i++){
         index = index << 7;
@@ -111,6 +112,11 @@ int Feature::generateIndex2(const simple_state&s){
         index |= ((s.CD[i] - 1) << 1);
         index |= (s.transferShield[i]);
     }
+    //move aount
+    index = index << 1;
+    if(s.move_amount < 100)
+        index |= 1;
+        
     return index;
 }
 

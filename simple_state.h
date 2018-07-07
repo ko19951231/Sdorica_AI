@@ -10,6 +10,7 @@ public:
     int selectedEnemyIndex;
     //from player.h
     int selectedCharacterIndex;
+    int move_amount;
     //from enemyState.h
     int kind[3]; 
     int e_HP[3];

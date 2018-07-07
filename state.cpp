@@ -44,10 +44,10 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         this->point = 100 - move_amount;
         if(this->point < 0) this->point = 0;
         this->gameContinue = this->enemy.nextStage();
-        reward += 300000;
+        reward += 3000;
         if(!this->gameContinue) {
             this->point += 100;
-            reward += 600000;
+            reward += 6000;
         }
         move_amount = 0;
         /*if(this->gameContinue)
@@ -60,7 +60,10 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
     }
     //return -1;
     //return this->point;
-    return reward / move_amount;
+    if(move_amount < 100)
+        return reward;
+    else
+        return 0;
 }
 bool state::enemy_move()
 {
@@ -122,6 +125,7 @@ simple_state state::get_simple_state(){
     ret.amount=this->enemy.getAmount();
     ret.selectedEnemyIndex=this->enemy.getSelectedEnemyIndex();
     ret.selectedCharacterIndex=this->player.getSelectedCharaterIndex();
+    ret.move_amount = this->move_amount;
     //Enemies data
     for(int i=0;i<3;i++){
         ret.kind[i]=this->enemy.enemies[i].getKind();
