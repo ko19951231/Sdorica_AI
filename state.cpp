@@ -69,7 +69,7 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
 }
 
 void state::next_stage(){
-    this->enemy.goNextStage();
+    this->enemy.go_next_stage();
 }
 bool state::enemy_move()
 {
