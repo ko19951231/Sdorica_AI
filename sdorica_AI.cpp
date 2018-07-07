@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 3;
+    int num_episode = 2;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -131,6 +131,8 @@ int main()
             move[r.size() - 1]++; 
             move_amount++;
             
+            cout << best_reward << " " << game.get_point() << endl;
+
             //After the 5th stage, the game over
             /*if(!game.game_continue()) {
                 finished = 1;
