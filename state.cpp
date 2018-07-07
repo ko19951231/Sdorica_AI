@@ -68,7 +68,7 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         return 0;
 }
 
-void stage::next_stage(){
+void state::next_stage(){
     this->enemy.goNextStage();
 }
 bool state::enemy_move()
@@ -179,7 +179,7 @@ void state::assign(state& s){
     this->move_amount = s.move_amount;
     this->gameContinue = s.gameContinue;
     this->point = s.point;
-    this->clearEnemies = s.clear_enemies;
+    this->clearEnemies = s.clearEnemies;
     this->board.assign(s.board);
     this->player.assign(s.player);
     this->enemy.assign(s.enemy);
