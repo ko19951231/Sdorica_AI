@@ -92,7 +92,7 @@ int main()
                             }
                         }
                         else{
-                            if(move_amount > 100 && first){
+                            if((move_amount > 100) && first){
                                 enter = true;
                                 cout << i << " " << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
                             }
