@@ -47,6 +47,8 @@ int main()
     int best_score = 0;
     float avg_score = 0;
     int best_episode = 0;
+    float best_value = 0;
+    float best_reward = 0;
     int move[4] ={0};
     srand(time(NULL));
     for(int i = 0 ; i < num_episode ; i++){
@@ -68,8 +70,8 @@ int main()
             int best_slide=0;
             int best_object=0;
             int maximum=-1;
-            float best_value = 0;
-            float best_reward = 0;
+            best_value = 0;
+            best_reward = 0;
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
@@ -91,8 +93,8 @@ int main()
                         }
                         else{
                             //cout << i << " " << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
-                            if(est > 1e+15 || est < -1e+15)
-                                cout << r.size() << " " << rew << " " << dup_game.get_stage() << " " << idx << " " << est << endl;
+                            //if(est > 1e+15 || est < -1e+15)
+                            //    cout << r.size() << " " << rew << " " << dup_game.get_stage() << " " << idx << " " << est << endl;
                                 
                             if (((int)est + rew) > maximum){
                                 best_slide=j;
@@ -151,6 +153,7 @@ int main()
         for(int j = 0 ; j < 4 ; j++)
             cout << (j + 1) << ":" << move[j] << " ";
         cout << endl;
+        cout << "Est " << best_value << " " << "Rew " << best_reward << endl;
         if(total_point > best_score){
             best_score = total_point;
             best_episode = i;
