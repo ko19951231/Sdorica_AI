@@ -92,7 +92,7 @@ int main()
                         else{
                             //cout << i << " " << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
                             if(rew < 1)
-                                cout << r.size() << " " << dup_game.get_stage() << " " << idx << " " << est << endl;
+                                cout << r.size() << " " << rew << " " << dup_game.get_stage() << " " << idx << " " << est << endl;
                                 
                             if (((int)est + rew) > maximum){
                                 best_slide=j;
