@@ -35,7 +35,7 @@ public:
 
     void set_value(float v) {this->estimate_value = v;}
     float get_value(){return this->estimate_value;}
-    void set_reward(float v){this->reward = reward;}
+    void set_reward(float v){this->reward = v;}
     float get_reward(){return this->reward;}
 };
 
