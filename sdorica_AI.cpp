@@ -131,7 +131,7 @@ int main()
             move[r.size() - 1]++; 
             move_amount++;
             
-            cout << best_reward << " " << game.get_point() << endl;
+            //cout << best_reward << " " << game.get_point() << endl;
 
             //After the 5th stage, the game over
             /*if(!game.game_continue()) {
