@@ -24,9 +24,10 @@ void Trainer::close_episode(Feature& feature, float alpha)
 		//move.value(): reward + estimate(afterState)
 		//exact : rnext + V(s'next)
 		//cout << "before " << exact << " " << move.get_value() << " " << move.get_reward() << endl;
+		cout << exact << " " ;
 		float error = exact - (move.get_value() - move.get_reward());
 		exact = move.get_reward() + feature.update(next_state, alpha * error);
-		cout << error << " " << move.get_value() << " " << (exact - move.get_reward()) << endl;
+		cout <<  move.get_value() << " " << error << " " <<  (exact - move.get_reward()) << endl;
 		next_state = move;
 		//cout << exact << " " << move.get_value() << " " << move.get_reward() << endl;
 		
