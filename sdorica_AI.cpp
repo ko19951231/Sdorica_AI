@@ -134,13 +134,13 @@ int main()
             //cout << best_reward << " " << game.get_point() << endl;
 
             //After the 5th stage, the game over
-            /*if(!game.game_continue()) {
+            if(!game.game_continue()) {
                 finished = 1;
                 break;
-            }*/
-            if(game.get_stage() == 2){
-                break;
             }
+            /*if(game.get_stage() == 3){
+                break;
+            }*/
             if(game.clear_enemies()){
                 game.next_stage();
             }
