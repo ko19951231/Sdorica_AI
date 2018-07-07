@@ -41,6 +41,7 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
     }
     float reward = hurt;
     if(this->enemy.getAmount() == 0){
+        this->clearEnemies = true;
         this->point = 100 - move_amount;
         if(this->point < 0) this->point = 0;
         this->gameContinue = this->enemy.nextStage();
@@ -56,6 +57,7 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
             return 1000 * (get_stage() + 1) + 1000 - 1;*/
     }
     else{
+        this->clearEnemies = false;
         this->point = 0;
     }
     //return -1;
@@ -64,6 +66,10 @@ int state::player_move(vector<int> r, vector<int> c, int idx)
         return reward;
     else
         return 0;
+}
+
+void stage::next_stage(){
+    this->enemy.goNextStage();
 }
 bool state::enemy_move()
 {
@@ -173,6 +179,7 @@ void state::assign(state& s){
     this->move_amount = s.move_amount;
     this->gameContinue = s.gameContinue;
     this->point = s.point;
+    this->clearEnemies = s.clear_enemies;
     this->board.assign(s.board);
     this->player.assign(s.player);
     this->enemy.assign(s.enemy);

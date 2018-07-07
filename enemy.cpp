@@ -133,11 +133,16 @@ bool Enemy::nextStage(){
     //no more enemies -> go to the next stage
     if(this->amount == 0) {
         if(this->stage == 4)
-            return false;
-        this->stage = this->stage + 1;
-        init(this->stage, this->game);
+            return false;  
         return true;
     }
+}
+
+bool Enemy::goNextStage(){
+    if(this->amount == 0) {
+        this->stage = this->stage + 1;
+        init(this->stage, this->game);
+    } 
 }
 
 int Enemy::getFirstIndex(){

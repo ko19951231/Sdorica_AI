@@ -125,11 +125,16 @@ int main()
                 total_point += game.get_point();     
             move[r.size() - 1]++; 
             move_amount++;
+            
             //After the 5th stage, the game over
             if(!game.game_continue()) {
                 finished = 1;
                 break;
             }
+            if(game.clear_enemies()){
+                game.next_stage();
+            }
+            
             //update the CD and "state" after one round
             //don't update when in new stage
             if(game.get_point() == 0)

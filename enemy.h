@@ -26,6 +26,7 @@ public:
     void attack();
     //Go to next stage
     bool nextStage();
+    void goNextStage();
     //others
     int getAmount();
     int getStage();

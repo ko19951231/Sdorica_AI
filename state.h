@@ -31,6 +31,8 @@ public:
     void enemyAddEasyHarmFirst(int round);
     void enemyAddEasyHarmSelected(int round);
     void assign(state& s);
+    void next_stage();
+    bool clear_enemies(){return this->clearEnemies;}
     bool player_dead(){return player.player_dead();}
     bool game_continue(){return this->gameContinue;}
     int get_point(){return this->point;}
@@ -43,6 +45,7 @@ private:
     Enemy enemy;
     int move_amount;
     bool gameContinue;
+    bool clearEnemies;
     int point;
 };
 #endif
