@@ -49,6 +49,8 @@ int main()
     int best_episode = 0;
     int move[4] ={0};
     srand(time(NULL));
+    bool first = true;
+    bool enter = false;
     for(int i = 0 ; i < num_episode ; i++){
         int total_point = 0;
         int finished = 0;
@@ -58,8 +60,6 @@ int main()
         game.init();
         dup_game.init();
         trainer.open_episode();
-        bool first = true;
-        bool enter = false;
         while(1){
             //The enemy attack first
             bool gameOver = game.enemy_move();
@@ -112,8 +112,6 @@ int main()
 			        }
                 }
             }
-            if(enter)
-                first = false;
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
             vector<int> c=next_move[best_slide].c;   
@@ -148,6 +146,8 @@ int main()
             if(game.get_point() == 0)
                 game.update();
         }
+        if(enter)
+            first = false;
         cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Finised: " << finished << endl;
         cout << "Movement: ";
         for(int j = 0 ; j < 4 ; j++)
