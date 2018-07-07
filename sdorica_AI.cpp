@@ -90,7 +90,7 @@ int main()
                             }
                         }
                         else{
-                            if(i == 250)
+                            if(i == 100)
                                 cout << r.size() << " " << (est + rew) << " " << est << " " << rew << endl;
                             if (((int)est + rew) > maximum){
                                 best_slide=j;
