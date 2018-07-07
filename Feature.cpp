@@ -38,7 +38,6 @@ float Feature::update(const simple_state& s, float u){
     int enemies_index = generateIndex2(s);
     this->weight[(1 << 22) * 3 + enemies_index] += u_spilt;
     value += this->weight[(1 << 22) * 3 + enemies_index];
-
     return value;
 }
 
