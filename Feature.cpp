@@ -22,7 +22,7 @@ float Feature::estimate(const simple_state& s){
     return value;
 }
 
-float Feature::update(const simple_state& s, float u){
+float Feature::update(const simple_state& s, float u, bool first){
 
     float value = 0;
     float u_spilt = u / 5.0;
@@ -31,20 +31,32 @@ float Feature::update(const simple_state& s, float u){
     int index[2];
     for(int i = 0 ; i < 3; i++){
         generateIndex1(s, i, index);
-        this->weight[(1 << 22) * i + index[0]] += (u_spilt / 2.0 - this->weight[(1 << 22) * i + index[0]]);
-        this->weight[(1 << 22) * i + index[1]] += (u_spilt / 2.0 - this->weight[(1 << 22) * i + index[1]]);
-        value += this->weight[(1 << 22) * i + index[0]];
+        if(!first){
+            this->weight[(1 << 22) * i + index[0]] += (u_spilt / 2.0 - this->weight[(1 << 22) * i + index[0]]);
+            this->weight[(1 << 22) * i + index[1]] += (u_spilt / 2.0 - this->weight[(1 << 22) * i + index[1]]);
+        }
+        else{
+            this->weight[(1 << 22) * i + index[0]] += u_spilt / 2.0;
+            this->weight[(1 << 22) * i + index[1]] += u_spilt / 2.0;
+        }
+         value += this->weight[(1 << 22) * i + index[0]];
         value += this->weight[(1 << 22) * i + index[1]];
     }
 
     //enemies feature
     int enemies_index = generateIndex2(s);
-    this->weight[(1 << 22) * 3 + enemies_index] += (u_spilt - this->weight[(1 << 22) * 3 + enemies_index]);
+    if(!first)
+        this->weight[(1 << 22) * 3 + enemies_index] += (u_spilt - this->weight[(1 << 22) * 3 + enemies_index]);
+    else
+       this->weight[(1 << 22) * 3 + enemies_index] += u_spilt;  
     value += this->weight[(1 << 22) * 3 + enemies_index];
 
     //move_amount feature
     int move_index = generateIndex3(s);
-    this->weight[(1 << 22) * 4 + move_index] += (u_spilt - this->weight[(1 << 22) * 4 + move_index]);
+    if(!first)
+        this->weight[(1 << 22) * 4 + move_index] += (u_spilt - this->weight[(1 << 22) * 4 + move_index]);
+    else
+        this->weight[(1 << 22) * 4 + move_index] += u_spilt;
     value += this->weight[(1 << 22) * 4 + move_index];
 
     return value;

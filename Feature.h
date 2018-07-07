@@ -29,7 +29,7 @@ public:
 	/**
 	 * update the value of a given board, and return its updated value
 	 */
-	float update(const simple_state& s, float u);
+	float update(const simple_state& s, float u, bool first);
 
     /**
 	 * get the name of this feature
