@@ -21,7 +21,7 @@ int main()
     bool load = false;
     bool save = true;
     // set the learning parameters
-	float alpha = 0.5;
+	float alpha = 1.0;
     //recording data
     string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
     fstream rewardFile;
