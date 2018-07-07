@@ -138,6 +138,8 @@ int main()
                 finished = 1;
                 break;
             }
+            if(move_amount > 100)
+                break;
             /*if(game.get_stage() == 3){
                 break;
             }*/
