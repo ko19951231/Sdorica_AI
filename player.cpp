@@ -155,6 +155,7 @@ void Player::print()
     if(this->selectedCharacterIndex == 1)
         printf("*");
     printf("NAYA: HP %f, ATK %f, Recover Diamond: %d\n", this->naya.getHP(), this->naya.getATK(), this->naya.getDiamondAount());
+
     if(this->selectedCharacterIndex == 2)
         printf("*");
     printf("DICA: HP %f, ATK %f, Recover Diamond: %d\n", this->dica.getHP(), this->dica.getATK(), this->dica.getDiamondAount());
@@ -243,4 +244,50 @@ void Player::assign(const Player&p){
     this->pon.assign(p.pon);
     this->naya.assign(p.naya);
     this->dica.assign(p.dica);
+}
+
+void Player::set_state(simple_state &s){
+
+    //Recover diamond 
+    this->pon.setDiamondAmount(s.recover_diamond[0]);
+    this->naya.setDiamondAmount(s.recover_diamond[1]);
+    this->dica.setDiamondAmount(s.recover_diamond[2]);
+
+    //HP
+    if(s.recover_diamond[0] == 0)
+        this->pon.setHP((s.p_HP[0] * 2 + 1) * this->pon.getMAXHP() / 8.0);
+    else
+        this->pon.setHP(-100);
+
+    if(s.recover_diamond[1] == 0)
+        this->naya.setHP((s.p_HP[1] * 2 + 1) * this->naya.getMAXHP() / 8.0);
+    else
+        this->naya.setHP(-100);
+
+    if(s.recover_diamond[1] == 0)
+        this->dica.setHP((s.p_HP[2] * 2 + 1) * this->dica.getMAXHP() / 8.0);
+    else
+        this->dica.setHP(-100);
+    
+    //state
+    int num[3] = {0};
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_minusHarm[0][i];
+    this->pon.setMinusHarm(num);
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_minusHarm[1][i];
+    this->naya.setMinusHarm(num);
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_minusHarm[2][i];
+    this->dica.setMinusHarm(num);
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_strengthen[0][i];
+    this->pon.setStrengthen(num);
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_strengthen[1][i];
+    this->naya.setStrengthen(num);
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_strengthen[2][i];
+    this->dica.setStrengthen(num);
+
 }

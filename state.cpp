@@ -8,7 +8,9 @@ void state::init()
     this->player.init(this);
     this->enemy.init(0, this);
     this->move_amount = 0;
+    this->point = 0;
     this->gameContinue = true;
+    this->clearEnemies = false;
 }
 int state::player_move(vector<int> r, vector<int> c, int idx)
 {
@@ -184,4 +186,14 @@ void state::assign(state& s){
     this->board.assign(s.board);
     this->player.assign(s.player);
     this->enemy.assign(s.enemy);
+}
+
+void state::set_state(simple_state &s){
+    this->move_amount = 0;
+    this->point = 0;
+    this->gameContinue = true;
+    this->clearEnemies = false;
+    this->board.set_state(s);
+    this->player.set_state(s);
+    this->enemy.set_state(s);
 }

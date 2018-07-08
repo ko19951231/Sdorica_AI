@@ -1,0 +1,4 @@
+all:
+	g++ -o demo Sdorica_demo.cpp board.cpp enemy.cpp enemyState.cpp Feature.cpp player.cpp playerState.cpp state.cpp
+clean:
+	rm demo

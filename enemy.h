@@ -3,9 +3,11 @@
 #include<cstdio>
 #include<cstdlib>
 #include "enemyState.h"
+#include "simple_state.h"
 
 using namespace std;
 class state;
+class simple_state;
 
 class Enemy
 {
@@ -34,6 +36,7 @@ public:
     void print();
     int getSelectedEnemyIndex();
     void assign(const Enemy &e);
+    void set_state(simple_state &s);
     EnemyState enemies[3];
 private:
     int stage;  // after all the enemy is dead, a new stage is begin
