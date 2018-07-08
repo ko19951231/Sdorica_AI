@@ -159,7 +159,7 @@ void Player::print()
         printf("%d ", (this->naya.getMinusHarm()[i]));
     printf("\n");
     for(int i = 0 ; i < 3 ; i++)
-        printf("%d ", (this->naya.getMinusHarm()[i]));
+        printf("%d ", (this->naya.getStrengthen()[i]));
     printf("\n");
     if(this->selectedCharacterIndex == 2)
         printf("*");
@@ -169,7 +169,7 @@ void Player::print()
         printf("%d ", (this->dica.getMinusHarm()[i]));
     printf("\n");
     for(int i = 0 ; i < 3 ; i++)
-        printf("%d ", (this->dica.getMinusHarm()[i]));
+        printf("%d ", (this->dica.getStrengthen()[i]));
     printf("\n");
 }
 

@@ -195,24 +195,23 @@ void Enemy::set_state(simple_state& s){
     int enemy_index = 0;
     //Assign to corresponding enemy data
     for(int i = 0 ; i < s.amount; i++){
-        if(this->enemies[enemy_index].getKind() == s.kind[i]){
-            this->enemies[enemy_index].setHP((s.e_HP[i] * 2 + 1) * this->enemies[enemy_index].getMAXHP() / 8.0);
-            this->enemies[enemy_index].setShield((s.shield[i] * 2 + 1) * this->enemies[enemy_index].getMAXHP() / 8.0);
-            this->enemies[enemy_index].setCD(s.CD[i]);
-            this->enemies[enemy_index].setShieldTransferLevel(s.shieldTransfer_level[i]);
-            this->enemies[enemy_index].setTransferShield(s.transferShield[i]);
-            int num[3] = {0};
-            for(int j = 0 ; j < 3 ; j++)
-                num[i] = s.p_strengthen[i][j];
-            this->enemies[enemy_index].setEasyHarm(num);
-            enemy_index++;
-        }
-        else{
+
+        while(this->enemies[enemy_index].getKind() != s.kind[i]){
             //the corresponding place enemy is dead
             this->enemies[enemy_index].setHP(-100);
             this->enemies[enemy_index].setShield(0);
             enemy_index++;
-        }
+        }        
+        this->enemies[enemy_index].setHP((s.e_HP[i] * 2 + 1) * this->enemies[enemy_index].getMAXHP() / 8.0);
+        this->enemies[enemy_index].setShield((s.shield[i] * 2 + 1) * this->enemies[enemy_index].getMAXHP() / 8.0);
+        this->enemies[enemy_index].setCD(s.CD[i]);
+        this->enemies[enemy_index].setShieldTransferLevel(s.shieldTransfer_level[i]);
+        this->enemies[enemy_index].setTransferShield(s.transferShield[i]);
+        int num[3] = {0};
+        for(int j = 0 ; j < 3 ; j++)
+            num[i] = s.p_strengthen[i][j];
+        this->enemies[enemy_index].setEasyHarm(num);
+        enemy_index++;
     }
 
 }
