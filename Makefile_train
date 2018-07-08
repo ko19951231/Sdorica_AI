@@ -1,4 +1,4 @@
 all:
-	g++ -std=c++0x -O3 -g -Wall -fmessage-length=0 -o ai sdorica_AI.cpp board.cpp enemy.cpp enemyState.cpp Feature.cpp player.cpp playerState.cpp state.cpp trainer.cpp
+	g++ -o ai sdorica_AI.cpp board.cpp enemy.cpp enemyState.cpp Feature.cpp player.cpp playerState.cpp state.cpp trainer.cpp
 clean:
 	rm ai
