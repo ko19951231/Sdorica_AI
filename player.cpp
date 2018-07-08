@@ -155,22 +155,11 @@ void Player::print()
     if(this->selectedCharacterIndex == 1)
         printf("*");
     printf("NAYA: HP %f, ATK %f, Recover Diamond: %d\n", this->naya.getHP(), this->naya.getATK(), this->naya.getDiamondAount());
-    for(int i = 0 ; i < 3 ; i++)
-        printf("%d ", (this->naya.getMinusHarm()[i]));
-    printf("\n");
-    for(int i = 0 ; i < 3 ; i++)
-        printf("%d ", (this->naya.getStrengthen()[i]));
-    printf("\n");
+
     if(this->selectedCharacterIndex == 2)
         printf("*");
     printf("DICA: HP %f, ATK %f, Recover Diamond: %d\n", this->dica.getHP(), this->dica.getATK(), this->dica.getDiamondAount());
     puts("--------");
-    for(int i = 0 ; i < 3 ; i++)
-        printf("%d ", (this->dica.getMinusHarm()[i]));
-    printf("\n");
-    for(int i = 0 ; i < 3 ; i++)
-        printf("%d ", (this->dica.getStrengthen()[i]));
-    printf("\n");
 }
 
 int Player::getFirstCharacterIndex(){
