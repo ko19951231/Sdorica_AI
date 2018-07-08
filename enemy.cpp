@@ -1,5 +1,7 @@
 #include "enemy.h"
 #include "state.h"
+#include <iostream>
+using namespace std;
 
 void Enemy::init(int s, state *st)
 {
