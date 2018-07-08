@@ -281,11 +281,24 @@ void Player::set_state(simple_state &s){
         this->dica.setHP(-100);
     
     //state
-    this->pon.setMinusHarm(s.p_minusHarm[0]);
-    this->naya.setMinusHarm(s.p_minusHarm[1]);
-    this->dica.setMinusHarm(s.p_minusHarm[2]);
-    this->pon.setStrengthen(s.p_strengthen[0]);
-    this->naya.setStrengthen(s.p_strengthen[1]);
-    this->dica.setStrengthen(s.p_strengthen[2]);
+    int num[3] = {0};
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_minusHarm[0][i];
+    this->pon.setMinusHarm(num);
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_minusHarm[1][i];
+    this->naya.setMinusHarm(num);
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_minusHarm[2][i];
+    this->dica.setMinusHarm(num);
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_strengthen[0][i];
+    this->pon.setStrengthen(num);
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_strengthen[1][i];
+    this->naya.setStrengthen(num);
+    for(int i = 0 ; i < 3 ; i++)
+        num[i] = s.p_strengthen[2][i];
+    this->dica.setStrengthen(num);
 
 }

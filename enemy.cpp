@@ -194,7 +194,7 @@ void Enemy::set_state(simple_state& s){
     init(s.stage - 1, this->game);
     int enemy_index = 0;
     for(int i = 0 ; i < 3 ; i++)
-        cout << this->enemies[i].getKind() << " ";
+        cout << this->enemies[i].getKind() << " " << s.kind[i] << " ";
     cout << endl;
     //Assign to corresponding enemy data
     for(int i = 0 ; i < s.amount; i++){
@@ -204,7 +204,10 @@ void Enemy::set_state(simple_state& s){
             this->enemies[enemy_index].setCD(s.CD[i]);
             this->enemies[enemy_index].setShieldTransferLevel(s.shieldTransfer_level[i]);
             this->enemies[enemy_index].setTransferShield(s.transferShield[i]);
-            this->enemies[enemy_index].setEasyHarm(s.e_easyHarm[i]);
+            int num[3] = {0};
+            for(int j = 0 ; j < 3 ; j++)
+                num[i] = s.p_strengthen[i][j];
+            this->enemies[enemy_index].setEasyHarm(num);
         }
         else{
             //the corresponding place enemy is dead
