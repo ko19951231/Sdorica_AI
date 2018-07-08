@@ -20,7 +20,6 @@ int main()
     string input_state_data = "example.txt";
     string load_weight = "Models/Sdorica.tar";
     
-    Sdorica Game
     state game;
     state dup_game;
     Feature feature;

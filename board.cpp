@@ -106,5 +106,5 @@ void Board::assign(Board& b){
 void Board::set_state(simple_state &s){
     for(int i = 0 ; i < 2 ; i++)
         for(int j = 0 ; j < 7 ; j++)
-            this->daimond[i][j] = s.daimond[i][j];
+            this->daimond[i][j] = s.diamond[i][j];
 }
