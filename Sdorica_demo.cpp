@@ -39,14 +39,13 @@ int main()
         }
     }
 */
+
+    //Initialize the game
+    game.init();
+    dup_game.init();
+    
     //Input the state
     simple_state s = load(input_state_data);
-   
-   	for(int i = 0 ; i < 3; i++)
-   		cout << s.recover_diamond[i] << endl;
-    
-    for(int i = 0 ; i < s.amount ; i++)
-    	cout << s.e_easyHarm[i][0] << endl;
 
     //Set the state of the game
     game.set_state(s);

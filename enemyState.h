@@ -47,7 +47,7 @@ public:
     int getCDInterval(){return this->CD_interval;}
     void setCDInterval(int cd_inter){this->CD_interval = cd_inter;}
     int getShieldTransferLevel(){return this->shieldTransfer_level;}
-    int setShieldTransferLevel(int s){this->shieldTransfer_level = s;}
+    void setShieldTransferLevel(int s){this->shieldTransfer_level = s;}
     int* getMinusHarm(){return this->minusHarm;}
     void setMinusHarm(int* m){ for(int i = 0 ; i < 3 ; i++) this->minusHarm[i] = m[i];}
     int* getStrengthen(){return this->strengthen;}

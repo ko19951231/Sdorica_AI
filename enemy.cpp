@@ -189,7 +189,7 @@ void Enemy::assign(const Enemy &e){
 
 void Enemy::set_state(simple_state& s){
     
-    init(s.stage, this->game);
+    init(s.stage - 1, this->game);
     int enemy_index = 0;
     //Assign to corresponding enemy data
     for(int i = 0 ; i < s.amount; i++){
