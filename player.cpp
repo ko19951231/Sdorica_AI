@@ -244,3 +244,36 @@ void Player::assign(const Player&p){
     this->naya.assign(p.naya);
     this->dica.assign(p.dica);
 }
+
+void Player::set_state(simple_state &s){
+
+    //Recover diamond 
+    this->pon.setDiamondAmount(s.recover_diamond[0]);
+    this->naya.setDiamondAmount(s.recover_diamond[1]);
+    this->dica.setDiamondAmount(s.recover_diamond[2]);
+
+    //HP
+    if(s.recover_diamond[0] == 0)
+        this->pon.setHP((s.p_HP[0] * 2 + 1) * this->pon.getMAXHP() / 8.0);
+    else
+        this->pon.setHP(-100);
+
+    if(s.recover_diamond[1] == 0)
+        this->naya.setHP((s.p_HP[1] * 2 + 1) * this->naya.getMAXHP() / 8.0);
+    else
+        this->naya.setHP(-100);
+
+    if(s.recover_diamond[1] == 0)
+        this->dica.setHP((s.p_HP[1] * 2 + 1) * this->dica.getMAXHP() / 8.0);
+    else
+        this->dica.setHP(-100);
+    
+    //state
+    this->pon.setMinusHarm(s.p_minusHarm[0]);
+    this->naya.setMinusHarm(s.p_minusHarm[1]);
+    this->dica.setMinusHarm(s.p_minusHarm[2]);
+    this->pon.setStrengthen(s.p_strengthen[0]);
+    this->naya.setStrengthen(s.p_strengthen[1]);
+    this->dica.setStrengthen(s.p_strengthen[2]);
+
+}

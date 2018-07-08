@@ -186,3 +186,27 @@ void Enemy::assign(const Enemy &e){
         this->enemies[i].assign(e.enemies[i]);
     }
 }
+
+void Enemy::set_state(simple_state& s){
+    
+    init(s.stage, this->state);
+    int enemy_index = 0;
+    //Assign to corresponding enemy data
+    for(int i = 0 ; i < s.amount; i++){
+        if(this->enemies[enemy_index].getKind() == s.kind[i]){
+            this->enemies[enemy_index].setHP((s.e_HP[i] * 2 + 1) * this->enemies[enemy_index].getMAXHP() / 8.0);
+            this->enemies[enemy_index].setShield((s.shield[i] * 2 + 1) * this->enemies[enemy_index].getMAXHP() / 8.0);
+            this->enemies[enemy_index].setCD(s.CD[i]);
+            this->enemies[enemy_index].setShieldTransferLevel(s.shieldTransfer_level[i]);
+            this->enemies[enemy_index].setTransferShield(s.transferShield[i]);
+            this->enemies[enemy_index].setEasyHarm(s.e_easyHarm[i]);
+        }
+        else{
+            //the corresponding place enemy is dead
+            this->enemies[enemy_index].setHP(-100);
+            this->enemies[enemy_index].setShield(0);
+            enemy_index++;
+        }
+    }
+
+}

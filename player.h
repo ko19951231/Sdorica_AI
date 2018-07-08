@@ -3,8 +3,10 @@
 #include<cstdio>
 #include<cstdlib>
 #include "playerState.h"
+#include "simple_state.h"
 using namespace std;
 class state;
+class simple_state;
 class Player
 {
 public:
@@ -30,6 +32,7 @@ public:
     void print();
     int getSelectedCharaterIndex();
     void assign(const Player& p);
+    void set_state(simple_state &s);
 
     PlayerState pon;
     PlayerState naya;

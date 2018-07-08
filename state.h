@@ -37,6 +37,7 @@ public:
     bool game_continue(){return this->gameContinue;}
     int get_point(){return this->point;}
     int get_stage(){return this->enemy.getStage();}
+    void set_state(simple_state &s);
     vector<tiles> get_available_moves();
     simple_state get_simple_state();
 private:
