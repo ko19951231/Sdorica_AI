@@ -2,9 +2,11 @@
 
 ## 編譯
  Training `make -f Makefile_train`
+ 
  Demo 'make -f Makefile_demo'
  
  Training 會產出執行檔:ai
+ 
  Demo 會產出執行檔: demo
 
 ## 玩法
