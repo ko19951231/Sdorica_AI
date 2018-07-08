@@ -191,6 +191,9 @@ void Enemy::set_state(simple_state& s){
     
     init(s.stage - 1, this->game);
     int enemy_index = 0;
+    for(int i = 0 ; i < 3 ; i++)
+        cout << this->enemies[i].getKind() << " ";
+    cout << endl;
     //Assign to corresponding enemy data
     for(int i = 0 ; i < s.amount; i++){
         if(this->enemies[enemy_index].getKind() == s.kind[i]){
