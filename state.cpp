@@ -12,7 +12,7 @@ void state::init()
     this->gameContinue = true;
     this->clearEnemies = false;
 }
-int state::player_move(vector<int> r, vector<int> c, int idx)
+float state::player_move(vector<int> r, vector<int> c, int idx)
 {
     move_amount++;
     // slide on the board to get the color and number of eliminated daimonds

@@ -17,13 +17,22 @@ vector<int> parse_string(string s, string pattern);
 
 int main()
 {
-    string input_state_data = "example.txt";
+    string input_state_data = "info.txt";
     string load_weight = "Models/Sdorica.tar";
     
     state game;
     state dup_game;
     Feature feature;
 
+    //Enter the Image path and transfer it to python file to get the info.txt file
+    string image_path = "";
+    cout << "Please Enter the picture file: " ;
+    cin >> image_path;
+    //Run python code to create info.txt
+    string pythonFile = "python3 ./read_image.py ";
+    pythonFile += image_path;
+    system(pythonFile.c_str());
+    cout << "Return From Python" << endl;
 /*
     //load Feature data
     if(load){
@@ -155,8 +164,8 @@ simple_state load(string filepath){
     nums = parse_string(text, spilt_pattern);
     for(int i = 0 ; i < s.amount ; i++){
     	s.kind[i] = nums[i];
-    	s.e_HP[i] = nums[i + 2];
-    	s.shield[i] = nums[i + 4];
+    	s.e_HP[i] = nums[i + s.amount];
+    	s.shield[i] = nums[i + s.amount * 2];
 	}
 	
 	getline(inputfile, text);

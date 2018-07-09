@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 10000;
+    int num_episode = 1000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -53,6 +53,7 @@ int main()
         int total_point = 0;
         int finished = 0;
         int move_amount = 0;
+        int clear_stages = 0;
         for(int j = 0 ; j < 4 ; j++)
             move[j] = 0;
         game.init();
@@ -67,7 +68,7 @@ int main()
             //Select the best slide and object
             int best_slide=0;
             int best_object=0;
-            int maximum=-1;
+            float maximum=-1;
             float best_value = 0;
             float best_reward = 0;
             for(int j=0;j<next_move.size();j++){
@@ -76,14 +77,14 @@ int main()
                 for(int idx=0;idx<3;idx++){
                     dup_game.assign(game);
                     //reward should be the estimate value + reward
-                    int rew=dup_game.player_move(r, c, idx);
-                    if ((!dup_game.player_dead()) && (dup_game.game_continue()) && (move_amount <= 3000)) {
+                    float rew=dup_game.player_move(r, c, idx);
+                    if ((!dup_game.player_dead()) && (dup_game.game_continue())) {
                         //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
-                        if (((int)est + rew) > maximum){
+                        if ((est + rew) > maximum){
                             best_slide=j;
                             best_object=idx;
-                            maximum = ((int)est + rew);
+                            maximum = est + rew;
                             best_reward = rew;
                             best_value = est + rew;
                         }
@@ -123,6 +124,7 @@ int main()
 
             //If the enemies are all dead, go to the next stage
             if(game.clear_enemies()){
+                clear_stages++;
                 game.next_stage();
             }
             
@@ -131,7 +133,7 @@ int main()
             if(game.get_point() == 0)
                 game.update();
         }
-        cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Finised: " << finished << endl;
+        cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << endl;
         cout << "Movement: ";
         for(int j = 0 ; j < 4 ; j++)
             cout << (j + 1) << ":" << move[j] << " ";

@@ -133,16 +133,17 @@ int Enemy::getStage(){
 
 bool Enemy::nextStage(){
     //no more enemies -> go to the next stage
-    if(this->amount == 0) {
+    /*if(this->amount == 0) {
         if(this->stage == 4)
             return false;  
         return true;
-    }
+    }*/
+    return true;
 }
 
 void Enemy::go_next_stage(){
     if(this->amount == 0) {
-        this->stage = this->stage + 1;
+        this->stage = (this->stage + 1) % 5;
         init(this->stage, this->game);
     } 
 }
@@ -203,7 +204,7 @@ void Enemy::set_state(simple_state& s){
             enemy_index++;
         }        
         this->enemies[enemy_index].setHP((s.e_HP[i] * 2 + 1) * this->enemies[enemy_index].getMAXHP() / 8.0);
-        this->enemies[enemy_index].setShield((s.shield[i] * 2 + 1) * this->enemies[enemy_index].getMAXHP() / 8.0);
+        this->enemies[enemy_index].setShield((s.shield[i]) * this->enemies[enemy_index].getMAXHP() / 4.0);
         this->enemies[enemy_index].setCD(s.CD[i]);
         this->enemies[enemy_index].setShieldTransferLevel(s.shieldTransfer_level[i]);
         this->enemies[enemy_index].setTransferShield(s.transferShield[i]);
@@ -212,6 +213,10 @@ void Enemy::set_state(simple_state& s){
             num[i] = s.p_strengthen[i][j];
         this->enemies[enemy_index].setEasyHarm(num);
         enemy_index++;
+    }
+    for(; enemy_index < 3 ; enemy_index++){
+        this->enemies[enemy_index].setHP(-100);
+        this->enemies[enemy_index].setShield(0);
     }
 
 }
