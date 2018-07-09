@@ -23,6 +23,8 @@ float Player::pon_attack(int diamond, int n)
         this->game->setEnemySelectedIndex(n);
     }
     float atk_value = this->pon.attack(diamond);
+    //testing
+    atk_value  * = 100;
     //one diamond . minus harm
     if(diamond == 1){
         atk_value = atk_value - this->game->enemyHurtFirst(atk_value);
@@ -41,7 +43,8 @@ float Player::naya_attack(int diamond, int n)
     this->game->setEnemySelectedIndex(n);
     //Attack the enemy
     float atk_value = this->naya.attack(diamond);
-    
+    //testing
+    atk_value  * = 100;
     //20% will give *2 attack in 2 diamond
     if(diamond == 2){
         if(rand()/(float)RAND_MAX < 0.2)
@@ -57,7 +60,8 @@ float Player::naya_attack(int diamond, int n)
 float Player::dica_attack(int diamond, int n)
 {
     float atk_value = this->dica.attack(diamond);
-
+    //testing
+    atk_value  * = 100;
     if(diamond==1){
         //Select a character to heal
         this->game->setPlayerSelectedIndex(n);
