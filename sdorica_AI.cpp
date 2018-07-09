@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 1;
+    int num_episode = 100;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -58,7 +58,6 @@ int main()
         game.init();
         dup_game.init();
         trainer.open_episode();
-        game.print();
         while(1){
             //The enemy attack first
             bool gameOver = game.enemy_move();
