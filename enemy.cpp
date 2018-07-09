@@ -213,5 +213,9 @@ void Enemy::set_state(simple_state& s){
         this->enemies[enemy_index].setEasyHarm(num);
         enemy_index++;
     }
+    for(; enemy_index < 3 ; enemy_index++){
+        this->enemies[enemy_index].setHP(-100);
+        this->enemies[enemy_index].setShield(0);
+    }
 
 }

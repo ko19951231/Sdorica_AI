@@ -164,8 +164,8 @@ simple_state load(string filepath){
     nums = parse_string(text, spilt_pattern);
     for(int i = 0 ; i < s.amount ; i++){
     	s.kind[i] = nums[i];
-    	s.e_HP[i] = nums[i + 2];
-    	s.shield[i] = nums[i + 4];
+    	s.e_HP[i] = nums[i + s.amount];
+    	s.shield[i] = nums[i + s.amount * 2];
 	}
 	
 	getline(inputfile, text);
