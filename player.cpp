@@ -253,12 +253,12 @@ void Player::assign(const Player&p){
 void Player::set_state(simple_state &s){
 
     //Recover diamond 
-    this->pon.setDiamondAmount(s.recover_diamond[0]);
+    this->pon.setDiamondAmount(s.recover_diamond[2]);
     this->naya.setDiamondAmount(s.recover_diamond[1]);
-    this->dica.setDiamondAmount(s.recover_diamond[2]);
+    this->dica.setDiamondAmount(s.recover_diamond[0]);
 
     //HP
-    if(s.recover_diamond[0] == 0)
+    if(s.recover_diamond[2] == 0)
         this->pon.setHP((s.p_HP[0] * 2 + 1) * this->pon.getMAXHP() / 8.0);
     else
         this->pon.setHP(-100);
@@ -268,7 +268,7 @@ void Player::set_state(simple_state &s){
     else
         this->naya.setHP(-100);
 
-    if(s.recover_diamond[1] == 0)
+    if(s.recover_diamond[0] == 0)
         this->dica.setHP((s.p_HP[2] * 2 + 1) * this->dica.getMAXHP() / 8.0);
     else
         this->dica.setHP(-100);
