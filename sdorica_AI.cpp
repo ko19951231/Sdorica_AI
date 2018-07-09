@@ -53,6 +53,7 @@ int main()
         int total_point = 0;
         int finished = 0;
         int move_amount = 0;
+        int clear_stages = 0;
         for(int j = 0 ; j < 4 ; j++)
             move[j] = 0;
         game.init();
@@ -123,6 +124,7 @@ int main()
 
             //If the enemies are all dead, go to the next stage
             if(game.clear_enemies()){
+                clear_stages++;
                 game.next_stage();
             }
             
@@ -131,7 +133,7 @@ int main()
             if(game.get_point() == 0)
                 game.update();
         }
-        cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Finised: " << finished << endl;
+        cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << endl;
         cout << "Movement: ";
         for(int j = 0 ; j < 4 ; j++)
             cout << (j + 1) << ":" << move[j] << " ";
