@@ -203,7 +203,7 @@ void Enemy::set_state(simple_state& s){
             enemy_index++;
         }        
         this->enemies[enemy_index].setHP((s.e_HP[i] * 2 + 1) * this->enemies[enemy_index].getMAXHP() / 8.0);
-        this->enemies[enemy_index].setShield((s.shield[i] * 2 + 1) * this->enemies[enemy_index].getMAXHP() / 8.0);
+        this->enemies[enemy_index].setShield((s.shield[i]) * this->enemies[enemy_index].getMAXHP() / 4.0);
         this->enemies[enemy_index].setCD(s.CD[i]);
         this->enemies[enemy_index].setShieldTransferLevel(s.shieldTransfer_level[i]);
         this->enemies[enemy_index].setTransferShield(s.transferShield[i]);
