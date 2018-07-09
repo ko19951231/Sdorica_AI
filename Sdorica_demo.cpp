@@ -29,7 +29,8 @@ int main()
     cout << "Please Enter the picture file: " ;
     cin >> image_path;
     //Run python code to create info.txt
-    string pythonFile = "python3 ./read_image.py";
+    string pythonFile = "python3 ./read_image.py ";
+    pythonFile += image_path;
     system(pythonFile.c_str());
     cout << "Return From Python" << endl;
 /*
