@@ -31,11 +31,8 @@ public:
     int diamond[2][7];
 
     //For training
-    float estimate_value;
-    float reward;
+    float reward; //got _ reward and turn to this simple after state
 
-    void set_value(float v) {this->estimate_value = v;}
-    float get_value(){return this->estimate_value;}
     void set_reward(float v){this->reward = v;}
     float get_reward(){return this->reward;}
 };

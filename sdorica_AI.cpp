@@ -51,9 +51,11 @@ int main()
     srand(time(NULL));
     for(int i = 0 ; i < num_episode ; i++){
         int total_point = 0;
+        int total_reward = 0;
         int finished = 0;
         int move_amount = 0;
         int clear_stages = 0;
+        double remain=0;
         for(int j = 0 ; j < 4 ; j++)
             move[j] = 0;
         game.init();
@@ -62,15 +64,19 @@ int main()
         while(1){
             //The enemy attack first
             bool gameOver = game.enemy_move();
-            if(gameOver) break;
+            if(gameOver){
+                //game.print();
+                if(clear_stages==4){
+                    remain+=game.enemy.enemies[0].getShield()+game.enemy.enemies[1].getShield();
+                }
+                break;
+            }
             //Input the sliding value
             vector<tiles> next_move = game.get_available_moves();
             //Select the best slide and object
             int best_slide=0;
             int best_object=0;
             float maximum=-1;
-            float best_value = 0;
-            float best_reward = 0;
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
@@ -78,21 +84,14 @@ int main()
                     dup_game.assign(game);
                     //reward should be the estimate value + reward
                     float rew=dup_game.player_move(r, c, idx);
-                    if ((!dup_game.player_dead()) && (dup_game.game_continue())) {
-                        //estimate the value after the movement
-                        float est = feature.estimate(dup_game.get_simple_state());
-                        if ((est + rew) > maximum){
-                            best_slide=j;
-                            best_object=idx;
-                            maximum = est + rew;
-                            best_reward = rew;
-                            best_value = est + rew;
-                        }
-                        
-			        } else {
-				        best_reward = rew;
-                        best_value = -100;
-			        }
+                    float est;
+                    if(dup_game.player_dead()) est=0;
+                    else est=feature.estimate(dup_game.get_simple_state());
+                    if ((est + rew) > maximum){
+                        best_slide=j;
+                        best_object=idx;
+                        maximum = est + rew;
+                    }
                 }
             }
             //Assign to the real one
@@ -102,18 +101,17 @@ int main()
             //Calculate the movement for debugging
             move[r.size() - 1]++; 
             move_amount++;
-            
-            //Add this state to the trainer
-            simple_state s = game.get_simple_state();
-            s.set_value(best_value);
-            s.set_reward(best_reward);
-            trainer.add_state(s); 
 
             //Move the 'real' game
-            game.player_move(r, c, best_object);  
+            float rew=game.player_move(r, c, best_object);  
+            //Add this state to the trainer
+            simple_state s = game.get_simple_state();
+            s.set_reward(rew);
+            trainer.add_state(s); 
             //Add the reward
             if(game.get_point() >= 0)
                 total_point += game.get_point(); 
+            total_reward+=rew;
 
             //If the game cannot be continued, then game over
             //After the 5th stage, the game over
@@ -133,11 +131,12 @@ int main()
             if(game.get_point() == 0)
                 game.update();
         }
-        cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << endl;
-        cout << "Movement: ";
+        cout << "Episode " << i << " Total Point: " << total_point << " Total Reward: " << total_reward << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << " Remain Shield: " << remain << endl;
+        if(clear_stages>4) puts("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR!!!");
+        /*cout << "Movement: ";
         for(int j = 0 ; j < 4 ; j++)
             cout << (j + 1) << ":" << move[j] << " ";
-        cout << endl;
+        cout << endl;*/
         if(total_point > best_score){
             best_score = total_point;
             best_episode = i;

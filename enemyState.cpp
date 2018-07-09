@@ -96,7 +96,7 @@ float EnemyState::getDamage(float damage){
         this->shield += this->MAX_HP * 0.1 * 3;
         if(this->shield > this->MAX_HP)
             this->shield = this->MAX_HP;
-        //return (this->shield - preShield);
+        return (this->shield - preShield);
     }
     
     return 0;
