@@ -67,7 +67,7 @@ int main()
             //Select the best slide and object
             int best_slide=0;
             int best_object=0;
-            int maximum=-1;
+            float maximum=-1;
             float best_value = 0;
             float best_reward = 0;
             for(int j=0;j<next_move.size();j++){
@@ -76,14 +76,14 @@ int main()
                 for(int idx=0;idx<3;idx++){
                     dup_game.assign(game);
                     //reward should be the estimate value + reward
-                    int rew=dup_game.player_move(r, c, idx);
-                    if ((!dup_game.player_dead()) && (dup_game.game_continue()) && (move_amount <= 3000)) {
+                    float rew=dup_game.player_move(r, c, idx);
+                    if ((!dup_game.player_dead()) && (dup_game.game_continue())) {
                         //estimate the value after the movement
                         float est = feature.estimate(dup_game.get_simple_state());
-                        if (((int)est + rew) > maximum){
+                        if ((est + rew) > maximum){
                             best_slide=j;
                             best_object=idx;
-                            maximum = ((int)est + rew);
+                            maximum = est + rew;
                             best_reward = rew;
                             best_value = est + rew;
                         }
