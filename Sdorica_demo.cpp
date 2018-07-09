@@ -30,7 +30,7 @@ int main()
     cin >> image_path;
     //Run python code to create info.txt
     string pythonFile = "./read_image.py";
-    system("python3 " + pythonFile);
+    system("python3 " + pythonFile.c_str());
     cout << "Return From Python" << endl;
 /*
     //load Feature data
