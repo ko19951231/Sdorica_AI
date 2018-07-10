@@ -91,7 +91,7 @@ float EnemyState::getDamage(float damage){
         this->shield -= totalDamage;
     }
     //Tranfer Shield
-    if(this->transferShield > 0){
+    if((this->transferShield > 0) && !isDead()){
         float preShield = this->shield;
         this->shield += this->MAX_HP * 0.1 * 3;
         if(this->shield > this->MAX_HP)
