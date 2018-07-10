@@ -158,7 +158,7 @@ int main()
         
         if(i >= (num_episode - 1000))
             avg_score += total_point;
-        if((i + 1) % 1000 == 0){
+        if((i + 1) % 100 == 0){
             rewardFile << i << "," << total_point << "," << (400 - total_point) << "," << move_amount << "," << game.get_stage() << "," << finished << endl;
         }    
         trainer.close_episode(feature, alpha);
