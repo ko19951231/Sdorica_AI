@@ -140,7 +140,7 @@ int main()
         cout << "Episode " << i << " Total Point: " << total_point << " Total Reward: " << total_reward << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << " Remain Shield: " << remain << endl;
         if(clear_stages>4) {
             puts("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR!!!");
-            clear_num++;
+            clear_nums++;
         }
         /*cout << "Movement: ";
         for(int j = 0 ; j < 4 ; j++)
