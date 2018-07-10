@@ -4,7 +4,7 @@ using namespace std;
 
 float Feature::estimate(const simple_state& s){
     
-    float value = 0;
+    /*float value = 0;
     
     //player's character feature
     int index[2];
@@ -14,14 +14,40 @@ float Feature::estimate(const simple_state& s){
         value += this->weight[(1 << 22) * i + index[1]] / 2.0;
     }
     //enemies feature
-    value += this->weight[(1 << 22) * 3 + generateIndex2(s)];
+    value += this->weight[(1 << 22) * 3 + generateIndex2(s)];*/
 
-    return value;
+    int idx=0;
+    for(int i=0;i<3;i++){
+        idx*=14;
+        if(s.recover_diamond[i]>0) idx+=(10-s.recover_diamond[i]);
+        else idx+=s.p_HP[i];
+        idx*=2;
+        bool mh=0;
+        for(int j=0;j<3;j++){
+            if(s.p_minusHarm[i][j]) mh=1;
+        }
+        if(mh) idx++;
+        idx*=2;
+        bool st=0;
+        for(int j=0;j<3;j++){
+            if(s.p_strengthen[i][j]) st=1;
+        }
+        if(st) idx++;
+        idx*=2;
+        bool eh=0;
+        for(int j=0;j<3;j++){
+            if(s.p_easyHarm[i][j]) eh=1;
+        }
+        if(eh) idx++;
+    }
+    return this->weight[idx];
+
+    //return value;
 }
 
-float Feature::update(const simple_state& s, float u, bool first){
+float Feature::update(const simple_state& s, float u){
 
-    float value = 0;
+    /*float value = 0;
     float u_spilt = u / 4.0;
     
     //player's character feature
@@ -39,7 +65,32 @@ float Feature::update(const simple_state& s, float u, bool first){
     this->weight[(1 << 22) * 3 + enemies_index] += u_spilt;  
     value += this->weight[(1 << 22) * 3 + enemies_index];
 
-    return value;
+    return value;*/
+    int idx=0;
+    for(int i=0;i<3;i++){
+        idx*=14;
+        if(s.recover_diamond[i]>0) idx+=(10-s.recover_diamond[i]);
+        else idx+=s.p_HP[i];
+        idx*=2;
+        bool mh=0;
+        for(int j=0;j<3;j++){
+            if(s.p_minusHarm[i][j]) mh=1;
+        }
+        if(mh) idx++;
+        idx*=2;
+        bool st=0;
+        for(int j=0;j<3;j++){
+            if(s.p_strengthen[i][j]) st=1;
+        }
+        if(st) idx++;
+        idx*=2;
+        bool eh=0;
+        for(int j=0;j<3;j++){
+            if(s.p_easyHarm[i][j]) eh=1;
+        }
+        if(eh) idx++;
+    }
+    this->weight[idx]+=u;
 }
 
 void Feature::generateIndex1(const simple_state &s, int color, int *index){

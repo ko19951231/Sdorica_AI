@@ -19,12 +19,10 @@ void Trainer::close_episode(Feature& feature, float alpha)
 	// td 0
 	float target=0;
 	float error = target-feature.estimate(path[path.size()-1]);
-	int first = 1;
-	feature.update(path[path.size()-1], alpha*error, first);
+	feature.update(path[path.size()-1], alpha*error);
 	for(int i=path.size()-2;i>=0;i--){
 		target=(path[i+1].progress-path[i].progress)+feature.estimate(path[i+1]);
 		error=target-feature.estimate(path[i]);
-		feature.update(path[i], alpha*error, first);
-		first=0;
+		feature.update(path[i], alpha*error);
 	}
 }
