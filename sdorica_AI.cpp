@@ -99,7 +99,7 @@ int main()
             vector<int> c=next_move[best_slide].c; 
 
             if(game.get_stage() == 4)
-                cout << best_object << endl;  
+                cout << best_object << " " << game.enemy.getAmount() << endl;  
 
             //Calculate the movement for debugging
             move[r.size() - 1]++; 
