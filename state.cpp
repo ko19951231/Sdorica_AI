@@ -41,7 +41,6 @@ float state::player_move(vector<int> r, vector<int> c, int idx)
         else
             this->player.dica_recover(count);
     }
-    float reward = hurt;
     if(this->enemy.getAmount() == 0){
         //All enemies were cleared
         this->clearEnemies = true;
@@ -51,12 +50,6 @@ float state::player_move(vector<int> r, vector<int> c, int idx)
 
         //If it is in 5th stage, then the user can't continue the game
         this->gameContinue = this->enemy.nextStage();
-        //bonus reward for clearing the stage
-        reward += 3000;
-        if(!this->gameContinue) {
-            this->point += 100;
-            reward += 6000;
-        }
         move_amount = 0;
     }
     else{
@@ -68,7 +61,7 @@ float state::player_move(vector<int> r, vector<int> c, int idx)
     //return this->point;
     
     //Return the atk value (divided by 100 to prevent overflow)
-    return reward / 100.0;
+    return hurt;
 }
 
 void state::next_stage(){
