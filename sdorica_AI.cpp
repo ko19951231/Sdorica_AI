@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 1000;
+    int num_episode = 100000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -95,7 +95,7 @@ int main()
                 }
             }
             //random
-            if(i % 1000){
+            if((i % 1000) == 0){
                 best_slide = rand()%next_move.size();
                 best_object = rand()%3;
             }
