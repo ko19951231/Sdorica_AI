@@ -25,13 +25,15 @@ float Player::pon_attack(int diamond, int n)
     float atk_value = this->pon.attack(diamond);
     //one diamond . minus harm
     if(diamond == 1){
-        atk_value = atk_value - this->game->enemyHurtFirst(atk_value);
+        float recover = this->game->enemyHurtFirst(atk_value);
+        if(recover>0) atk_value=-recover;
         this->pon.addMinusHarm(3);
     }
     else{
         //if(diamond == 4)
         //    atk_value /= 2.0;
-        atk_value = atk_value - this->game->enemyHurtSelected(atk_value);
+        float recover = this->game->enemyHurtSelected(atk_value);
+        if(recover>0) atk_value=-recover;
     }    
     return atk_value;
 }
@@ -48,7 +50,8 @@ float Player::naya_attack(int diamond, int n)
     }
     //if(diamond == 4)
     //    atk_value /= 2.0;
-    atk_value = atk_value - this->game->enemyHurtSelected(atk_value);
+    float recover = this->game->enemyHurtSelected(atk_value);
+    if(recover>0) atk_value=-recover;
     if(diamond == 1)
         this->game->enemyAddEasyHarmFirst(3);
     return atk_value;
@@ -67,7 +70,8 @@ float Player::dica_attack(int diamond, int n)
     }
     else if(diamond==2){
         this->game->setEnemySelectedIndex(n);
-        atk_value = atk_value - this->game->enemyHurtSelected(atk_value);
+        float recover = this->game->enemyHurtSelected(atk_value);
+        if(recover>0) atk_value=-recover;
         return atk_value;
     }
     else if(diamond==4){     //choose the one who has the least HP to heal

@@ -16,18 +16,15 @@ void Trainer::close_episode(Feature& feature, float alpha)
 {
     //train
     //Update the value in the vector
-	simple_state& next_state = path.back();
-	float exact = next_state.get_reward();
-
-	int first = true;
-	for (path.pop_back(); path.size(); path.pop_back()) {
-		simple_state& move = path.back();
-		//move.value(): reward + estimate(afterState)
-		//exact : rnext + V(s'next)
-		float error = exact - (move.get_value() - move.get_reward());
-		exact = move.get_reward() + feature.update(next_state, alpha * error, first);
-		next_state = move;
-		first = false;
-		
+	// td 0
+	float target=0;
+	float error = target-feature.estimate(path[path.size()-1]);
+	int first = 1;
+	feature.update(path[path.size()-1], alpha*error, first);
+	for(int i=path.size()-2;i>=0;i--){
+		target=path[i+1].get_reward()+feature.estimate(path[i+1]);
+		error=target-feature.estimate(path[i]);
+		feature.update(path[i], alpha*error, first);
+		first=0;
 	}
 }

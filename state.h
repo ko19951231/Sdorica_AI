@@ -40,10 +40,10 @@ public:
     void set_state(simple_state &s);
     vector<tiles> get_available_moves();
     simple_state get_simple_state();
+    Enemy enemy;
 private:
     Board board;
     Player player;
-    Enemy enemy;
     int move_amount;
     bool gameContinue;
     bool clearEnemies;
