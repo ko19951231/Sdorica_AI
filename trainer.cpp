@@ -22,7 +22,7 @@ void Trainer::close_episode(Feature& feature, float alpha)
 	int first = 1;
 	feature.update(path[path.size()-1], alpha*error, first);
 	for(int i=path.size()-2;i>=0;i--){
-		target=path[i+1].get_reward()+feature.estimate(path[i+1]);
+		target=(path[i+1].progress-path[i].progress)+feature.estimate(path[i+1]);
 		error=target-feature.estimate(path[i]);
 		feature.update(path[i], alpha*error, first);
 		first=0;

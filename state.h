@@ -39,7 +39,7 @@ public:
     int get_stage(){return this->enemy.getStage();}
     void set_state(simple_state &s);
     vector<tiles> get_available_moves();
-    simple_state get_simple_state();
+    simple_state get_simple_state(int clear_stage);
     Enemy enemy;
 private:
     Board board;
