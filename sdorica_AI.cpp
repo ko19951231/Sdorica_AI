@@ -99,8 +99,7 @@ int main()
                 best_slide = rand()%next_move.size();
                 best_object = rand()%3;
                 dup_game.assign(game);
-                rew=dup_game.player_move(r, c, idx);
-                est;
+                rew=dup_game.player_move(next_move[best_slide].r, next_move[best_slide].c, best_object);
                 if(dup_game.player_dead()) est=0;
                 else est=feature.estimate(dup_game.get_simple_state());
             }
