@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 100000;
+    int num_episode = 1000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -93,6 +93,16 @@ int main()
                         maximum = est + rew;
                     }
                 }
+            }
+            //random
+            if(i % 1000){
+                best_slide = rand()%next_move.size();
+                best_object = rand()%3;
+                dup_game.assign(game);
+                rew=dup_game.player_move(r, c, idx);
+                est;
+                if(dup_game.player_dead()) est=0;
+                else est=feature.estimate(dup_game.get_simple_state());
             }
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
