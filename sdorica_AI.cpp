@@ -94,6 +94,16 @@ int main()
                     }
                 }
             }
+            //random
+            if(i % 1000){
+                best_slide = rand()%next_move.size();
+                best_object = rand()%3;
+                dup_game.assign(game);
+                rew=dup_game.player_move(r, c, idx);
+                est;
+                if(dup_game.player_dead()) est=0;
+                else est=feature.estimate(dup_game.get_simple_state());
+            }
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
             vector<int> c=next_move[best_slide].c; 
