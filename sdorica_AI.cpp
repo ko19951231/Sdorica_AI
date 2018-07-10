@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 100000;
+    int num_episode = 10000000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -96,6 +96,15 @@ int main()
                 }
             }
 
+            if((i % 1000) == 0){
+                best_slide = rand() % next_move.size();
+                best_object = rand() % 3;
+            }
+
+            if(i % 800 == 0){
+                best_slide = rand() % next_move.size();
+                best_object = rand() % 3;
+            }
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
             vector<int> c=next_move[best_slide].c; 
