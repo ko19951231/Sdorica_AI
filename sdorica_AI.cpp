@@ -15,10 +15,10 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 1000;
+    int num_episode = 100000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
-    bool load = false;
+    bool load = true;
     bool save = true;
     // set the learning parameters
 	float alpha = 0.1;
@@ -94,10 +94,14 @@ int main()
                     }
                 }
             }
+
+            if((i % 1000) == 0){
+                best_slide = rand() % next_move.size();
+                best_object = rand() % 3;
+            }
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
             vector<int> c=next_move[best_slide].c; 
-
 
             //Calculate the movement for debugging
             move[r.size() - 1]++; 
@@ -151,7 +155,7 @@ int main()
         if(i >= (num_episode - 1000))
             avg_score += total_point;
         if((i + 1) % 1000 == 0){
-            rewardFile << i << "," << total_point << "," << move_amount << "," << game.get_stage() << "," << finished << endl;
+            rewardFile << i << "," << total_point << "," << (400 - total_point) << "," << move_amount << "," << game.get_stage() << "," << finished << endl;
         }    
         trainer.close_episode(feature, alpha);
     }
