@@ -96,7 +96,8 @@ int main()
             }
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
-            vector<int> c=next_move[best_slide].c;   
+            vector<int> c=next_move[best_slide].c; 
+
 
             //Calculate the movement for debugging
             move[r.size() - 1]++; 
