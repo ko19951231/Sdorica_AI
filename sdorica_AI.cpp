@@ -47,6 +47,7 @@ int main()
     int best_score = 0;
     float avg_score = 0;
     int best_episode = 0;
+    int clear_nums = 0;
     int move[4] ={0};
     srand(time(NULL));
     for(int i = 0 ; i < num_episode ; i++){
@@ -94,6 +95,10 @@ int main()
                     }
                 }
             }
+            if((i % 1000) == 0){
+                best_slide = rand() % next_move.size();
+                best_object = rand() % 3;
+            }
 
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
@@ -133,7 +138,10 @@ int main()
                 game.update();
         }
         cout << "Episode " << i << " Total Point: " << total_point << " Total Reward: " << total_reward << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << " Remain Shield: " << remain << endl;
-        if(clear_stages>4) puts("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR!!!");
+        if(clear_stages>4) {
+            puts("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR!!!");
+            clear_num++;
+        }
         /*cout << "Movement: ";
         for(int j = 0 ; j < 4 ; j++)
             cout << (j + 1) << ":" << move[j] << " ";
@@ -159,6 +167,7 @@ int main()
 
     cout << "The best score is: " << best_score << " appear in episode#" << best_episode << endl;
     cout << "The average score is: " << avg_score/1000.0 << endl;
+    cout << "Clear Stage times: " << clear_nums << endl;
     //Save 
     if(save){
         ofstream out;
