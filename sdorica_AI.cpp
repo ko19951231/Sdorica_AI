@@ -95,10 +95,6 @@ int main()
                     }
                 }
             }
-            if((i % 1000) == 0){
-                best_slide = rand() % next_move.size();
-                best_object = rand() % 3;
-            }
 
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
