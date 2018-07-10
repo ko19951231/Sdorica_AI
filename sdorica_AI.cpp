@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 10000;
+    int num_episode = 1000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -96,7 +96,10 @@ int main()
             }
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
-            vector<int> c=next_move[best_slide].c;   
+            vector<int> c=next_move[best_slide].c; 
+
+            if(game.get_stage() == 4)
+                cout << best_object << endl;  
 
             //Calculate the movement for debugging
             move[r.size() - 1]++; 
