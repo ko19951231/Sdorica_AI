@@ -18,7 +18,7 @@ int main()
     int num_episode = 100000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
-    bool load = true;
+    bool load = false;
     bool save = true;
     // set the learning parameters
 	float alpha = 0.1;
@@ -94,10 +94,6 @@ int main()
                         maximum = est + rew;
                     }
                 }
-            }
-            if((i % 1000) == 0){
-                best_slide = rand() % next_move.size();
-                best_object = rand() % 3;
             }
 
             //Assign to the real one
