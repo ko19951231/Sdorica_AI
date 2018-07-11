@@ -98,11 +98,6 @@ public:
 		return NULL;
 	}
 private:
-    void generateIndex1(const simple_state &s, int color, int *index);
-	int generateIndex1(const simple_state &s, int color, bool flip);
-    int getDiamondIndex(const int diamond[2][7], int color, bool flip);
-	int generateIndex2(const simple_state &s);
-	int generateIndex3(const simple_state &s);
 	float* weight;
 	size_t length;
 };
