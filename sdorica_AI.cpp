@@ -15,11 +15,11 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 1000000;
+    int num_episode = 10000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
-    bool save = false;
+    bool save = true;
     // set the learning parameters
 	float alpha = 0.03;
     //recording data
@@ -90,15 +90,10 @@ int main()
                     float est;
                     if(dup_game.player_dead()) est=0;
                     else est=feature.estimate(dup_game.get_simple_state(clear_stages));
-                    /*if ((est + current_progress) > maximum){
+                    if ((est + current_progress) > maximum){
                         best_slide=j;
                         best_object=idx;
                         maximum = est + current_progress;
-                    }*/
-                    if(current_progress > maximum){
-                        best_slide = j;
-                        best_object = idx;
-                        maximum = current_progress;
                     }
                 }
             }
