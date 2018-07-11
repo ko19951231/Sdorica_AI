@@ -15,15 +15,15 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 800000;
+    int num_episode = 1000000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
-    bool save = true;
+    bool save = false;
     // set the learning parameters
 	float alpha = 0.1;
     //recording data
-    string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
+    string rewardFilename = "Results/Sdorica_Random_Reward.csv";
     fstream rewardFile;
     rewardFile.open(rewardFilename.c_str(), std::ios::out);
     //Game training setup
@@ -52,7 +52,7 @@ int main()
     srand(time(NULL));
     for(int i = 0 ; i < num_episode ; i++){
         int total_point = 0;
-        int total_reward = 0;
+        double total_reward = 0;
         int finished = 0;
         int move_amount = 0;
         int clear_stages = 0;
@@ -78,6 +78,7 @@ int main()
             int best_slide=0;
             int best_object=0;
             float maximum=-1;
+            /*
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
@@ -96,15 +97,10 @@ int main()
                 }
             }
 
-            if((i % 1000) == 0){
-                best_slide = rand() % next_move.size();
-                best_object = rand() % 3;
-            }
+            */
+            best_slide = rand() % next_move.size();
+            best_object = rand() % 3;
 
-            if(i % 800 == 0){
-                best_slide = rand() % next_move.size();
-                best_object = rand() % 3;
-            }
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
             vector<int> c=next_move[best_slide].c; 
@@ -164,7 +160,7 @@ int main()
         if(i >= (num_episode - 1000))
             avg_score += total_point;
         if((i + 1) % 100 == 0){
-            rewardFile << i << "," << total_point << "," << (400 - total_point) << "," << move_amount << "," << game.get_stage() << "," << finished << endl;
+            rewardFile << (i + 1) << "," << total_point << "," << (total_reward) << "," << move_amount << "," << game.get_stage() << endl;
         }    
         trainer.close_episode(feature, alpha);
     }
