@@ -99,7 +99,7 @@ float Feature::update(const simple_state& s, float u)
                 if(s.diamond[r][c]==i) idx++;
             }
         }
-        this->weight[idx]+=u;
+        this->weight[idx+offset]+=u;
         offset+=917584;
     }
 }
