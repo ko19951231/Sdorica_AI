@@ -143,7 +143,7 @@ int main()
             cout << i/block <<" "<<avg/block << " " << max <<endl;
             avg=0;
             max=0;
-            if((i/block)%50==0) alpha*=0.8;
+            if((i/block)%100==0) alpha*=0.9;
         }
         if(clear_stages>4){
             cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << " Progress: " << game.get_simple_state(clear_stages).progress << endl;

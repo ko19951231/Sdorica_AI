@@ -168,27 +168,25 @@ simple_state state::get_simple_state(int clear_stage){
             ret.diamond[r][c]=board.daimond[r][c];
         }
     }
-    int round=clear_stage/5;
-    ret.progress=round*33240;
     int num;
-    if(clear_stage%5==0){
-        ret.progress+=6504;
+    if(clear_stage==0){
+        ret.progress=6504;
         num=3;
     }
-    else if(clear_stage%5==1){
-        ret.progress+=13398;
+    else if(clear_stage==1){
+        ret.progress=13398;
         num=3;
     }
-    else if(clear_stage%5==2){
-        ret.progress+=16626;
+    else if(clear_stage==2){
+        ret.progress=16626;
         num=1;
     }
-    else if(clear_stage%5==3){
-        ret.progress+=21238;
+    else if(clear_stage==3){
+        ret.progress=21238;
         num=1;
     }
-    else if(clear_stage%5==4){
-        ret.progress+=33240;
+    else if(clear_stage>=4){
+        ret.progress=21238+12002*(clear_stage-3);
         num=2;
     }
     for(int i=0;i<num;i++){

@@ -143,7 +143,7 @@ bool Enemy::nextStage(){
 
 void Enemy::go_next_stage(){
     if(this->amount == 0) {
-        this->stage = (this->stage + 1) % 5;
+        if(this->stage<4) this->stage = this->stage + 1;
         init(this->stage, this->game);
     } 
 }
