@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 1000000;
+    int num_episode = 10000;
     string load_weight = "Models/Sdorica.tar";
     string save_weight = "Models/Sdorica.tar";
     bool load = false;
@@ -23,7 +23,7 @@ int main()
     // set the learning parameters
 	float alpha = 0.03;
     //recording data
-    string rewardFilename = "Results/Sdorica_Reward_ver1.csv";
+    string rewardFilename = "Results/Sdorica_Max_Reward.csv";
     fstream rewardFile;
     rewardFile.open(rewardFilename.c_str(), std::ios::out);
     //Game training setup
@@ -159,8 +159,8 @@ int main()
 
         if(i >= (num_episode - 1000))
             avg_score += total_point;
-        if((i + 1) % 1000 == 0){
-            rewardFile << i << "," << total_point << "," << move_amount << "," << game.get_stage() << "," << finished << endl;
+        if((i + 1) % 100 == 0){
+            rewardFile << (i + 1) << "," << total_point << "," << move_amount << "," << game.get_stage() << endl;
         }    
         trainer.close_episode(feature, alpha);
     }
