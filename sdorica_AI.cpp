@@ -23,7 +23,7 @@ int main()
     // set the learning parameters
 	float alpha = 0.1;
     //recording data
-    string rewardFilename = "Results/Sdorica_Random_Reward.csv";
+    string rewardFilename = "Results/Sdorica_BestReward_Reward.csv";
     fstream rewardFile;
     rewardFile.open(rewardFilename.c_str(), std::ios::out);
     //Game training setup
@@ -78,7 +78,7 @@ int main()
             int best_slide=0;
             int best_object=0;
             float maximum=-1;
-            /*
+            
             for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
@@ -89,17 +89,19 @@ int main()
                     float est;
                     if(dup_game.player_dead()) est=0;
                     else est=feature.estimate(dup_game.get_simple_state());
+                    /*
                     if ((est + rew) > maximum){
                         best_slide=j;
                         best_object=idx;
                         maximum = est + rew;
+                    }*/
+                    if(rew > maximum){
+                        best_slide = j;
+                        best_object = idx;
+                        maximum = rew;
                     }
                 }
             }
-
-            */
-            best_slide = rand() % next_move.size();
-            best_object = rand() % 3;
 
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
