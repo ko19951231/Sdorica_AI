@@ -51,6 +51,7 @@ int main()
     srand(time(NULL));
     int block=100;
     float avg=0;
+    float max=0;
     for(int i = 0 ; i < num_episode ; i++){
         int total_point = 0;
         int finished = 0;
@@ -132,10 +133,17 @@ int main()
             if(game.get_point() == 0)
                 game.update();
         }
-        avg += game.get_simple_state(clear_stages).progress;
+        float progress=game.get_simple_state(clear_stages).progress;
+        avg += progress;
+        if(progress>max){
+            max=progress;
+        }
+        
         if(i%block==block-1){
-            cout << i/block <<" "<<avg/block << endl;
+            cout << i/block <<" "<<avg/block << " " << max <<endl;
             avg=0;
+            max=0;
+            alpha*=0.8;
         }
         if(clear_stages>4){
             cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << " Progress: " << game.get_simple_state(clear_stages).progress << endl;
