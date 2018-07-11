@@ -121,7 +121,7 @@ void state::enemyAddEasyHarmSelected(int round){
 vector<tiles> state::get_available_moves(){
     return this->board.get_available_moves();
 }
-simple_state state::get_simple_state(){
+simple_state state::get_simple_state(int clear_stage){
     simple_state ret;
     ret.stage=this->enemy.getStage();
     ret.amount=this->enemy.getAmount();
@@ -167,6 +167,33 @@ simple_state state::get_simple_state(){
         for(int c=0;c<7;c++){
             ret.diamond[r][c]=board.daimond[r][c];
         }
+    }
+    int round=clear_stage/5;
+    ret.progress=round*33240;
+    int num;
+    if(clear_stage%5==0){
+        ret.progress+=6504;
+        num=3;
+    }
+    else if(clear_stage%5==1){
+        ret.progress+=13398;
+        num=3;
+    }
+    else if(clear_stage%5==2){
+        ret.progress+=16626;
+        num=1;
+    }
+    else if(clear_stage%5==3){
+        ret.progress+=21238;
+        num=1;
+    }
+    else if(clear_stage%5==4){
+        ret.progress+=33240;
+        num=2;
+    }
+    for(int i=0;i<num;i++){
+        ret.progress-=this->enemy.enemies[i].getHP();
+        ret.progress-=this->enemy.enemies[i].getShield();
     }
     return ret;
 }

@@ -10,9 +10,9 @@ class Feature {
 public:
 	Feature(){
 		//Consist of 4 features: 3 players' state, enemy state
-		length = 26;
-		weight = new float[(1 << 26)];
-		for(int i = 0 ; i < (1 << 26) ; i++){
+		length = 21;
+		weight = new float[(1 << 21)];
+		for(int i = 0 ; i < (1 << 21) ; i++){
 			weight[i] = 0;
 		}
 	}
@@ -30,7 +30,7 @@ public:
 	/**
 	 * update the value of a given board, and return its updated value
 	 */
-	float update(const simple_state& s, float u, bool first);
+	float update(const simple_state& s, float u);
 
     /**
 	 * get the name of this feature
@@ -98,11 +98,6 @@ public:
 		return NULL;
 	}
 private:
-    void generateIndex1(const simple_state &s, int color, int *index);
-	int generateIndex1(const simple_state &s, int color, bool flip);
-    int getDiamondIndex(const int diamond[2][7], int color, bool flip);
-	int generateIndex2(const simple_state &s);
-	int generateIndex3(const simple_state &s);
 	float* weight;
 	size_t length;
 };

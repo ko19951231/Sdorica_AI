@@ -31,10 +31,7 @@ public:
     int diamond[2][7];
 
     //For training
-    float reward; //got _ reward and turn to this simple after state
-
-    void set_reward(float v){this->reward = v;}
-    float get_reward(){return this->reward;}
+    float progress;
 };
 
 #endif
