@@ -4,7 +4,10 @@
 #include<cstdlib>
 #include<string>
 #include<iostream>
+#include<vector>
 #include "simple_state.h"
+
+using namespace std;
 
 class Feature {
 public:
@@ -20,7 +23,7 @@ public:
 	float& operator[] (size_t i) { return weight[i];}
 	float operator[] (size_t i) const { return weight[i];}
 	size_t size() const { return (1 << length);}
-
+	vector<float> get_est_value() {return this->est_value;}
 public:
 
 	/**
@@ -70,7 +73,6 @@ public:
 			std::exit(1);
 		}
 		in.read(reinterpret_cast<char*>(weight), sizeof(float) * size);
-		std::cout << size << std::endl;
 		if (!in) {
 			std::cerr << "unexpected end of binary" << std::endl;
 			std::exit(1);
@@ -101,6 +103,7 @@ public:
 private:
 	float* weight;
 	size_t length;
+	vector<float> est_value;
 };
 
 #endif

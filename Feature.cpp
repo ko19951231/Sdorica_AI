@@ -6,6 +6,7 @@ float Feature::estimate(const simple_state& s)
 {
     float ret=0;
     int idx=0;
+    this->est_value.clear();
     for(int i=0;i<3;i++){
         idx*=14;
         if(s.recover_diamond[i]>0) idx+=(10-s.recover_diamond[i]);
@@ -23,6 +24,7 @@ float Feature::estimate(const simple_state& s)
         }
         if(st) idx++;
     }
+    est_value.push_back[this->weight[idx]];
     ret += this->weight[idx];
     int offset=175616;
     for(int i=0;i<3;i++){
@@ -48,6 +50,7 @@ float Feature::estimate(const simple_state& s)
                 if(s.diamond[r][c]==i) idx++;
             }
         }
+        est_value.push_back[this->weight[idx+offset]];
         ret += this->weight[idx+offset];
         offset+=917504;
     }
@@ -86,6 +89,7 @@ float Feature::estimate(const simple_state& s)
             }
             if(mh) idx++;
         }
+        est_value.push_back[this->weight[idx+offset]];
         ret+=weight[idx+offset];
         offset+=281000;
     }

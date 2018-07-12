@@ -14,6 +14,7 @@ using namespace std;
 
 simple_state load(string filepath);
 vector<int> parse_string(string s, string pattern);
+int find_max_feature_slide(vector<vector<float>> value, int idx);
 
 int main()
 {
@@ -64,6 +65,7 @@ int main()
     //Try all the combination to give the suggest answer
     //Input the sliding value
     vector<tiles> next_move = game.get_available_moves();
+    vector<vector<float>> est_value;
     //Select the best slide and object
     int best_slide=0;
     int best_object=0;
@@ -79,6 +81,7 @@ int main()
             float est;
             if(dup_game.player_dead()) est=0;
             else est=feature.estimate(dup_game.get_simple_state(s.stage - 1));
+            est_value.push_back(feature.get_est_value());
             if ((est + current_progress) > maximum){
                 best_slide=j;
                 best_object=idx;
@@ -92,6 +95,53 @@ int main()
             cout << "Row: " << (next_move[best_slide].r[i] + 1) << " Column: " << (next_move[best_slide].c[i] + 1) << endl;
     }
     cout << "Suggest Select Enemy: " << (best_object + 1) << endl;
+
+    //Suggestion from each feature
+    cout <<"-----------------------------------------" << endl;
+    
+    int move_idx = 0;
+
+    move_idx = find_max_feature_slide(est_value, 0);
+    cout << "Suggest from Feature #1: 3 Character's state" << endl;
+    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    }
+
+    move_idx = find_max_feature_slide(est_value, 1);
+    cout << "Suggest from Feature #2: Pon's state and board" << endl;
+    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    }
+
+    move_idx = find_max_feature_slide(est_value, 2);
+    cout << "Suggest from Feature #3: Naya's state and board" << endl;
+    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    }
+
+    move_idx = find_max_feature_slide(est_value, 3);
+    cout << "Suggest from Feature #4: Dica's state and board" << endl;
+    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    }
+
+    move_idx = find_max_feature_slide(est_value, 4);
+    cout << "Suggest from Feature #5: First Enemy's state" << endl;
+    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    }
+
+    move_idx = find_max_feature_slide(est_value, 5);
+    cout << "Suggest from Feature #6: Second Enemy's state" << endl;
+    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    }
+
+    move_idx = find_max_feature_slide(est_value, 6);
+    cout << "Suggest from Feature #7: Third Enemy's state" << endl;
+    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    }
     
     return 0;
 }
@@ -206,4 +256,18 @@ vector<int> parse_string(string s, string pattern){
 
     return nums;
 
+}
+
+int find_max_feature_slide(vector<vector<float>> value, int idx){
+    
+    float max = -1;
+    int move = -1;
+    
+    for(int i = 0 ; i < value.size(); i++){
+        if(value[i][idx] > max){
+            max = value[i][idx];
+            move = i;
+        }
+    }
+    return move;
 }
