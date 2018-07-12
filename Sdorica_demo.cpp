@@ -103,46 +103,60 @@ int main()
 
     move_idx = find_max_feature_slide(est_value, 0);
     cout << "Suggest from Feature #1: 3 Character's state" << endl;
-    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
-            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    for(int i = 0 ; i < next_move[move_idx / 3].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx / 3].r[i] + 1) << " Column: " << (next_move[move_idx / 3].c[i] + 1) << endl;
     }
+    cout << "Suggest Select Enemy: " << (move_idx % 3) << endl;
+    cout << "--------------------" << endl;
 
     move_idx = find_max_feature_slide(est_value, 1);
     cout << "Suggest from Feature #2: Pon's state and board" << endl;
-    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
-            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    for(int i = 0 ; i < next_move[move_idx / 3].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx / 3].r[i] + 1) << " Column: " << (next_move[move_idx / 3].c[i] + 1) << endl;
     }
+    cout << "Suggest Select Enemy: " << (move_idx % 3) << endl;
+    cout << "--------------------" << endl;
 
     move_idx = find_max_feature_slide(est_value, 2);
     cout << next_move.size() << " " << move_idx << endl;
     cout << "Suggest from Feature #3: Naya's state and board" << endl;
-    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
-            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    for(int i = 0 ; i < next_move[move_idx / 3].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx / 3].r[i] + 1) << " Column: " << (next_move[move_idx / 3].c[i] + 1) << endl;
     }
+    cout << "Suggest Select Enemy: " << (move_idx % 3) << endl;
+    cout << "--------------------" << endl;
 
     move_idx = find_max_feature_slide(est_value, 3);
     cout << "Suggest from Feature #4: Dica's state and board" << endl;
-    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
-            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    for(int i = 0 ; i < next_move[move_idx / 3].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx / 3].r[i] + 1) << " Column: " << (next_move[move_idx / 3].c[i] + 1) << endl;
     }
+    cout << "Suggest Select Enemy: " << (move_idx % 3) << endl;
+    cout << "--------------------" << endl;
 
     move_idx = find_max_feature_slide(est_value, 4);
     cout << "Suggest from Feature #5: First Enemy's state" << endl;
-    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
-            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    for(int i = 0 ; i < next_move[move_idx / 3].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx / 3].r[i] + 1) << " Column: " << (next_move[move_idx / 3].c[i] + 1) << endl;
     }
+    cout << "Suggest Select Enemy: " << (move_idx % 3) << endl;
+    cout << "--------------------" << endl;
 
     move_idx = find_max_feature_slide(est_value, 5);
     cout << "Suggest from Feature #6: Second Enemy's state" << endl;
-    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
-            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    for(int i = 0 ; i < next_move[move_idx / 3].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx / 3].r[i] + 1) << " Column: " << (next_move[move_idx / 3].c[i] + 1) << endl;
     }
+    cout << "Suggest Select Enemy: " << (move_idx % 3) << endl;
+    cout << "--------------------" << endl;
 
     move_idx = find_max_feature_slide(est_value, 6);
     cout << "Suggest from Feature #7: Third Enemy's state" << endl;
-    for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
-            cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
+    for(int i = 0 ; i < next_move[move_idx / 3].r.size() ; i++){
+            cout << "Row: " << (next_move[move_idx / 3].r[i] + 1) << " Column: " << (next_move[move_idx / 3].c[i] + 1) << endl;
     }
+    cout << "Suggest Select Enemy: " << (move_idx % 3) << endl;
+    cout << "--------------------" << endl;
     
     return 0;
 }
