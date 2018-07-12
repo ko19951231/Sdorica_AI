@@ -15,15 +15,15 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 100000;
+    int num_episode = 300000;
     string load_weight = "Models/Sdorica2.tar";
     string save_weight = "Models/Sdorica2.tar";
-    bool load = false;
-    bool save = false;
+    bool load = true;
+    bool save = true;
     // set the learning parameters
 	float alpha = 0.001;
     //recording data
-    string rewardFilename = "Results/Sdorica_Random_Reward.csv";
+    string rewardFilename = "Results/Sdorica_RL_Reward2.csv";
     fstream rewardFile;
     rewardFile.open(rewardFilename.c_str(), std::ios::out);
     //Game training setup
@@ -79,7 +79,7 @@ int main()
             int best_slide=0;
             int best_object=0;
             float maximum=-1;
-            /*for(int j=0;j<next_move.size();j++){
+            for(int j=0;j<next_move.size();j++){
                 vector<int> r=next_move[j].r;
                 vector<int> c=next_move[j].c;
                 for(int idx=0;idx<3;idx++){
@@ -97,10 +97,6 @@ int main()
                     }
                 }
             }
-            */
-            best_slide = rand() % next_move.size();
-            best_object = rand() % 3;
-
 
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
