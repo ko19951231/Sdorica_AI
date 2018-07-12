@@ -57,7 +57,7 @@ enemy_status=[]
 
 #daimond
 for r in range(2):
-    print(' ')
+    #print(' ')
     for c in range(7):
         ans=[0,0,0]
         perl = picture[535+r*100:545+r*100,360+c*100:370+c*100,:]

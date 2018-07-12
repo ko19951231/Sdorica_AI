@@ -39,8 +39,8 @@ int main()
         ifstream in;
         in.open(load_weight.c_str(), std::ios::in | std::ios::binary);
         if(in.is_open()){
-            cout << "Model is loaded from " << load_weight << endl;
             in >> feature;
+            cout << "Model is loaded from " << load_weight << endl;
         }
         else{
             cout << "Model data not found" << endl;
