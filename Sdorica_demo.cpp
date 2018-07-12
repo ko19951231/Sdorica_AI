@@ -114,6 +114,7 @@ int main()
     }
 
     move_idx = find_max_feature_slide(est_value, 2);
+    cout << next_move.size() << " " << move_idx << endl;
     cout << "Suggest from Feature #3: Naya's state and board" << endl;
     for(int i = 0 ; i < next_move[move_idx].r.size() ; i++){
             cout << "Row: " << (next_move[move_idx].r[i] + 1) << " Column: " << (next_move[move_idx].c[i] + 1) << endl;
