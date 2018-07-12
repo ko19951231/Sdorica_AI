@@ -15,10 +15,10 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 10000;
+    int num_episode = 90000;
     string load_weight = "Models/Sdorica2.tar";
     string save_weight = "Models/Sdorica2.tar";
-    bool load = false;
+    bool load = true;
     bool save = true;
     // set the learning parameters
 	float alpha = 0.001;
