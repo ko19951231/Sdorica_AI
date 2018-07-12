@@ -89,8 +89,7 @@ int main()
 
     cout << "Suggest Slide: " << endl;
     for(int i = 0 ; i < next_move[best_slide].r.size() ; i++){
-        for(int j = 0 ; j < next_move[best_slide].c.size(); j++)
-            cout << "Row: " << (i + 1) << " Column: " << (j + 1) << endl;
+            cout << "Row: " << (next_move[best_slide].r[i] + 1) << " Column: " << (next_move[best_slide].c[i] + 1) << endl;
     }
     cout << "Suggest Select Enemy: " << (best_object + 1) << endl;
     

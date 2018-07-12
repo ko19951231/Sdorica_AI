@@ -19,7 +19,7 @@ int main()
     string load_weight = "Models/Sdorica2.tar";
     string save_weight = "Models/Sdorica2.tar";
     bool load = true;
-    bool save = true;
+    bool save = false;
     // set the learning parameters
 	float alpha = 0.001;
     //recording data
