@@ -70,6 +70,7 @@ public:
 			std::exit(1);
 		}
 		in.read(reinterpret_cast<char*>(weight), sizeof(float) * size);
+		std::cout << size << endl;
 		if (!in) {
 			std::cerr << "unexpected end of binary" << std::endl;
 			std::exit(1);

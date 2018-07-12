@@ -33,6 +33,7 @@ int main()
     pythonFile += image_path;
     system(pythonFile.c_str());
     cout << "Return From Python" << endl;
+    cout << "-------------------" << endl;
 
     //load Feature data
     if(load){
