@@ -16,14 +16,14 @@ int main()
 {
     //Some parameter that often change
     int num_episode = 100000;
-    string load_weight = "Models/Sdorica3.tar";
+    string load_weight = "Models/Sdorica2.tar";
     string save_weight = "Models/Sdorica2.tar";
     bool load = false;
     bool save = true;
     // set the learning parameters
 	float alpha = 0.001;
     //recording data
-    string rewardFilename = "Results/Sdorica_RL_Reward.csv";
+    string rewardFilename = "Results/Sdorica_RL_Reward2.csv";
     fstream rewardFile;
     rewardFile.open(rewardFilename.c_str(), std::ios::out);
     //Game training setup
