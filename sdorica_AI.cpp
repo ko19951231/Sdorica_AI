@@ -23,7 +23,7 @@ int main()
     // set the learning parameters
 	float alpha = 0.001;
     //recording data
-    string rewardFilename = "Results/Sdorica_Max_Reward.csv";
+    string rewardFilename = "Results/Sdorica_Test_Reward.csv";
     fstream rewardFile;
     rewardFile.open(rewardFilename.c_str(), std::ios::out);
     //Game training setup
