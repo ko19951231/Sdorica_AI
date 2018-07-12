@@ -14,7 +14,7 @@ using namespace std;
 
 simple_state load(string filepath);
 vector<int> parse_string(string s, string pattern);
-int find_max_feature_slide(vector<vector<float>> value, int idx);
+int find_max_feature_slide(vector< vector<float> > value, int idx);
 
 int main()
 {
@@ -65,7 +65,7 @@ int main()
     //Try all the combination to give the suggest answer
     //Input the sliding value
     vector<tiles> next_move = game.get_available_moves();
-    vector<vector<float>> est_value;
+    vector< vector<float> > est_value;
     //Select the best slide and object
     int best_slide=0;
     int best_object=0;
@@ -258,7 +258,7 @@ vector<int> parse_string(string s, string pattern){
 
 }
 
-int find_max_feature_slide(vector<vector<float>> value, int idx){
+int find_max_feature_slide(vector< vector<float> > value, int idx){
     
     float max = -1;
     int move = -1;
