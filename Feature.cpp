@@ -43,13 +43,51 @@ float Feature::estimate(const simple_state& s)
         }
         if(st) idx++;
         for(int r=0;r<2;r++){
-            for(int c=0;c<2;c++){
+            for(int c=0;c<7;c++){
                 idx*=2;
                 if(s.diamond[r][c]==i) idx++;
             }
         }
         ret += this->weight[idx+offset];
-        offset+=917584;
+        offset+=917504;
+    }
+    for(int i=0;i<3;i++){
+        idx=0;
+        if(s.e_HP[i]>=0){
+            idx*=5;
+            idx+=s.kind[i];
+            idx*=7;
+            if(s.shield[i]>=0){
+                idx+=3;
+                idx+=s.shield[i];
+            }
+            else{
+                idx+=s.e_HP[i];
+            }
+            idx*=2;
+            if(s.CD[i]>0) idx++;
+            idx*=2;
+            bool eh=0;
+            for(int j=0;j<3;j++){
+                if(s.e_easyHarm[i][j]) eh=1;
+            }
+            if(eh) idx++;
+            idx*=2;
+            if(s.transferShield[i]) idx++;
+            idx++;
+        }
+        for(int j=0;j<3;j++){
+            idx*=5;
+            idx+=(s.p_HP[j]+1);
+            idx*=2;
+            bool mh=0;
+            for(int k=0;k<3;k++){
+                if(s.p_minusHarm[j][k]) mh=1;
+            }
+            if(mh) idx++;
+        }
+        ret+=weight[idx+offset];
+        offset+=281000;
     }
     return ret;
 }
@@ -94,13 +132,51 @@ float Feature::update(const simple_state& s, float u)
         }
         if(st) idx++;
         for(int r=0;r<2;r++){
-            for(int c=0;c<2;c++){
+            for(int c=0;c<7;c++){
                 idx*=2;
                 if(s.diamond[r][c]==i) idx++;
             }
         }
         this->weight[idx+offset]+=u;
-        offset+=917584;
+        offset+=917504;
+    }
+    for(int i=0;i<3;i++){
+        idx=0;
+        if(s.e_HP[i]>=0){
+            idx*=5;
+            idx+=s.kind[i];
+            idx*=7;
+            if(s.shield[i]>=0){
+                idx+=3;
+                idx+=s.shield[i];
+            }
+            else{
+                idx+=s.e_HP[i];
+            }
+            idx*=2;
+            if(s.CD[i]>0) idx++;
+            idx*=2;
+            bool eh=0;
+            for(int j=0;j<3;j++){
+                if(s.e_easyHarm[i][j]) eh=1;
+            }
+            if(eh) idx++;
+            idx*=2;
+            if(s.transferShield[i]) idx++;
+            idx++;
+        }
+        for(int j=0;j<3;j++){
+            idx*=5;
+            idx+=(s.p_HP[j]+1);
+            idx*=2;
+            bool mh=0;
+            for(int k=0;k<3;k++){
+                if(s.p_minusHarm[j][k]) mh=1;
+            }
+            if(mh) idx++;
+        }
+        this->weight[idx+offset]+=u;
+        offset+=281000;
     }
 }
 

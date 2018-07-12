@@ -15,13 +15,13 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 10000;
-    string load_weight = "Models/Sdorica.tar";
-    string save_weight = "Models/Sdorica.tar";
-    bool load = false;
+    int num_episode = 50000;
+    string load_weight = "Models/Sdorica2.tar";
+    string save_weight = "Models/Sdorica2.tar";
+    bool load = true;
     bool save = true;
     // set the learning parameters
-	float alpha = 0.03;
+	float alpha = 0.001;
     //recording data
     string rewardFilename = "Results/Sdorica_Max_Reward.csv";
     fstream rewardFile;
@@ -143,7 +143,7 @@ int main()
             cout << i/block <<" "<<avg/block << " " << max <<endl;
             avg=0;
             max=0;
-            if((i/block)%100==0) alpha*=0.9;
+            if((i/block)%100==0) alpha*=0.7;
         }
         if(clear_stages>4){
             cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << " Progress: " << game.get_simple_state(clear_stages).progress << endl;
