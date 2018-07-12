@@ -18,7 +18,7 @@ vector<int> parse_string(string s, string pattern);
 int main()
 {
     string input_state_data = "info.txt";
-    string load_weight = "Models/Sdorica.tar";
+    string load_weight = "Models/Sdorica2.tar";
     
     state game;
     state dup_game;
@@ -33,7 +33,7 @@ int main()
     pythonFile += image_path;
     system(pythonFile.c_str());
     cout << "Return From Python" << endl;
-/*
+
     //load Feature data
     if(load){
         ifstream in;
@@ -47,7 +47,7 @@ int main()
             exit(1);
         }
     }
-*/
+
 
     //Initialize the game
     game.init();
@@ -59,7 +59,7 @@ int main()
     //Set the state of the game
     game.set_state(s);
     game.print();
-    /*
+    
     //Try all the combination to give the suggest answer
     //Input the sliding value
     vector<tiles> next_move = game.get_available_moves();
@@ -99,7 +99,7 @@ int main()
             cout << "Row: " << (i + 1) << " Column: " << (j + 1) << endl;
     }
     cout << "Suggest Select Enemy: " << (best_object + 1) << endl;
-    */
+    
     return 0;
 }
 
