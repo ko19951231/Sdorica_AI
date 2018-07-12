@@ -16,7 +16,7 @@ int main()
 {
     //Some parameter that often change
     int num_episode = 10000;
-    string load_weight = "Models/Sdorica2.tar";
+    string load_weight = "Models/Sdorica3.tar";
     string save_weight = "Models/Sdorica3.tar";
     bool load = true;
     bool save = true;
