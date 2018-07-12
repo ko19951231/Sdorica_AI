@@ -74,10 +74,10 @@ int main()
             dup_game.assign(game);
             //reward should be the estimate value + reward
             dup_game.player_move(r, c, idx); 
-            float current_progress=dup_game.get_simple_state(clear_stages).progress;
+            float current_progress=dup_game.get_simple_state(s.stage - 1).progress;
             float est;
             if(dup_game.player_dead()) est=0;
-            else est=feature.estimate(dup_game.get_simple_state(clear_stages));
+            else est=feature.estimate(dup_game.get_simple_state(s.stage - 1));
             if ((est + current_progress) > maximum){
                 best_slide=j;
                 best_object=idx;
