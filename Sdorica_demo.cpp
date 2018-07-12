@@ -19,7 +19,7 @@ int find_max_feature_slide(vector< vector<float> > value, int idx);
 int main()
 {
     string input_state_data = "info.txt";
-    string load_weight = "Models/Sdorica3.tar";
+    string load_weight = "Models/Sdorica2.tar";
     
     state game;
     state dup_game;
