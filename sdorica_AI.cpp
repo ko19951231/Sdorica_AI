@@ -17,13 +17,13 @@ int main()
     //Some parameter that often change
     int num_episode = 100000;
     string load_weight = "Models/Sdorica3.tar";
-    string save_weight = "Models/Sdorica3.tar";
-    bool load = true;
+    string save_weight = "Models/Sdorica2.tar";
+    bool load = false;
     bool save = true;
     // set the learning parameters
 	float alpha = 0.001;
     //recording data
-    string rewardFilename = "Results/Sdorica_Test_Reward.csv";
+    string rewardFilename = "Results/Sdorica_RL_Reward.csv";
     fstream rewardFile;
     rewardFile.open(rewardFilename.c_str(), std::ios::out);
     //Game training setup
@@ -139,15 +139,6 @@ int main()
             max=progress;
         }
         
-        if(i%block==block-1){
-            cout << i/block <<" "<<avg/block << " " << max <<endl;
-            avg=0;
-            max=0;
-            if((i/block)%100==0) alpha*=0.7;
-        }
-        if(clear_stages>4){
-            cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << " Progress: " << game.get_simple_state(clear_stages).progress << endl;
-        }
         /*cout << "Movement: ";
         for(int j = 0 ; j < 4 ; j++)
             cout << (j + 1) << ":" << move[j] << " ";
@@ -157,11 +148,23 @@ int main()
             best_episode = i;
         }
 
-        if(i >= (num_episode - 1000))
-            avg_score += total_point;
+        avg_score += total_point;
         if((i + 1) % 100 == 0){
-            rewardFile << (i + 1) << "," << total_point << "," << move_amount << "," << game.get_stage() << endl;
+            avg_score /= 100.0;
+            rewardFile << (i + 1) << "," << avg_score << "," << avg/100.0 << endl;
+            avg_score = 0;
         }    
+
+        if(i%block==block-1){
+            cout << i/block <<" "<<avg/block << " " << max <<endl;
+            avg=0;
+            max=0;
+            if((i/block)%100==0) alpha*=0.7;
+        }
+        if(clear_stages>4){
+            cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << " Progress: " << game.get_simple_state(clear_stages).progress << endl;
+        }
+
         trainer.close_episode(feature, alpha);
     }
     rewardFile.close();
