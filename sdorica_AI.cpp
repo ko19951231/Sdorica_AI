@@ -15,15 +15,15 @@ using namespace std;
 int main()
 {
     //Some parameter that often change
-    int num_episode = 300000;
+    int num_episode = 50000;
     string load_weight = "Models/Sdorica2.tar";
     string save_weight = "Models/Sdorica2.tar";
     bool load = true;
     bool save = true;
     // set the learning parameters
-	float alpha = 0.001;
+	float alpha = 0.0005;
     //recording data
-    string rewardFilename = "Results/Sdorica_RL_Reward2.csv";
+    string rewardFilename = "Results/Sdorica_Max_Reward.csv";
     fstream rewardFile;
     rewardFile.open(rewardFilename.c_str(), std::ios::out);
     //Game training setup
@@ -49,9 +49,10 @@ int main()
     int best_episode = 0;
     int move[4] ={0};
     srand(time(NULL));
-    int block=100;
+    int block=1000;
     float avg=0;
     float max=0;
+    int cnt=0;
     for(int i = 0 ; i < num_episode ; i++){
         int total_point = 0;
         int finished = 0;
@@ -97,7 +98,6 @@ int main()
                     }
                 }
             }
-
             //Assign to the real one
             vector<int> r=next_move[best_slide].r;
             vector<int> c=next_move[best_slide].c; 
@@ -139,7 +139,18 @@ int main()
         if(progress>max){
             max=progress;
         }
-        
+
+        if(clear_stages>4){
+            cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << " Progress: " << game.get_simple_state(clear_stages).progress << endl;
+            cnt++;
+        }        
+        if(i%block==block-1){
+            cout << i/block <<" "<<avg/block << " " << cnt <<endl;
+            avg=0;
+            max=0;
+            cnt=0;
+            //if((i/block)%100==0) alpha*=0.7;
+        }
         /*cout << "Movement: ";
         for(int j = 0 ; j < 4 ; j++)
             cout << (j + 1) << ":" << move[j] << " ";
@@ -149,23 +160,11 @@ int main()
             best_episode = i;
         }
 
-        avg_score += total_point;
+        if(i >= (num_episode - 1000))
+            avg_score += total_point;
         if((i + 1) % 100 == 0){
-            avg_score /= 100.0;
-            rewardFile << (i + 1) << "," << avg_score << "," << avg/100.0 << endl;
-            avg_score = 0;
+            rewardFile << (i + 1) << "," << total_point << "," << move_amount << "," << game.get_stage() << endl;
         }    
-
-        if(i%block==block-1){
-            cout << i/block <<" "<<avg/block << " " << max <<endl;
-            avg=0;
-            max=0;
-            if((i/block)%100==0) alpha*=0.7;
-        }
-        if(clear_stages>4){
-            cout << "Episode " << i << " Total Point: " << total_point << " Move Amount: " << move_amount << " Statge: " << game.get_stage() << " Clear Stages: " << clear_stages << " Progress: " << game.get_simple_state(clear_stages).progress << endl;
-        }
-
         trainer.close_episode(feature, alpha);
     }
     rewardFile.close();
