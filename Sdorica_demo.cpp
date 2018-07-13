@@ -274,7 +274,7 @@ vector<int> parse_string(string s, string pattern){
 
 int find_max_feature_slide(vector< vector<float> > value, int idx){
     
-    float max = -1;
+    float max = -99999;
     int move = -1;
     
     for(int i = 0 ; i < value.size(); i++){
